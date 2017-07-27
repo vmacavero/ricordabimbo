@@ -24,24 +24,25 @@ class CalendarSelection extends Component {
 constructor(props, context) {
   super(props, context);
   this.changeCheckBox = this.changeCheckBox.bind(this);
-
+  this.showDateTimePicker = this.showDateTimePicker.bind(this);
 this.state = {
   checked: [true, true, true, true, true, false, false],
   sliderNumber1: 1,
-  isDateTimePickerVisible: false,
+  isDateTimePickerVisible: false
   };
 }
 openCal = () => {
 
 };
-  showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
-
+  showDateTimePicker = (startOrEndCalendar) => {
+    this.setState({ isDateTimePickerVisible: true });
+  }
   hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
 
   handleDatePicked = (date) => {
     //alert('A date has been picked: ', date);
-    alert('');
-    alert(date);
+    console.log('date = : ');
+    console.log(date);
     this.hideDateTimePicker();
   };
 
@@ -62,7 +63,6 @@ openCal = () => {
             large
             rounded
             source={this.props.navigation.state.params.imgUri}
-            onPress={console.log('avatpressed')}
             activeOpacity={0.7}
         />
         <View style={{ paddingTop: 20 }}>
@@ -84,14 +84,14 @@ openCal = () => {
           size={22}
           //type='font-awesome'
           color='#192f6a'
-          onPress={this.showDateTimePicker}
+          onPress={this.showDateTimePicker.bind(this, 'start')}
         />
         <Icon
           raised
           name='trending-flat'
           size={22}
           color='#192f6a'
-          onPress={() => console.log('hello')}
+          onPress={() => console.log('arrowicon')}
         />
         <Icon
           raised
@@ -99,7 +99,7 @@ openCal = () => {
           size={22}
           //type='font-awesome'
           color='#192f6a'
-          onPress={() => console.log('hello')}
+          onPress={() => console.log('end')}
         />
       </View>
       <View style={{ flex: 1 }}>
@@ -135,7 +135,7 @@ openCal = () => {
           > 08:32 am</Text>
           <Button
             icon={{ name: 'alarm', size: 28 }}
-            onPress={console.log('f')}
+            onPress={console.log('buttoncreated')}
             title={'(cambia)'}
             buttonStyle={styles.nextButtonStyle}
             backgroundColor='blue'
@@ -159,7 +159,7 @@ openCal = () => {
         > 08:32 am</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('f')}
+          onPress={console.log('iconclock')}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'

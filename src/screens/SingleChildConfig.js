@@ -52,9 +52,11 @@ validateName = (text) => {
   //TO DO : VALIDATION OF NAME !!!
 }
 goToCalendarConfig = () => {
+  console.log('cal pressed go to calendarconfig');
    const { navigate } = this.props.navigation;
    navigate('calendarselection',
     { imgUri: this.state.currentImage });
+
 }
 nextBtn = () => {
   //we should build the Array of children
