@@ -1,26 +1,16 @@
 import React, { Component } from 'react';
-import { StackNavigator } from 'react-navigation';
-import ConfigAge from './screens/ConfigAge';
-import HomeScreen from './screens/HomeScreen';
-import SingleChildConfig from './screens/SingleChildConfig';
-import CalendarSelection from './screens/CalendarSelection';
-import TimeToSchoolSelection from './screens/TimeToSchoolSelection';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import Router from './Router';
+import reducers from './reducers';
 
 class App extends Component {
-constructor(props) {
-  super(props);
-}
   render() {
-    const MainNavigator = StackNavigator(
-      {
-        home: { screen: HomeScreen },
-        config: { screen: ConfigAge },
-        singlechildconfig: { screen: SingleChildConfig },
-        calendarselection: { screen: CalendarSelection },
-        timetoschoolselection: { screen: TimeToSchoolSelection }
-      });
+    const store = createStore(reducers);
     return (
-        <MainNavigator />
+      <Provider store={store} >
+        <Router />
+      </Provider>
     );
   }
 }
