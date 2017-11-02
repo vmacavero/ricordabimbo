@@ -81,7 +81,7 @@ this.state = {
    buttonStyle={styles.nextButtonStyle}
    backgroundColor='blue'
    textStyle={{ textAlign: 'center' }}
-   title={'Prossimo'}
+   title={'Ritorna'}
  />
 </LinearGradient>
 

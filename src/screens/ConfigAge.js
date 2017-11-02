@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import {
   View,
   Text,
-  StyleSheet
+  StyleSheet,
+  PixelRatio
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Slider, Button } from 'react-native-elements';
@@ -16,13 +17,71 @@ class ConfigAge extends Component {
        },
   title: 'RicordaBimbo',
 });
-
-state = {
-  sliderNumber: 1
-};
+constructor(props) {
+  super(props);
+  this.state = {
+    numberOfChildren: 1,
+    arrayOfChildren: [
+      {
+        name: String,
+        age: String,
+        photoImage: null,
+        calendarData:
+         {
+          mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
+         }
+       },
+       {
+         name: String,
+         age: String,
+         photoImage: String,
+         calendarData:
+          {
+           mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
+          }
+        },
+        {
+          name: String,
+          age: String,
+          photoImage: null,
+          calendarData:
+           {
+            mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
+           }
+         },
+         {
+           name: String,
+           age: String,
+           photoImage: null,
+           calendarData:
+            {
+             mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
+            }
+          },
+          {
+            name: String,
+            age: String,
+            photoImage: null,
+            calendarData:
+             {
+              mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
+             }
+           },
+           {
+             name: String,
+             age: String,
+             photoImage: null,
+             calendarData:
+              {
+               mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
+              }
+            }
+      ],
+  };
+}
 arr = [(<ChildrenIcon key={1} />)];
 showIcons() {
-   const iconNum = this.state.sliderNumber;
+   const iconNum = this.state.numberOfChildren;
    this.arr = [];
    for (let i = 0; i < iconNum; i++) {
      this.arr.push(<ChildrenIcon key={i} />);
@@ -30,13 +89,14 @@ showIcons() {
  }
 nextBtn = () => {
   //we should build the Array of children
-  let childrenArray = [{ name: '', age: 0 }, 2, 3, 4];
   const { navigate } = this.props.navigation;
+  console.log('sono in configage nextBtn e quest e stato: =');
+  console.log(this.state);
   navigate(
   'singlechildconfig',
-    { totalChild: this.state.sliderNumber,
+    { totalChild: this.state.numberOfChildren,
       currentChild: 1,
-      childrenArray: childrenArray
+      arrayOfChildren: this.state.arrayOfChildren
     }
   );
 }
@@ -58,12 +118,12 @@ nextBtn = () => {
           justifyContent: 'flex-start' }}
         >
   <Slider
-    value={this.state.sliderNumber}
+    value={this.state.numberOfChildren}
     minimumValue={1}
     maximumValue={5}
     step={1}
-    onValueChange={(sliderNumber) => {
-      this.setState({ sliderNumber });
+    onValueChange={(numberOfChildren) => {
+      this.setState({ numberOfChildren });
       this.showIcons();
       }
     }
@@ -75,7 +135,7 @@ nextBtn = () => {
     <Text
       style={styles.buttonText}
     >
-      {this.state.sliderNumber}
+      {this.state.numberOfChildren}
     </Text>
  </View>
  <Button
@@ -101,7 +161,7 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonText: {
-    fontSize: 28,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(12),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 10,

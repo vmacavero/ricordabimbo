@@ -3,4 +3,4 @@
     to use redux and redux-persist to save state :(
 2) implement components in a raw way avoiding to style them
 3) Insert event in calendar of both ios and android
-4) 
+4) FINISH, SOON !!!

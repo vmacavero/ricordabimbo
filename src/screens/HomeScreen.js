@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {
  Alert,
+ PixelRatio,
+ View
 } from 'react-native';
 
 import AppIntro from 'react-native-app-intro';
@@ -12,15 +14,13 @@ class HomeScreen extends Component {
       header: null
       // Note: By default the icon is only shown on iOS. Search the showIcon option below
     });
-    constructor(props) {
+    /*constructor(props) {
       super(props);
-    }
+    }*/
     onSkipBtnHandle = (index) => {
       Alert.alert('Skip');
-      console.log(index);
     }
     onSlideChangeHandle = (index, total) => {
-      console.log(total);
     }
     doneBtnHandle = () => {
       //
@@ -29,7 +29,6 @@ class HomeScreen extends Component {
     }
     nextBtnHandle = (index) => {
       Alert.alert('Next');
-      console.log(index);
     }
     render() {
       const pageArray = [{
@@ -43,6 +42,7 @@ class HomeScreen extends Component {
         backgroundColor: '#fa931d',
         fontColor: '#fff',
         level: 10,
+        fontSize: PixelRatio.getPixelSizeForLayoutSize(6)
       }, {
         title: 'Iniziamo la Configurazione!',
         description: 'Adesso ti chiedero\' quanti bimbi hai, ' +
@@ -82,15 +82,17 @@ class HomeScreen extends Component {
         }];
 
       return (
-        <AppIntro
-          //onNextBtnClick={this.nextBtnHandle}
-          onDoneBtnClick={this.doneBtnHandle}
-          //onSkipBtnClick={this.onSkipBtnHandle}
-          onSlideChange={this.onSlideChangeHandle}
-          pageArray={pageArray}
-          doneBtnLabel='Ok!'
-          skipBtnLabel=''
-        />
+        <View allowFontScaling={false}>
+          <AppIntro
+            //onNextBtnClick={this.nextBtnHandle}
+            onDoneBtnClick={this.doneBtnHandle}
+            //onSkipBtnClick={this.onSkipBtnHandle}
+            onSlideChange={this.onSlideChangeHandle}
+            pageArray={pageArray}
+            doneBtnLabel='Ok!'
+            skipBtnLabel=''
+          />
+        </View>
       );
     }
 }

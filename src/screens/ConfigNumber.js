@@ -18,4 +18,16 @@ class ConfigNumber extends Component {
   }
 }
 
+  //from other pages :(
+  /*
+  <Icon
+    raised
+    name='date-range'
+    size={22}
+    //type='font-awesome'
+    color='#192f6a'
+    onPress={this.goToCalendarConfig}
+  />
+*/
+
 export default ConfigNumber;
