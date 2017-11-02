@@ -1,6 +1,3 @@
-1) trying to implement asysnc storage to
-    save array data (jsonstringified) . Otherwise i'll have
-    to use redux and redux-persist to save state :(
-2) implement components in a raw way avoiding to style them
-3) Insert event in calendar of both ios and android
-4) FINISH, SOON !!!
+
+1) Insert event in calendar of both ios and android
+2) FINISH, SOON !!!
