@@ -1,3 +1,4 @@
 
 1) Insert event in calendar of both ios and android
 2) FINISH, asap, as a MVP !!!
+
