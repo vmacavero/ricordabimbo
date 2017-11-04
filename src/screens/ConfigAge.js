@@ -5,151 +5,95 @@ import {
   StyleSheet,
   PixelRatio
 } from 'react-native';
+import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { Slider, Button } from 'react-native-elements';
 import ChildrenIcon from '../components/ChildrenIcon';
+import { setNumberOfChildren } from '../actions';
+import dataStructure from '../dataStructure.json';
 
 class ConfigAge extends Component {
-  static navigationOptions = ({ navigation }) => ({
-  headerTintColor: 'white',
-  headerStyle: {
-         backgroundColor: '#4c669f'
-       },
-  title: 'RicordaBimbo',
-});
-constructor(props) {
-  super(props);
-  this.state = {
-    numberOfChildren: 1,
-    arrayOfChildren: [
-      {
-        name: String,
-        age: String,
-        photoImage: null,
-        calendarData:
-         {
-          mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
-         }
-       },
-       {
-         name: String,
-         age: String,
-         photoImage: String,
-         calendarData:
-          {
-           mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
-          }
+    static navigationOptions = () => ({
+    headerTintColor: 'white',
+    headerStyle: {
+          backgroundColor: '#4c669f'
         },
-        {
-          name: String,
-          age: String,
-          photoImage: null,
-          calendarData:
-           {
-            mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
-           }
-         },
-         {
-           name: String,
-           age: String,
-           photoImage: null,
-           calendarData:
-            {
-             mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
-            }
-          },
-          {
-            name: String,
-            age: String,
-            photoImage: null,
-            calendarData:
-             {
-              mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
-             }
-           },
-           {
-             name: String,
-             age: String,
-             photoImage: null,
-             calendarData:
-              {
-               mon: Date, tue: Date, wed: Date, thu: Date, fri: Date, sat: Date, sun: Date
-              }
-            }
-      ],
-  };
+    title: 'RicordaBimbo',
+    });
+    constructor(props) {
+    super(props);
+    this.state = {
+      numberOfChildren: 1,
+    };
 }
-arr = [(<ChildrenIcon key={1} />)];
+
 showIcons() {
-   const iconNum = this.state.numberOfChildren;
-   this.arr = [];
-   for (let i = 0; i < iconNum; i++) {
-     this.arr.push(<ChildrenIcon key={i} />);
+   const arr = [];
+   for (let i = 0; i < this.state.numberOfChildren; i++) {
+     arr.push(<ChildrenIcon key={i} />);
    }
+   return arr;
  }
+
 nextBtn = () => {
-  //we should build the Array of children
   const { navigate } = this.props.navigation;
-  console.log('sono in configage nextBtn e quest e stato: =');
-  console.log(this.state);
   navigate(
   'singlechildconfig',
     { totalChild: this.state.numberOfChildren,
       currentChild: 1,
-      arrayOfChildren: this.state.arrayOfChildren
+      dataStruct: dataStructure
     }
   );
 }
+
   render() {
    return (
       <LinearGradient
-        colors={['#4c669f', '#3b5998', '#192f6a']}
-        style={styles.linearGradient}
+          colors={['#4c669f', '#3b5998', '#192f6a']}
+          style={styles.linearGradient}
       >
-        <View style={{ paddingTop: 20 }}>
-          <Text style={styles.buttonText}>
-            Inserisci qui il numero dei tuoi Bimbi !
-          </Text>
-        </View>
-        <View
-         style={{
-           flex: 1,
-           alignItems: 'stretch',
-          justifyContent: 'flex-start' }}
-        >
-  <Slider
-    value={this.state.numberOfChildren}
-    minimumValue={1}
-    maximumValue={5}
-    step={1}
-    onValueChange={(numberOfChildren) => {
-      this.setState({ numberOfChildren });
-      this.showIcons();
+          <View style={{ paddingTop: 20 }}>
+            <Text style={styles.buttonText}>
+              Inserisci qui il numero dei tuoi Bimbi !
+            </Text>
+          </View>
+          <View
+          style={{
+            flex: 1,
+            alignItems: 'stretch',
+            justifyContent: 'flex-start' }}
+          >
+    <Slider
+      value={this.state.numberOfChildren}
+      minimumValue={1}
+      maximumValue={5}
+      step={1}
+      onValueChange={(numberOfChildren) => {
+        this.setState({ numberOfChildren });
+        }
       }
-    }
+    />
+
+    <View style={styles.childStyle}>
+        { this.showIcons() }
+  </View>
+      <Text
+        style={styles.buttonText}
+      >
+        {this.state.numberOfChildren}
+      </Text>
+  </View>
+  <Button
+    icon={{ name: 'trending-flat', size: 32 }}
+    iconRight
+    onPress={this.nextBtn}
+    buttonStyle={styles.nextButtonStyle}
+    backgroundColor='blue'
+    textStyle={{ textAlign: 'center' }}
+    title={'Prossimo'}
   />
-
-  <View style={styles.childStyle}>
-        { this.arr }
- </View>
-    <Text
-      style={styles.buttonText}
-    >
-      {this.state.numberOfChildren}
-    </Text>
- </View>
- <Button
-   icon={{ name: 'trending-flat', size: 32 }}
-   iconRight
-   onPress={this.nextBtn}
-   buttonStyle={styles.nextButtonStyle}
-   backgroundColor='blue'
-   textStyle={{ textAlign: 'center' }}
-   title={'Prossimo'}
- />
-      </LinearGradient>
-
-    );
+</LinearGradient>
+);
   }
 }
 
@@ -171,7 +115,6 @@ const styles = StyleSheet.create({
   nextButtonStyle: {
     backgroundColor: 'rgba(52, 52, 52, 0.01)',
     borderRadius: 10
-
   },
   childStyle: {
     flex: 0,

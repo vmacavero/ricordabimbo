@@ -17,6 +17,7 @@ import {
   Slider
 } from 'react-native-elements';
 
+
 class SingleChildConfig extends Component {
   static navigationOptions = ({ navigation }) => ({
   headerTintColor: 'white',
@@ -153,12 +154,18 @@ const options = {
   }
 };
 // Open Image Library:
-ImagePicker.launchImageLibrary(options, (response) => {
-  const imageUriFromCamera = { uri: response.uri };
-      this.setState({ currentImage: imageUriFromCamera });
-      this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
+  ImagePicker.launchImageLibrary(options, (response) => {
+    if (!response.didCancel) { 
+        const imageUriFromCamera = { uri: response.uri };
+        this.setState({ currentImage: imageUriFromCamera });
+        this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
+    }
   });
 }
+
+  componentWillMount() {
+  
+  }
   render(props) {
       const { navigate } = this.props.navigation;
       const { currentChild } = this.props.navigation.state.params;

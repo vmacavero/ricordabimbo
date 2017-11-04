@@ -1,0 +1,87 @@
+[
+  {
+    "id": 0,
+    "name": "un",
+    "age": "",
+    "photoImage": "thisMustBeAnUri",
+    "schoolDateStart": "thisShouldBeADate",
+    "schoolDateEnd": "thisShouldBeADate",
+    "daysOfWeekSchoolStarts": {
+      "monday": "thisShouldBeATime",
+      "tuesday": "thisShouldBeATime",
+      "wednesday": "thisShouldBeATime",
+      "thursday": "thisShouldBeATime",
+      "friday": "thisShouldBeATime",
+      "saturday": "thisShouldBeATime",
+      "sunday": "thisShouldBeATime"
+    }
+  },
+  {
+    "id": 1,
+    "name": "du",
+    "age": "",
+    "photoImage": "thisMustBeAnUri",
+    "schoolDateStart": "thisShouldBeADate",
+    "schoolDateEnd": "thisShouldBeADate",
+    "daysOfWeekSchoolStarts": {
+      "monday": "thisShouldBeATime",
+      "tuesday": "thisShouldBeATime",
+      "wednesday": "thisShouldBeATime",
+      "thursday": "thisShouldBeATime",
+      "friday": "thisShouldBeATime",
+      "saturday": "thisShouldBeATime",
+      "sunday": "thisShouldBeATime"
+    }
+  },
+  {
+    "id": 2,
+    "name": "tr",
+    "age": "",
+    "photoImage": "thisMustBeAnUri",
+    "schoolDateStart": "thisShouldBeADate",
+    "schoolDateEnd": "thisShouldBeADate",
+    "daysOfWeekSchoolStarts": {
+      "monday": "thisShouldBeATime",
+      "tuesday": "thisShouldBeATime",
+      "wednesday": "thisShouldBeATime",
+      "thursday": "thisShouldBeATime",
+      "friday": "thisShouldBeATime",
+      "saturday": "thisShouldBeATime",
+      "sunday": "thisShouldBeATime"
+    }
+  },
+  {
+    "id": 3,
+    "name": "qu",
+    "age": "",
+    "photoImage": "thisMustBeAnUri",
+    "schoolDateStart": "thisShouldBeADate",
+    "schoolDateEnd": "thisShouldBeADate",
+    "daysOfWeekSchoolStarts": {
+      "monday": "thisShouldBeATime",
+      "tuesday": "thisShouldBeATime",
+      "wednesday": "thisShouldBeATime",
+      "thursday": "thisShouldBeATime",
+      "friday": "thisShouldBeATime",
+      "saturday": "thisShouldBeATime",
+      "sunday": "thisShouldBeATime"
+    }
+  },
+  {
+    "id": 4,
+    "name": "cin",
+    "age": "",
+    "photoImage": "thisMustBeAnUri",
+    "schoolDateStart": "thisShouldBeADate",
+    "schoolDateEnd": "thisShouldBeADate",
+    "daysOfWeekSchoolStarts": {
+      "monday": "thisShouldBeATime",
+      "tuesday": "thisShouldBeATime",
+      "wednesday": "thisShouldBeATime",
+      "thursday": "thisShouldBeATime",
+      "friday": "thisShouldBeATime",
+      "saturday": "thisShouldBeATime",
+      "sunday": "thisShouldBeATime"
+    }
+  } 
+]

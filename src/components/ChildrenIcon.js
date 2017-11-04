@@ -1,8 +1,4 @@
 import React, { Component } from 'react';
-import {
-  Text,
-  View,
-} from 'react-native';
 import { Icon } from 'react-native-elements';
 
 class ChildrenIcon extends Component {
@@ -12,9 +8,8 @@ class ChildrenIcon extends Component {
       raised
       name='child-friendly'
       size={32}
-      //type='font-awesome'
       color='#192f6a'
-      onPress={() => console.log('hello')}
+      onPress={/*i could fire some animations?? */null}
     />);
   }
 }

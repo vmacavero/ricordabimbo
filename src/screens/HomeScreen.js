@@ -4,7 +4,6 @@ import {
  PixelRatio,
  View
 } from 'react-native';
-
 import AppIntro from 'react-native-app-intro';
 
 class HomeScreen extends Component {
