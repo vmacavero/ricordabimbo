@@ -3,11 +3,13 @@ import {
   View,
   Text,
   StyleSheet,
-  Alert
+  Alert,
+  TouchableWithoutFeedback
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Avatar, Icon, CheckBox } from 'react-native-elements';
 import DateTimePicker from 'react-native-modal-datetime-picker';
+import * as Animatable from 'react-native-animatable';
 
 /* Receives :
 dataStruct: naviProps.dataStruct,
@@ -407,6 +409,8 @@ backBtn = () => {
         <Text
           style={styles.timeToSchoolTextStyle}
         > 08:36 am</Text>
+        
+        <Animatable.View animation="swing" iterationCount="infinite">
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={console.log('f')}
@@ -414,6 +418,9 @@ backBtn = () => {
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
+        </Animatable.View>
+
+
       </View>
       </View>
         <View
