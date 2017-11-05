@@ -9,6 +9,13 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Button, Avatar, Icon, CheckBox } from 'react-native-elements';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
+/* Receives :
+dataStruct: naviProps.dataStruct,
+currentChild: naviProps.currentChild,
+totalChild: naviProps.totalChild,
+calendarPage: true
+*/
+
 class CalendarSelection extends Component {
   static navigationOptions = ({ navigation }) => ({
     header: null,
@@ -19,8 +26,9 @@ class CalendarSelection extends Component {
 });
 constructor(props, context) {
   super(props, context);
-  this.changeCheckBox = this.changeCheckBox.bind(this);
   this.showDatePicker = this.showDatePicker.bind(this);
+  this.naviProps = this.props.navigation.state.params;
+
   this.state = {
     checked: [true, true, true, true, true, false, false],
     sliderNumber1: 1,
@@ -29,58 +37,92 @@ constructor(props, context) {
     whichCalendar: '',
     startDate: '11/11/11',
     endDate: '99/99/99',
-    currentChild: this.props.navigation.state.params.currentChild,
-    arrayOfChildren: this.props.navigation.state.params.arrayOfChildren
+    //currentChild: this.props.navigation.state.params.currentChild,
+    //arrayOfChildren: this.props.navigation.state.params.arrayOfChildren
   };
 }
+  changeCheckBox(num) {
+    const index = this.naviProps.currentChild;
+    const week = this.naviProps.dataStruct[index - 1].daysOfWeekSchoolStarts;
+    switch (num) {
+      default:
+        return;
+      case 0:
+        week.monday.active = !(week.monday.active);
+        break;
+      case 1:
+        week.tuesday.active = !(week.tuesday.active);
+        break;
+      case 2:
+        week.wednesday.active = !(week.wednesday.active);
+        break;
+      case 3:
+        week.thursday.active = !(week.thursday.active);
+        break;
+      case 4:
+        week.friday.active = !(week.friday.active);
+        break;
+      case 5:
+        week.saturday.active = !(week.saturday.active);
+        break;
+      case 6:
+        week.sunday.active = !(week.sunday.active);
+        break;
+    }
+    this.props.navigation.setParams(); //FORCES - TRIGGERS RE-RENDER
+  }
   showDatePicker = (startOrEndCalendar) => {
     //we set the calendar (start or end)
     this.setState({ whichCalendar: startOrEndCalendar });
     this.setState({ isDatePickerVisible: true });
   }
+
   hideDatePicker = () => this.setState({ isDatePickerVisible: false });
+
   handleDatePicked = (date) => {
+    //const naviProps = this.props.navigation.state.params;
     //alert('A date has been picked: ', date);
     const yyyy = date.getFullYear().toString();
     const mm = (date.getMonth() + 101).toString().slice(-2);
     const dd = (date.getDate() + 100).toString().slice(-2);
     const dateString = `${dd}/${mm}/${yyyy}`;
     if (this.state.whichCalendar === 'start') {
-      this.setState({ startDate: dateString });
+      //this.setState({ startDate: dateString });
+      this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateStart = dateString;
     } else {
-      this.setState({ endDate: dateString });
+      this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateEnd = dateString;
     }
     this.hideDatePicker();
   };
+
   showTimePicker = () => {
     //we set the calendar (start or end)
     this.setState({ isTimePickerVisible: true });
   }
+
   hideTimePicker = () => this.setState({ isTimePickerVisible: false });
+
   handleTimePicked = (date) => {
     //alert('A date has been picked: ', date);
     console.log(date);
     this.hideTimePicker();
   };
 backBtn = () => {
-    //we should build the Array of children
     //let currentChildrenArray = currentProps.childrenArray;
+
+    // I'll check if the calendar is correct ! (date/times, etc) so
+    //we can pass to other child (or to final config);
+
      const { navigate } = this.props.navigation;
     navigate(
            'singlechildconfig',
            {
-             arrayOfChildren: this.state.arrayOfChildren,
-             currentChildNum: this.state.currentChildNum
+            totalChild: this.naviProps.totalChild,
+            currentChild: this.naviProps.currentChild,
+            dataStruct: this.naviProps.dataStruct
            }
          );
 }
-  changeCheckBox(num) {
-     const previousState = this.state.checked;
-     previousState[num] = !this.state.checked[num];
-     this.setState({
-      checked: previousState
-    });
- }
   render() {
    return (
       <LinearGradient
@@ -99,21 +141,21 @@ backBtn = () => {
         <Avatar
             large
             rounded
-            source={this.state.arrayOfChildren[this.state.currentChild].photoImage}
+            source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
             activeOpacity={1}
         />
         <Text style={styles.childInfoStyle}>
 
-          {this.state.arrayOfChildren[this.state.currentChild].name}
+          {this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
         </Text>
         <Text style={styles.childInfoStyle}>
-          {this.state.arrayOfChildren[this.state.currentChild].age} { ' anni '}
+          {this.naviProps.dataStruct[this.naviProps.currentChild - 1].age} { ' anni '}
         </Text>
       </View>
         <View style={{ paddingTop: 20 }}>
           <Text style={styles.buttonText}>
             Per favore scegli la data in cui inizia la scuola di{' '}
-            {this.state.arrayOfChildren[this.state.currentChild].name}
+            {this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
             {' '}e quando termina
           </Text>
 
@@ -141,7 +183,7 @@ backBtn = () => {
           alignSelf: 'center',
         }}
       >
-        {this.state.startDate}
+        {this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateStart}
       </Text>
         <Icon
           raised
@@ -159,7 +201,7 @@ backBtn = () => {
             alignSelf: 'center',
           }}
         >
-          {this.state.endDate}
+          {this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateEnd}
         </Text>
         <Icon
           raised
@@ -186,7 +228,7 @@ backBtn = () => {
       <View style={{ paddingTop: 20 }}>
         <Text style={styles.buttonText}>
           In basso scegli i giorni in
-           cui {' '}{this.state.arrayOfChildren[this.state.currentChild].name}
+           cui {' '}{this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
            {' '}va a scuola e l'orario
         </Text>
       </View>
@@ -194,7 +236,9 @@ backBtn = () => {
         <View style={styles.daysOfWeekRowStyle}>
           <CheckBox
             title='Lun'
-            checked={this.state.checked[0]}
+            //checked={this.state.checked[0]}
+            checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.monday.active}
             containerStyle={styles.daysOfWeekStyle}
             textStyle={styles.daysOfWeekTextStyle}
             onPress={this.changeCheckBox.bind(this, 0)}
@@ -206,7 +250,7 @@ backBtn = () => {
           </Text>
           <Text
             style={styles.timeToSchoolTextStyle}
-          > 08:32 am</Text>
+          > 08:30 am</Text>
           <Button
             icon={{ name: 'alarm', size: 28 }}
             onPress={this.showTimePicker}
@@ -218,7 +262,9 @@ backBtn = () => {
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
           title='Mar'
-          checked={this.state.checked[1]}
+          checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                      .daysOfWeekSchoolStarts.tuesday.active
+            }
           containerStyle={styles.daysOfWeekStyle}
           textStyle={styles.daysOfWeekTextStyle}
           onPress={this.changeCheckBox.bind(this, 1)}
@@ -230,7 +276,7 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:32 am</Text>
+        > 08:31 am</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={console.log('iconclock')}
@@ -242,7 +288,9 @@ backBtn = () => {
       <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
           title='Mer'
-          checked={this.state.checked[2]}
+          checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                      .daysOfWeekSchoolStarts.wednesday.active
+            }
           containerStyle={styles.daysOfWeekStyle}
           textStyle={styles.daysOfWeekTextStyle}
           onPress={this.changeCheckBox.bind(this, 2)}
@@ -266,7 +314,9 @@ backBtn = () => {
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
           title='Gio'
-          checked={this.state.checked[3]}
+          checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                      .daysOfWeekSchoolStarts.thursday.active
+            }
           containerStyle={styles.daysOfWeekStyle}
           textStyle={styles.daysOfWeekTextStyle}
           onPress={this.changeCheckBox.bind(this, 3)}
@@ -278,7 +328,7 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:32 am</Text>
+        > 08:33 am</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={console.log('f')}
@@ -290,7 +340,9 @@ backBtn = () => {
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
           title='Ven'
-          checked={this.state.checked[4]}
+          checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                      .daysOfWeekSchoolStarts.friday.active
+            }
           containerStyle={styles.daysOfWeekStyle}
           textStyle={styles.daysOfWeekTextStyle}
           onPress={this.changeCheckBox.bind(this, 4)}
@@ -302,7 +354,7 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:32 am</Text>
+        > 08:34 am</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={console.log('f')}
@@ -314,7 +366,9 @@ backBtn = () => {
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
           title='Sab'
-          checked={this.state.checked[5]}
+          checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                      .daysOfWeekSchoolStarts.saturday.active
+            }
           containerStyle={styles.daysOfWeekStyle}
           textStyle={styles.daysOfWeekTextStyle}
           onPress={this.changeCheckBox.bind(this, 5)}
@@ -326,7 +380,7 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:32 am</Text>
+        > 08:35 am</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={console.log('f')}
@@ -338,7 +392,9 @@ backBtn = () => {
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
           title='Dom'
-          checked={this.state.checked[6]}
+          checked={this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                      .daysOfWeekSchoolStarts.sunday.active
+            }
           containerStyle={styles.daysOfWeekStyle}
           textStyle={styles.daysOfWeekTextStyle}
           onPress={this.changeCheckBox.bind(this, 6)}
@@ -350,7 +406,7 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:32 am</Text>
+        > 08:36 am</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={console.log('f')}

@@ -1,87 +1,192 @@
 [
   {
     "id": 0,
-    "name": "un",
-    "age": "",
+    "name": "",
+    "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "thisShouldBeADate",
-    "schoolDateEnd": "thisShouldBeADate",
+    "schoolDateStart": "01/01/2017",
+    "schoolDateEnd": "31/12/2018",
     "daysOfWeekSchoolStarts": {
-      "monday": "thisShouldBeATime",
-      "tuesday": "thisShouldBeATime",
-      "wednesday": "thisShouldBeATime",
-      "thursday": "thisShouldBeATime",
-      "friday": "thisShouldBeATime",
-      "saturday": "thisShouldBeATime",
-      "sunday": "thisShouldBeATime"
+      "monday": { 
+        "start": "07:00",
+        "active": true
+      },
+      "tuesday": { 
+        "start": "07:00",
+        "active": true
+      },
+      "wednesday": { 
+        "start": "07:00",
+        "active": true
+      },
+      "thursday": { 
+        "start": "07:00",
+        "active": true
+      },
+      "friday": { 
+        "start": "07:00",
+        "active": true
+      },
+      "saturday": { 
+        "start": "07:00",
+        "active": false
+      },
+      "sunday": { 
+        "start": "07:00",
+        "active": false
+      }
     }
   },
   {
     "id": 1,
-    "name": "du",
+    "name": "",
     "age": "",
     "photoImage": "thisMustBeAnUri",
     "schoolDateStart": "thisShouldBeADate",
     "schoolDateEnd": "thisShouldBeADate",
     "daysOfWeekSchoolStarts": {
-      "monday": "thisShouldBeATime",
-      "tuesday": "thisShouldBeATime",
-      "wednesday": "thisShouldBeATime",
-      "thursday": "thisShouldBeATime",
-      "friday": "thisShouldBeATime",
-      "saturday": "thisShouldBeATime",
-      "sunday": "thisShouldBeATime"
+      "monday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "tuesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "wednesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "thursday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "friday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "saturday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "sunday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      }
     }
   },
   {
     "id": 2,
-    "name": "tr",
+    "name": "",
     "age": "",
     "photoImage": "thisMustBeAnUri",
     "schoolDateStart": "thisShouldBeADate",
     "schoolDateEnd": "thisShouldBeADate",
     "daysOfWeekSchoolStarts": {
-      "monday": "thisShouldBeATime",
-      "tuesday": "thisShouldBeATime",
-      "wednesday": "thisShouldBeATime",
-      "thursday": "thisShouldBeATime",
-      "friday": "thisShouldBeATime",
-      "saturday": "thisShouldBeATime",
-      "sunday": "thisShouldBeATime"
+      "monday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "tuesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "wednesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "thursday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "friday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "saturday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "sunday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      }
     }
   },
   {
     "id": 3,
-    "name": "qu",
+    "name": "",
     "age": "",
     "photoImage": "thisMustBeAnUri",
     "schoolDateStart": "thisShouldBeADate",
     "schoolDateEnd": "thisShouldBeADate",
     "daysOfWeekSchoolStarts": {
-      "monday": "thisShouldBeATime",
-      "tuesday": "thisShouldBeATime",
-      "wednesday": "thisShouldBeATime",
-      "thursday": "thisShouldBeATime",
-      "friday": "thisShouldBeATime",
-      "saturday": "thisShouldBeATime",
-      "sunday": "thisShouldBeATime"
+      "monday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "tuesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "wednesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "thursday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "friday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "saturday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "sunday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      }
     }
   },
   {
     "id": 4,
-    "name": "cin",
+    "name": "",
     "age": "",
     "photoImage": "thisMustBeAnUri",
     "schoolDateStart": "thisShouldBeADate",
     "schoolDateEnd": "thisShouldBeADate",
     "daysOfWeekSchoolStarts": {
-      "monday": "thisShouldBeATime",
-      "tuesday": "thisShouldBeATime",
-      "wednesday": "thisShouldBeATime",
-      "thursday": "thisShouldBeATime",
-      "friday": "thisShouldBeATime",
-      "saturday": "thisShouldBeATime",
-      "sunday": "thisShouldBeATime"
+      "monday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "tuesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "wednesday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "thursday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "friday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "saturday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      },
+      "sunday": { 
+        "start": "thisShouldBeATime",
+        "active": true
+      }
     }
   } 
 ]

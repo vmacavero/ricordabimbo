@@ -22,6 +22,11 @@ class ConfigAge extends Component {
     });
     constructor(props) {
     super(props);
+    dataStructure[0].photoImage = require('../../img/icon_empty_camera.png');
+    dataStructure[1].photoImage = require('../../img/icon_empty_camera.png');
+    dataStructure[2].photoImage = require('../../img/icon_empty_camera.png');
+    dataStructure[3].photoImage = require('../../img/icon_empty_camera.png');
+    dataStructure[4].photoImage = require('../../img/icon_empty_camera.png');
     this.state = {
       numberOfChildren: 1,
     };

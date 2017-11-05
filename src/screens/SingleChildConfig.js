@@ -17,6 +17,11 @@ import {
   Slider
 } from 'react-native-elements';
 
+/* Receives :
+totalChild: this.state.numberOfChildren,
+      currentChild: 1,
+      dataStruct: dataStructure
+*/
 
 class SingleChildConfig extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -37,8 +42,10 @@ class SingleChildConfig extends Component {
      {navigation.state.params.currentChild}/{navigation.state.params.totalChild}
     </Text>
 });
+
 constructor(props) {
   super(props);
+  this.naviProps = this.props.navigation.state.params;
   Text.defaultProps.allowFontScaling = false;
   console.log('sono nel costruttore di singlechildconfig, costruisco lo stato');
     this.state = {
@@ -46,8 +53,6 @@ constructor(props) {
       currentChild: this.props.navigation.state.params.currentChild,
       sliderValue: 0.5,
       requiredField: true,
-      //ARRAY WILL START FROM 1 and not 0 FOR CONVENIENCE !
-      arrayOfChildren: this.props.navigation.state.params.arrayOfChildren,
       nameTextField: '',
       childNameText: 'Benissimo, come si chiama il tuo ',
       childNameTextEnd: ' figlio? e quanti anni ha ?',
@@ -56,19 +61,38 @@ constructor(props) {
         'Adesso fai \'Tap\' sul calendario e scegliamo i giorni',
       calendarTextPart2:
         ' e l\'ora in cui accompagni tuo figlio va a scuola',
+      nextOrEndText: 'prossimo'
     };
 
     console.log('fatto. lo stato e : ');
     console.log(this.state);
 }
+
+componentWillMount() {
+  //let's check if name isn't empty
+  if (this.naviProps.photoImage !== require('../../img/icon_empty_camera.png')) {
+    this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
+  }
+  if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name !== '') {
+    this.setState({ requiredField: false });
+  }
+  //and let's check if we have an image
+}
 validateName = (text) => {
-  console.log('validatename');
   if ((text === null) || (text === '')) {
         this.setState({ requiredField: true });
     } else {
         this.setState({ requiredField: false });
     }
   this.setState({ nameTextField: text });
+ //
+  this.naviProps.dataStruct[this.naviProps.currentChild - 1].name = text;
+  console.log(this.naviProps);
+}
+setSliderValue = (value) => {
+  
+  this.naviProps.dataStruct[this.naviProps.currentChild - 1].age = value;
+  this.setState({ sliderValue: value });
 }
 goToCalendarConfig = () => {
   console.log('cal pressed go to calendarconfig');
@@ -100,8 +124,23 @@ goToCalendarConfig = () => {
   }
 }
 nextBtn = () => {
-  //we should build the Array of children
-  console.log('sono in nexBtn di singlechildconfig');
+  console.log('nexTbn pressed');
+
+  if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name === '') {
+    Alert.alert('per favore, inserisci il nome...');
+  } else {
+    //check if we are going to calendar or to next child
+    //check if we are on last child
+    this.props.navigation.navigate('calendarselection', { 
+      dataStruct: this.naviProps.dataStruct,
+      currentChild: this.naviProps.currentChild,
+      totalChild: this.naviProps.totalChild,
+      calendarPage: true
+    });
+  }
+
+ //OLD
+ /*
   const currentProps = this.props.navigation.state.params;
   console.log('currentprops = ');
   console.log(currentProps);
@@ -137,37 +176,36 @@ nextBtn = () => {
      }
  } else {
     Alert.alert('per favore, inserisci il nome...');
-  }
+  }*/
 }
 accessCameraRoll = () => {
 const ImagePicker = require('react-native-image-picker');
 // More info on all the options is below in the README...just some common use cases shown here
 const options = {
   title: 'Select Avatar',
-  customButtons: [
-    { name: 'RicordaBimbo',
-      title: 'Choose Photo ' },
-  ],
+  allowsEditing: 'true',
+  takePhotoButtonTitle: 'Usa la Fotocamera',
+  chooseFromLibraryButtonTitle: 'Scegli dall\'album Foto',
   storageOptions: {
     skipBackup: true,
     path: 'images'
   }
 };
 // Open Image Library:
-  ImagePicker.launchImageLibrary(options, (response) => {
-    if (!response.didCancel) { 
-        const imageUriFromCamera = { uri: response.uri };
+  ImagePicker.showImagePicker(options, (response) => {
+    if ((!response.didCancel) && (!response.error)) { 
+        //const imageUriFromCamera = { uri: response.uri };
+        const imageUriFromCamera = { uri: 'data:image/jpeg;base64,' + response.data };
         this.setState({ currentImage: imageUriFromCamera });
         this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
+        this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage = imageUriFromCamera;
+        this.props.navigation.setParams();
     }
   });
 }
 
-  componentWillMount() {
-  
-  }
   render(props) {
-      const { navigate } = this.props.navigation;
+    //check following statements. delete ?
       const { currentChild } = this.props.navigation.state.params;
 let ordinal = '';
 switch (currentChild) {
@@ -227,7 +265,7 @@ switch (currentChild) {
           onChangeText={(text) => this.validateName(text)}
           width={100}
           inputStyle={styles.buttonText}
-          value={this.state.nameTextField}
+          value={this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
         />
       </View>
       { ((this.state.requiredField === true) || (this.state.requiredField === '')) &&
@@ -259,9 +297,8 @@ switch (currentChild) {
             raised
             name='arrow-upward'
             size={13}
-            //type='font-awesome'
             color='red'
-            onPress={console.log('richiest')}
+            onPress={null}
             backgroundColor='transparent'
           />
         campo richiesto
@@ -269,9 +306,8 @@ switch (currentChild) {
           raised
           name='arrow-upward'
           size={13}
-          //type='font-awesome'
           color='red'
-          onPress={console.log('richiest')}
+          onPress={null}
           backgroundColor='transparent'
         />
       </FormValidationMessage>
@@ -294,16 +330,16 @@ switch (currentChild) {
         style={styles.buttonText}
         width={100}
       >
-        {this.state.sliderValue}
+        {this.naviProps.dataStruct[this.naviProps.currentChild - 1].age}
       </Text>
       <Slider
-        value={this.state.sliderValue}
+        value={this.naviProps.dataStruct[this.naviProps.currentChild - 1].age}
         minimumValue={0.5}
         maximumValue={15}
         step={0.5}
         style={{ backgroundColor: 'rgba(52, 52, 52, 0)', width: 107, marginRight: 20 }}
-        onValueChange={(sliderValue) => {
-          this.setState({ sliderValue });
+        onValueChange={(value) => {
+          this.setSliderValue(value);
           }
         }
       />
@@ -318,9 +354,26 @@ switch (currentChild) {
   <Avatar
       xlarge
       rounded
-      source={this.state.currentImage}
+      source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
       onPress={this.accessCameraRoll}
       activeOpacity={0.7}
+  />
+  </View>
+  <View style={styles.calendarButtonStyle}>
+  <Icon
+     raised
+     name='date-range'
+     size={28}
+     //type='font-awesome'
+     color='#192f6a'
+     onPress={() => {
+       this.props.navigation.navigate('calendarselection', { 
+        dataStruct: this.naviProps.dataStruct,
+        currentChild: this.naviProps.currentChild,
+        totalChild: this.naviProps.totalChild,
+        calendarPage: true
+      });
+     }}
   />
   </View>
 
@@ -338,12 +391,10 @@ switch (currentChild) {
     buttonStyle={styles.nextButtonStyle}
     backgroundColor='blue'
     textStyle={{ textAlign: 'center' }}
-    title={'Prossimo'}
+    title={this.state.nextOrEndText}
   />
 </View>
-
       </LinearGradient>
-
     );
   }
 }
@@ -374,10 +425,16 @@ const styles = StyleSheet.create({
   nextButtonStyle: {
     backgroundColor: 'rgba(52, 52, 52, 0)',
     borderRadius: 10
-
   },
   childStyle: {
     flex: 0,
+    justifyContent: 'space-around',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  calendarButtonStyle: {
+    flex: 0,
+    paddingTop: 30,
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',

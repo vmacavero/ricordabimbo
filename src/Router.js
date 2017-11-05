@@ -3,11 +3,11 @@ import ConfigAge from './screens/ConfigAge';
 import HomeScreen from './screens/HomeScreen';
 import SingleChildConfig from './screens/SingleChildConfig';
 import CalendarSelection from './screens/CalendarSelection';
-import TimeToSchoolSelection from './screens/TimeToSchoolSelection'
+import TimeToSchoolSelection from './screens/TimeToSchoolSelection';
 
 const Router = StackNavigator(
   {
-    home: { screen: HomeScreen },
+    home: { screen: ConfigAge }, /*HomeScreen*/
     config: { screen: ConfigAge },
     singlechildconfig: { screen: SingleChildConfig },
     calendarselection: { screen: CalendarSelection },

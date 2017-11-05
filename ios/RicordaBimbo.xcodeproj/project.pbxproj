@@ -466,6 +466,16 @@
 			name = Resources;
 			sourceTree = "<group>";
 		};
+		0D80D5051FADE3FF003E6E1D /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				A2230D3C600A4B0B8DEDBDD3 /* libRNImagePicker.a */,
+				0BE11A59C0DD4AD891B64162 /* libBVLinearGradient.a */,
+				C2ABD709EBB04108B892766D /* libRNVectorIcons.a */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
 		0D9F9CC11F239C390063E27D /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -597,6 +607,7 @@
 				00E356EF1AD99517003FC87E /* RicordaBimboTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				0687CFD09138416BB79D8A6E /* Resources */,
+				0D80D5051FADE3FF003E6E1D /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
