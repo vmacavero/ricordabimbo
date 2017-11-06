@@ -29,6 +29,7 @@ class CalendarSelection extends Component {
 constructor(props, context) {
   super(props, context);
   this.showDatePicker = this.showDatePicker.bind(this);
+  this.showTimePicker = this.showTimePicker.bind(this);
   this.naviProps = this.props.navigation.state.params;
 
   this.state = {
@@ -39,6 +40,7 @@ constructor(props, context) {
     whichCalendar: '',
     startDate: '11/11/11',
     endDate: '99/99/99',
+    weekDay: 0
     //currentChild: this.props.navigation.state.params.currentChild,
     //arrayOfChildren: this.props.navigation.state.params.arrayOfChildren
   };
@@ -97,17 +99,55 @@ constructor(props, context) {
     this.hideDatePicker();
   };
 
-  showTimePicker = () => {
+  showTimePicker = (num) => {
     //we set the calendar (start or end)
+    console.log('showtimepicker e num = ');
+    console.log(num);
     this.setState({ isTimePickerVisible: true });
+    this.setState({ weekDay: num });
   }
 
   hideTimePicker = () => this.setState({ isTimePickerVisible: false });
 
   handleTimePicked = (date) => {
     //alert('A date has been picked: ', date);
-    console.log(date);
+    console.log('sono in handletimepickd');
+    let hh = date.getHours().toString();
+    hh = (hh < 10 ? '0' : '') + hh;
+    let mm = date.getMinutes().toString();
+    mm = (mm < 10 ? '0' : '') + mm;
+    const timeString = `${hh}:${mm}`;
+    console.log(timeString);
+    console.log(this.state.weekDay);
+    const index = this.naviProps.currentChild;
+    const week = this.naviProps.dataStruct[index - 1].daysOfWeekSchoolStarts;
+    switch (this.state.weekDay) {
+      default:
+        return;
+      case 0:
+        week.monday.start = timeString;
+        break;
+      case 1:
+        week.tuesday.start = timeString;
+        break;
+      case 2:
+        week.wednesday.start = timeString;
+        break;
+      case 3:
+        week.thursday.start = timeString;
+        break;
+      case 4:
+        week.friday.start = timeString;
+        break;
+      case 5:
+        week.saturday.start = timeString;
+        break;
+      case 6:
+        week.sunday.start = timeString;
+        break;
+    }
     this.hideTimePicker();
+    this.props.navigation.setParams(); //FORCES - TRIGGERS RE-RENDER
   };
 backBtn = () => {
     //let currentChildrenArray = currentProps.childrenArray;
@@ -231,7 +271,7 @@ backBtn = () => {
         <Text style={styles.buttonText}>
           In basso scegli i giorni in
            cui {' '}{this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
-           {' '}va a scuola e l'orario
+           {' '}va a scuola e l'orario in cui dovrebbe entrare
         </Text>
       </View>
       <View style={styles.calendarIconsStyleCheckBox}>
@@ -252,10 +292,11 @@ backBtn = () => {
           </Text>
           <Text
             style={styles.timeToSchoolTextStyle}
-          > 08:30 am</Text>
+          >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.monday.start}</Text>
           <Button
             icon={{ name: 'alarm', size: 28 }}
-            onPress={this.showTimePicker}
+            onPress={this.showTimePicker.bind(this,0)}
             title={'(cambia)'}
             buttonStyle={styles.nextButtonStyle}
             backgroundColor='blue'
@@ -278,10 +319,11 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:31 am</Text>
+        >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.tuesday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('iconclock')}
+          onPress={this.showTimePicker.bind(this,1)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -304,10 +346,11 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:32 am</Text>
+        >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.wednesday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('f')}
+          onPress={this.showTimePicker.bind(this ,2)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -330,10 +373,11 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:33 am</Text>
+        >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.thursday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('f')}
+          onPress={this.showTimePicker.bind(this,3)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -356,10 +400,11 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:34 am</Text>
+        >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.friday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('f')}
+          onPress={this.showTimePicker.bind(this,4)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -382,14 +427,17 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:35 am</Text>
+        >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.saturday.start}</Text>
+        <Animatable.View animation="swing" iterationCount={15}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('f')}
+          onPress={this.showTimePicker.bind(this,5)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
+        </Animatable.View>
       </View>
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
@@ -408,13 +456,14 @@ backBtn = () => {
         </Text>
         <Text
           style={styles.timeToSchoolTextStyle}
-        > 08:36 am</Text>
+        >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
+                .daysOfWeekSchoolStarts.sunday.start}</Text>
         
         <Animatable.View animation="swing" iterationCount="infinite">
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={console.log('f')}
-          title={'(cambia)'}
+          onPress={this.showTimePicker.bind(this,6)}
+          
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />

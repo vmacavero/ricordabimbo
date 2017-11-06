@@ -46,6 +46,8 @@ class SingleChildConfig extends Component {
 constructor(props) {
   super(props);
   this.naviProps = this.props.navigation.state.params;
+  console.log('sono nel costruttore di singlechildconfig, ecco props');
+  console.log(this.props);
   Text.defaultProps.allowFontScaling = false;
   console.log('sono nel costruttore di singlechildconfig, costruisco lo stato');
     this.state = {
@@ -124,60 +126,26 @@ goToCalendarConfig = () => {
   }
 }
 nextBtn = () => {
-  console.log('nexTbn pressed');
-
   if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name === '') {
-    Alert.alert('per favore, inserisci il nome...');
+      Alert.alert('per favore, inserisci il nome...');
   } else {
-    //check if we are going to calendar or to next child
-    //check if we are on last child
-    this.props.navigation.navigate('calendarselection', { 
-      dataStruct: this.naviProps.dataStruct,
-      currentChild: this.naviProps.currentChild,
+    console.log('else');
+    console.log(this.naviProps);
+      if (this.naviProps.currentChild < this.naviProps.totalChild) {
+      this.props.navigation.navigate('singlechildconfig', {
+      currentChild: this.naviProps.currentChild + 1,
       totalChild: this.naviProps.totalChild,
+      dataStruct: this.naviProps.dataStruct,
       calendarPage: true
-    });
-  }
-
- //OLD
- /*
-  const currentProps = this.props.navigation.state.params;
-  console.log('currentprops = ');
-  console.log(currentProps);
-  const currentIndex = currentProps.currentChild;
-  const totalPages = currentProps.totalChild;
-  let arrayOfChildrenCopy = this.state.arrayOfChildren;
-  arrayOfChildrenCopy[currentIndex].photoImage = this.state.currentImage;
-  arrayOfChildrenCopy[currentIndex].name = this.state.nameTextField;
-  arrayOfChildrenCopy[currentIndex].age = this.state.sliderValue;
-  this.setState({ arrayOfChildren: this.arrayOfChildrenCopy });
-
-  //FIXME !
-  let currentarrayOfChildren = currentProps.arrayOfChildren;
-   const { navigate } = this.props.navigation;
-   if ((this.state.nameTextField !== null) && (this.state.nameTextField !== '')) {
-     if (currentIndex < totalPages) {
-       navigate(
-         'singlechildconfig',
-         { totalChild: totalPages,
-           currentChild: currentIndex + 1,
-           arrayOfChildren: this.state.arrayOfChildren
-         }
-       );
-     } else {
-       //this should be changed !!! will go to finalize !
-       navigate(
-         'calendarselection',
-         { totalChild: totalPages,
-           currentChild:  1,
-           arrayOfChildren: this.state.arrayOfChildren
-         }
-       );
-     }
- } else {
-    Alert.alert('per favore, inserisci il nome...');
-  }*/
+       }); 
+      } else {
+         this.props.navigation.navigate('endofconfig', {
+           dataStruct: this.naviProps.dataStruct
+         });
+       }
+    }
 }
+
 accessCameraRoll = () => {
 const ImagePicker = require('react-native-image-picker');
 // More info on all the options is below in the README...just some common use cases shown here

@@ -40,153 +40,153 @@
   {
     "id": 1,
     "name": "",
-    "age": "",
+    "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "thisShouldBeADate",
-    "schoolDateEnd": "thisShouldBeADate",
+    "schoolDateStart": "01/01/2017",
+    "schoolDateEnd": "31/12/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "tuesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "wednesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "thursday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "friday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "saturday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       },
       "sunday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       }
     }
   },
   {
     "id": 2,
     "name": "",
-    "age": "",
+    "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "thisShouldBeADate",
-    "schoolDateEnd": "thisShouldBeADate",
+    "schoolDateStart": "01/01/2017",
+    "schoolDateEnd": "31/12/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "tuesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "wednesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "thursday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "friday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "saturday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       },
       "sunday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       }
     }
   },
   {
     "id": 3,
     "name": "",
-    "age": "",
+    "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "thisShouldBeADate",
-    "schoolDateEnd": "thisShouldBeADate",
+    "schoolDateStart": "01/01/2017",
+    "schoolDateEnd": "31/12/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "tuesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "wednesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "thursday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "friday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "saturday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       },
       "sunday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       }
     }
   },
   {
     "id": 4,
     "name": "",
-    "age": "",
+    "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "thisShouldBeADate",
-    "schoolDateEnd": "thisShouldBeADate",
+    "schoolDateStart": "01/01/2017",
+    "schoolDateEnd": "31/12/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "tuesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "wednesday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "thursday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "friday": { 
-        "start": "thisShouldBeATime",
+        "start": "07:00",
         "active": true
       },
       "saturday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       },
       "sunday": { 
-        "start": "thisShouldBeATime",
-        "active": true
+        "start": "07:00",
+        "active": false
       }
     }
-  } 
+  },
 ]
