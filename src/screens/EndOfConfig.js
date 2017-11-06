@@ -38,5 +38,6 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderRadius: 0
   }
+});
 
 export default EndOfConfig;
