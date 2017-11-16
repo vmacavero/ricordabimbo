@@ -4,28 +4,28 @@
     "name": "",
     "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "01/01/2017",
-    "schoolDateEnd": "31/12/2018",
+    "schoolDateStart": "01/09/2017",
+    "schoolDateEnd": "30/06/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "tuesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "wednesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "thursday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "friday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "saturday": { 
         "start": "07:00",
@@ -35,35 +35,36 @@
         "start": "07:00",
         "active": false
       }
-    }
+    },
+    "calendarDone": false
   },
   {
     "id": 1,
     "name": "",
     "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "01/01/2017",
-    "schoolDateEnd": "31/12/2018",
+    "schoolDateStart": "01/09/2017",
+    "schoolDateEnd": "30/06/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "tuesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "wednesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "thursday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "friday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "saturday": { 
         "start": "07:00",
@@ -73,35 +74,36 @@
         "start": "07:00",
         "active": false
       }
-    }
+    },
+    "calendarDone": false
   },
   {
     "id": 2,
     "name": "",
     "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "01/01/2017",
-    "schoolDateEnd": "31/12/2018",
+    "schoolDateStart": "01/09/2017",
+    "schoolDateEnd": "30/06/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "tuesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "wednesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "thursday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "friday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "saturday": { 
         "start": "07:00",
@@ -111,35 +113,36 @@
         "start": "07:00",
         "active": false
       }
-    }
+    },
+    "calendarDone": false
   },
   {
     "id": 3,
     "name": "",
     "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "01/01/2017",
-    "schoolDateEnd": "31/12/2018",
+    "schoolDateStart": "01/09/2017",
+    "schoolDateEnd": "30/06/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "tuesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "wednesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "thursday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "friday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "saturday": { 
         "start": "07:00",
@@ -149,35 +152,36 @@
         "start": "07:00",
         "active": false
       }
-    }
+    },
+    "calendarDone": false
   },
   {
     "id": 4,
     "name": "",
     "age": 0.5,
     "photoImage": "thisMustBeAnUri",
-    "schoolDateStart": "01/01/2017",
-    "schoolDateEnd": "31/12/2018",
+    "schoolDateStart": "01/09/2017",
+    "schoolDateEnd": "30/06/2018",
     "daysOfWeekSchoolStarts": {
       "monday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "tuesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "wednesday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "thursday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "friday": { 
         "start": "07:00",
-        "active": true
+        "active": false
       },
       "saturday": { 
         "start": "07:00",
@@ -187,6 +191,7 @@
         "start": "07:00",
         "active": false
       }
-    }
+    },
+    "calendarDone": false
   },
 ]

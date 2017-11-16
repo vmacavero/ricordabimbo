@@ -151,9 +151,22 @@ constructor(props, context) {
   };
 backBtn = () => {
     //let currentChildrenArray = currentProps.childrenArray;
-
     // I'll check if the calendar is correct ! (date/times, etc) so
     //we can pass to other child (or to final config);
+  
+    const week = this.naviProps.dataStruct[this.naviProps.currentChild - 1].daysOfWeekSchoolStarts;
+    let calendarOk = false;
+    Object.keys(week).forEach(function(key) {
+     //console.log('Key : ' + key + ', Value : ' + week[key].active);
+     if (week[key].active) {
+       calendarOk = true;
+     }
+    });
+     if (calendarOk === false) {
+       Alert.alert('Per favore segna con la spunta almeno un giorno della settimana');
+       return;
+     }
+
 
      const { navigate } = this.props.navigation;
     navigate(

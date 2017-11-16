@@ -1,32 +1,40 @@
 import React, { Component } from 'react';
 import {
   View,
+  ScrollView,
   Text,
   StyleSheet,
   PixelRatio
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
-import { Slider, Button } from 'react-native-elements';
-import { setNumberOfChildren } from '../actions';
-
+import { Button, Card, ListItem } from 'react-native-elements';
 
 class EndOfConfig extends Component {
+  constructor(props) {
+    super(props);
+    this.naviProps = this.props.navigation.state.params;
+  }
+  renderCards() {
+    const m = this.naviProps.dataStruct;
 
+    for (var i = 0; i < 5; i++) {
+      return <Card title={m[i].name}></Card>
+    }
+  }
   render() {
     return (
-    <View style={{ align: 'center' }}>
-    <Text>
-      Riepilogo:
-    </Text>
-    <Text>
+  <View>
+    <View >
+      <Text>
+        Riepilogo:
       </Text>
-      <Text>{this.props.navigation.state.params.dataStruct[0].name}</Text>
-      <Text>{this.props.navigation.state.params.dataStruct[1].name}</Text>
-      <Text>{this.props.navigation.state.params.dataStruct[2].name}</Text>
-      <Text>{this.props.navigation.state.params.dataStruct[3].name}</Text>
-      <Text>{this.props.navigation.state.params.dataStruct[4].name}</Text>
     </View>
+    <ScrollView>
+    {this.renderCards()}
+      
+    </ScrollView>
+  </View>
     ); 
   }
 }

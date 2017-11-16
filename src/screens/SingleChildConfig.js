@@ -16,6 +16,7 @@ import {
   Avatar,
   Slider
 } from 'react-native-elements';
+import * as Animatable from 'react-native-animatable';
 
 /* Receives :
 totalChild: this.state.numberOfChildren,
@@ -46,10 +47,7 @@ class SingleChildConfig extends Component {
 constructor(props) {
   super(props);
   this.naviProps = this.props.navigation.state.params;
-  console.log('sono nel costruttore di singlechildconfig, ecco props');
-  console.log(this.props);
   Text.defaultProps.allowFontScaling = false;
-  console.log('sono nel costruttore di singlechildconfig, costruisco lo stato');
     this.state = {
       currentImage: require('../../img/icon_empty_camera.png'),
       currentChild: this.props.navigation.state.params.currentChild,
@@ -63,11 +61,10 @@ constructor(props) {
         'Adesso fai \'Tap\' sul calendario e scegliamo i giorni',
       calendarTextPart2:
         ' e l\'ora in cui accompagni tuo figlio va a scuola',
-      nextOrEndText: 'prossimo'
+      nextOrEndText: 'prossimo',
+      calendarIcon: 'calendar-question',
+      calendarColor: '#ff0000' //green is '#1fff6a'
     };
-
-    console.log('fatto. lo stato e : ');
-    console.log(this.state);
 }
 
 componentWillMount() {
@@ -79,6 +76,18 @@ componentWillMount() {
     this.setState({ requiredField: false });
   }
   //and let's check if we have an image
+  
+  //check if calendar is Done
+   const index = this.naviProps.currentChild;
+   if (this.naviProps.dataStruct[index - 1].calendarDone === true) {
+    this.setState({ 
+      calendarIcon: 'calendar-check', 
+      calendarColor: '#1fff6a' 
+    });
+   } else {
+    //we should leave it false ?
+   }
+
 }
 validateName = (text) => {
   if ((text === null) || (text === '')) {
@@ -125,7 +134,7 @@ goToCalendarConfig = () => {
     Alert.alert('per favore metti un nome ?');
   }
 }
-nextBtn = () => {
+nextBtn = () => {  
   if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name === '') {
       Alert.alert('per favore, inserisci il nome...');
   } else {
@@ -327,23 +336,28 @@ switch (currentChild) {
       activeOpacity={0.7}
   />
   </View>
+  <Animatable.View animation="swing" iterationCount="infinite" duration={1500}>
   <View style={styles.calendarButtonStyle}>
-  <Icon
-     raised
-     name='date-range'
-     size={28}
-     //type='font-awesome'
-     color='#192f6a'
-     onPress={() => {
-       this.props.navigation.navigate('calendarselection', { 
-        dataStruct: this.naviProps.dataStruct,
-        currentChild: this.naviProps.currentChild,
-        totalChild: this.naviProps.totalChild,
-        calendarPage: true
-      });
-     }}
-  />
-  </View>
+ 
+    <Icon
+      raised
+      name={this.state.calendarIcon}
+      size={36}
+      type='material-community'
+      color={this.state.calendarColor}
+      //color='#192f6a'
+      onPress={() => {
+        this.props.navigation.navigate('calendarselection', { 
+          dataStruct: this.naviProps.dataStruct,
+          currentChild: this.naviProps.currentChild,
+          totalChild: this.naviProps.totalChild,
+          calendarPage: true
+        });
+      }}
+    />
+     </View>
+  </Animatable.View>
+ 
 
 <View
   style={{
@@ -351,16 +365,16 @@ switch (currentChild) {
     justifyContent: 'flex-end',
     flexDirection: 'column',
     alignItems: 'center', }}
->
-  <Button
-    icon={{ name: 'trending-flat', size: 32, flex: 1 }}
-    iconRight
-    onPress={this.nextBtn}
-    buttonStyle={styles.nextButtonStyle}
-    backgroundColor='blue'
-    textStyle={{ textAlign: 'center' }}
-    title={this.state.nextOrEndText}
-  />
+> 
+    <Button
+      icon={{ name: 'trending-flat', size: 32, flex: 1 }}
+      iconRight
+      onPress={this.nextBtn}
+      buttonStyle={styles.nextButtonStyle}
+      backgroundColor='blue'
+      textStyle={{ textAlign: 'center' }}
+      title={this.state.nextOrEndText}
+    />
 </View>
       </LinearGradient>
     );
