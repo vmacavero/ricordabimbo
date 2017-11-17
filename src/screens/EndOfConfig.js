@@ -17,10 +17,29 @@ class EndOfConfig extends Component {
   }
   renderCards() {
     const m = this.naviProps.dataStruct;
+    return m.map(item => { 
+      if (item.name !== '') {
+      return (
+      <Card 
+        title={item.name}
+        image={item.photoImage}
+      >
+      <Text> Entra a scuola il 
+      {(item.daysOfWeekSchoolStarts.monday.active===true)?  'lunedi' : 'nolun'}
+      {(item.daysOfWeekSchoolStarts.tuesday.active===true)?  'lunedi' : 'nolun'}
+      {(item.daysOfWeekSchoolStarts.m.active===true)?  'lunedi' : 'nolun'}
+      {(item.daysOfWeekSchoolStarts.monday.active===true)?  'lunedi' : 'nolun'}
+      {(item.daysOfWeekSchoolStarts.monday.active===true)?  'lunedi' : 'nolun'}
+      {(item.daysOfWeekSchoolStarts.monday.active===true)?  'lunedi' : 'nolun'}
+      {(item.daysOfWeekSchoolStarts.monday.active===true)?  'lunedi' : 'nolun'}
+      </Text>
+      </Card>);
+      } else { 
+        return null;
+      }
+    });
 
-    for (var i = 0; i < 5; i++) {
-      return <Card title={m[i].name}></Card>
-    }
+   
   }
   render() {
     return (
