@@ -1,3 +1,4 @@
+/*eslint global-require: off */
 import React, { Component } from 'react';
 import {
   View,
@@ -5,11 +6,11 @@ import {
   StyleSheet,
   PixelRatio
 } from 'react-native';
-import { connect } from 'react-redux';
+//import { connect } from 'react-redux';
 import LinearGradient from 'react-native-linear-gradient';
 import { Slider, Button } from 'react-native-elements';
 import ChildrenIcon from '../components/ChildrenIcon';
-import { setNumberOfChildren } from '../actions';
+//import { setNumberOfChildren } from '../actions';
 import dataStructure from '../dataStructure.json';
 
 class ConfigAge extends Component {
@@ -21,15 +22,14 @@ class ConfigAge extends Component {
     title: 'RicordaBimbo',
     });
     constructor(props) {
-    super(props);
-    dataStructure[0].photoImage = require('../../img/icon_empty_camera.png');
-    dataStructure[1].photoImage = require('../../img/icon_empty_camera.png');
-    dataStructure[2].photoImage = require('../../img/icon_empty_camera.png');
-    dataStructure[3].photoImage = require('../../img/icon_empty_camera.png');
-    dataStructure[4].photoImage = require('../../img/icon_empty_camera.png');
-    this.state = {
-      numberOfChildren: 1,
-    };
+      super(props);
+      for (const d of dataStructure) {
+        //setting all images to the empty image
+        d.photoImage = require('../../img/icon_empty_camera.png');
+      }
+      this.state = {
+        numberOfChildren: 1,
+      };
 }
 
 showIcons() {
@@ -62,22 +62,19 @@ nextBtn = () => {
               Inserisci qui il numero dei tuoi Bimbi !
             </Text>
           </View>
-          <View
-          style={{
-            flex: 1,
-            alignItems: 'stretch',
-            justifyContent: 'flex-start' }}
-          >
-    <Slider
-      value={this.state.numberOfChildren}
-      minimumValue={1}
-      maximumValue={5}
-      step={1}
-      onValueChange={(numberOfChildren) => {
-        this.setState({ numberOfChildren });
-        }
-      }
-    />
+       <View
+          style={styles.gradientStyle}
+       >
+        <Slider
+          value={this.state.numberOfChildren}
+          minimumValue={1}
+          maximumValue={5}
+          step={1}
+          onValueChange={(numberOfChildren) => {
+            this.setState({ numberOfChildren });
+            }
+          }
+        />
 
     <View style={styles.childStyle}>
         { this.showIcons() }
@@ -109,6 +106,11 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     borderRadius: 0
   },
+  gradientStyle: {
+    flex: 1,
+    alignItems: 'stretch',
+    justifyContent: 'flex-start'
+  },
   buttonText: {
     fontSize: PixelRatio.getPixelSizeForLayoutSize(12),
     fontFamily: 'Gill Sans',
@@ -132,8 +134,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 22,
   },
-
 });
-
 
 export default ConfigAge;

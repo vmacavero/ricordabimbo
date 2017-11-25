@@ -1,6 +1,6 @@
+/*eslint global-require: off */
 import React, { Component } from 'react';
 import {
- Alert,
  PixelRatio,
  View
 } from 'react-native';
@@ -9,17 +9,15 @@ import AppIntro from 'react-native-app-intro';
 class HomeScreen extends Component {
 
   static navigationOptions = () => ({
-    //tabBarVisible: false,
       header: null
       // Note: By default the icon is only shown on iOS. Search the showIcon option below
     });
-    /*constructor(props) {
-      super(props);
-    }*/
+
     onSkipBtnHandle = (index) => {
-      Alert.alert('Skip');
+      console.log(index);
     }
     onSlideChangeHandle = (index, total) => {
+      console.log(index, total);
     }
     doneBtnHandle = () => {
       //
@@ -27,7 +25,7 @@ class HomeScreen extends Component {
       navigate('config');
     }
     nextBtnHandle = (index) => {
-      Alert.alert('Next');
+      console.log(index);
     }
     render() {
       const pageArray = [{
@@ -83,9 +81,7 @@ class HomeScreen extends Component {
       return (
         <View allowFontScaling={false}>
           <AppIntro
-            //onNextBtnClick={this.nextBtnHandle}
             onDoneBtnClick={this.doneBtnHandle}
-            //onSkipBtnClick={this.onSkipBtnHandle}
             onSlideChange={this.onSlideChangeHandle}
             pageArray={pageArray}
             doneBtnLabel='Ok!'
