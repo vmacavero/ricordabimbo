@@ -15,7 +15,7 @@ const Router = StackNavigator(
     calendarselection: { screen: CalendarSelection },
     timetoschoolselection: { screen: TimeToSchoolSelection },
     endofconfig: { screen: EndOfConfig },
-    reminderOk: { screen: ReminderOk }
+    reminderok: { screen: ReminderOk }
   });
 
   export default Router;

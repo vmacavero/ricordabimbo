@@ -9,6 +9,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Card } from 'react-native-elements';
+import RNCalendarEvents from 'react-native-calendar-events';
 
 class ReminderOk extends Component {
   static navigationOptions = ({ navigation }) => ({

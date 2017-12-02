@@ -3,9 +3,11 @@ import {
   View,
   ScrollView,
   Text,
-  StyleSheet
+  StyleSheet,
+  Alert
 } from 'react-native';
 
+import RNCalendarEvents from 'react-native-calendar-events';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Card } from 'react-native-elements';
 
@@ -37,13 +39,36 @@ class EndOfConfig extends Component {
     this.index = this.props.navigation.state.params;
   }
 
-  insertEvents() {
-    this.props.navigation.navigate('reminderok', {
-      currentChild: this.naviProps.currentChild + 1,
-      totalChild: this.naviProps.totalChild,
-      dataStruct: this.naviProps.dataStruct,
-   
+  insertEvents = () => {
+  /*
+    RNCalendarEvents.authorizeEventStore()
+    .then(status => {
+      switch (status) {
+        case 'denied' : 
+          Alert.alert('denied');
+          break;
+        case 'restricted' :
+          Alert.alert('restricted');
+          break;
+        case 'authorized' :
+          Alert.alert('authorized');
+          this.props.navigation.navigate('reminderok', {
+            dataStruct: this.naviProps.dataStruct
+          });
+          break;
+        case 'undetermined' :
+          Alert.alert('undetermined');
+          break;
+        default: 
+          Alert.alert('default');
+          break;
+      }
+    })
+    .catch(error => {
+     // handle error
+     Alert.alert('error');
     });
+    */
   }
   renderCards() {
     const m = this.naviProps.dataStruct;
