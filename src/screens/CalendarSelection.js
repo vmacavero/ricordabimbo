@@ -1,10 +1,10 @@
+/*eslint no-else-return: off */
 import React, { Component } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   Alert,
-  TouchableWithoutFeedback
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Avatar, Icon, CheckBox } from 'react-native-elements';
@@ -153,18 +153,20 @@ backBtn = () => {
     //let currentChildrenArray = currentProps.childrenArray;
     // I'll check if the calendar is correct ! (date/times, etc) so
     //we can pass to other child (or to final config);
-  
-    const week = this.naviProps.dataStruct[this.naviProps.currentChild - 1].daysOfWeekSchoolStarts;
+    const index = this.naviProps.currentChild;
+    const week = this.naviProps.dataStruct[index - 1].daysOfWeekSchoolStarts;
     let calendarOk = false;
-    Object.keys(week).forEach(function(key) {
+    Object.keys(week).forEach((key) => {
      //console.log('Key : ' + key + ', Value : ' + week[key].active);
      if (week[key].active) {
-       calendarOk = true;
+       calendarOk = true; 
      }
     });
      if (calendarOk === false) {
        Alert.alert('Per favore segna con la spunta almeno un giorno della settimana');
        return;
+     } else {
+      this.naviProps.dataStruct[index - 1].calendarDone = true;
      }
 
 
@@ -309,7 +311,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.monday.start}</Text>
           <Button
             icon={{ name: 'alarm', size: 28 }}
-            onPress={this.showTimePicker.bind(this,0)}
+            onPress={this.showTimePicker.bind(this, 0)}
             title={'(cambia)'}
             buttonStyle={styles.nextButtonStyle}
             backgroundColor='blue'
@@ -336,7 +338,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.tuesday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={this.showTimePicker.bind(this,1)}
+          onPress={this.showTimePicker.bind(this, 1)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -363,7 +365,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.wednesday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={this.showTimePicker.bind(this ,2)}
+          onPress={this.showTimePicker.bind(this, 2)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -390,7 +392,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.thursday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={this.showTimePicker.bind(this,3)}
+          onPress={this.showTimePicker.bind(this, 3)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -417,7 +419,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.friday.start}</Text>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={this.showTimePicker.bind(this,4)}
+          onPress={this.showTimePicker.bind(this, 4)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -445,7 +447,7 @@ backBtn = () => {
         <Animatable.View animation="swing" iterationCount={15}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={this.showTimePicker.bind(this,5)}
+          onPress={this.showTimePicker.bind(this, 5)}
           title={'(cambia)'}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
@@ -475,7 +477,7 @@ backBtn = () => {
         <Animatable.View animation="swing" iterationCount="infinite">
         <Button
           icon={{ name: 'alarm', size: 28 }}
-          onPress={this.showTimePicker.bind(this,6)}
+          onPress={this.showTimePicker.bind(this, 6)}
           
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'

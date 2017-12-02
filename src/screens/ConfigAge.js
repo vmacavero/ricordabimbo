@@ -7,10 +7,10 @@ import {
   PixelRatio
 } from 'react-native';
 //import { connect } from 'react-redux';
+//import { setNumberOfChildren } from '../actions';
 import LinearGradient from 'react-native-linear-gradient';
 import { Slider, Button } from 'react-native-elements';
 import ChildrenIcon from '../components/ChildrenIcon';
-//import { setNumberOfChildren } from '../actions';
 import dataStructure from '../dataStructure.json';
 
 class ConfigAge extends Component {

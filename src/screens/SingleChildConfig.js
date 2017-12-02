@@ -1,3 +1,4 @@
+/*eslint global-require: off */
 import React, { Component } from 'react';
 import {
   Text,
@@ -18,7 +19,7 @@ import {
 } from 'react-native-elements';
 import * as Animatable from 'react-native-animatable';
 
-/* Receives :
+/* Receives folllowing props from navigator:
 totalChild: this.state.numberOfChildren,
       currentChild: 1,
       dataStruct: dataStructure
@@ -33,12 +34,7 @@ class SingleChildConfig extends Component {
   title: 'RicordaBimbo',
   headerRight:
     <Text
-     style={{
-       color: 'white',
-       fontWeight: 'bold',
-       fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
-       paddingRight: 15
-     }}
+     style={styles.headerRightTextStyle}
     >
      {navigation.state.params.currentChild}/{navigation.state.params.totalChild}
     </Text>
@@ -49,9 +45,9 @@ constructor(props) {
   this.naviProps = this.props.navigation.state.params;
   Text.defaultProps.allowFontScaling = false;
     this.state = {
-      currentImage: require('../../img/icon_empty_camera.png'),
-      currentChild: this.props.navigation.state.params.currentChild,
-      sliderValue: 0.5,
+      //currentImage: require('../../img/icon_empty_camera.png'),
+      //currentChild: this.props.navigation.state.params.currentChild,
+      //sliderValue: 0.5,
       requiredField: true,
       nameTextField: '',
       childNameText: 'Benissimo, come si chiama il tuo ',
@@ -68,14 +64,14 @@ constructor(props) {
 }
 
 componentWillMount() {
-  //let's check if name isn't empty
+  //and let's check if we have an image
   if (this.naviProps.photoImage !== require('../../img/icon_empty_camera.png')) {
     this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
   }
+//let's check if name isn't empty
   if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name !== '') {
     this.setState({ requiredField: false });
   }
-  //and let's check if we have an image
   
   //check if calendar is Done
    const index = this.naviProps.currentChild;
@@ -87,8 +83,13 @@ componentWillMount() {
    } else {
     //we should leave it false ?
    }
-
 }
+
+setSliderValue = (value) => { 
+  this.naviProps.dataStruct[this.naviProps.currentChild - 1].age = value;
+  this.setState({ sliderValue: value });
+}
+
 validateName = (text) => {
   if ((text === null) || (text === '')) {
         this.setState({ requiredField: true });
@@ -100,13 +101,7 @@ validateName = (text) => {
   this.naviProps.dataStruct[this.naviProps.currentChild - 1].name = text;
   console.log(this.naviProps);
 }
-setSliderValue = (value) => {
-  
-  this.naviProps.dataStruct[this.naviProps.currentChild - 1].age = value;
-  this.setState({ sliderValue: value });
-}
 goToCalendarConfig = () => {
-  console.log('cal pressed go to calendarconfig');
    const { navigate } = this.props.navigation;
    if ((this.state.nameTextField !== null) && (this.state.nameTextField !== '')) {
     /* navigate('calendarselection',
@@ -116,26 +111,17 @@ goToCalendarConfig = () => {
         childAge: this.state.sliderValue
       });*/
 
-    let arrayCopy = this.state.arrayOfChildren;
-
-    const currentIndex = this.props.navigation.state.params.currentChild;
-    arrayCopy[currentIndex].photoImage = this.state.currentImage;
-    arrayCopy[currentIndex].name = this.state.nameTextField;
-    arrayCopy[currentIndex].age = this.state.sliderValue;
-
-    this.setState({ arrayOfChildren: arrayCopy });
-
     navigate('calendarselection',
       { arrayOfChildren: this.state.arrayOfChildren,
         currentChildNum: this.props.navigation.state.params.currentChild,
 
       });
   } else {
-    Alert.alert('per favore metti un nome ?');
+    Alert.alert('per favore inserisci un nome prima di configurare il calendario');
   }
 }
 nextBtn = () => {  
-  if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name === '') {
+ /* if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name === '') {
       Alert.alert('per favore, inserisci il nome...');
   } else {
     console.log('else');
@@ -152,12 +138,35 @@ nextBtn = () => {
            dataStruct: this.naviProps.dataStruct
          });
        }
+    }*/
+    const index = this.naviProps.currentChild;
+    if (this.naviProps.dataStruct[index - 1].name === '') {
+      Alert.alert('per favore, inserisci il nome...');
+      return;
     }
+
+    if (this.naviProps.dataStruct[index - 1].calendarDone === false) {
+      Alert.alert('per favore fai tap sul calendario e configuralo!');
+      return;
+    }
+
+    if (index < this.naviProps.totalChild) {
+        this.props.navigation.navigate('singlechildconfig', {
+        currentChild: this.naviProps.currentChild + 1,
+        totalChild: this.naviProps.totalChild,
+        dataStruct: this.naviProps.dataStruct,
+        calendarPage: true
+        }); 
+    } else {
+         this.props.navigation.navigate('endofconfig', {
+           dataStruct: this.naviProps.dataStruct,
+         });
+      }
 }
 
 accessCameraRoll = () => {
 const ImagePicker = require('react-native-image-picker');
-// More info on all the options is below in the README...just some common use cases shown here
+
 const options = {
   title: 'Select Avatar',
   allowsEditing: 'true',
@@ -172,7 +181,8 @@ const options = {
   ImagePicker.showImagePicker(options, (response) => {
     if ((!response.didCancel) && (!response.error)) { 
         //const imageUriFromCamera = { uri: response.uri };
-        const imageUriFromCamera = { uri: 'data:image/jpeg;base64,' + response.data };
+       // const imageUriFromCamera = { uri: 'data:image/jpeg;base64,' + response.data };
+        const imageUriFromCamera = { uri: `data:image/jpeg;base64,${response.data}` };
         this.setState({ currentImage: imageUriFromCamera });
         this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
         this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage = imageUriFromCamera;
@@ -181,8 +191,7 @@ const options = {
   });
 }
 
-  render(props) {
-    //check following statements. delete ?
+  render() {
       const { currentChild } = this.props.navigation.state.params;
 let ordinal = '';
 switch (currentChild) {
@@ -424,6 +433,12 @@ const styles = StyleSheet.create({
   buttonStyle: {
     backgroundColor: '#fffdfd'
   },
+  headerRightTextStyle: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
+    paddingRight: 15
+  }
 });
 
 export default SingleChildConfig;
