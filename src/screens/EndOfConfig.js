@@ -40,24 +40,27 @@ class EndOfConfig extends Component {
   }
 
   insertEvents = () => {
-  /*
+  
     RNCalendarEvents.authorizeEventStore()
     .then(status => {
       switch (status) {
         case 'denied' : 
-          Alert.alert('denied');
+          Alert.alert(
+            'Per favore vai nelle impostazioni e autorizza all\'uso del calendario'
+          );
           break;
         case 'restricted' :
-          Alert.alert('restricted');
+          Alert.alert(
+           'Per favore vai nelle impostazioni e autorizza all\'uso del calendario'
+        );
           break;
         case 'authorized' :
-          Alert.alert('authorized');
           this.props.navigation.navigate('reminderok', {
             dataStruct: this.naviProps.dataStruct
           });
           break;
         case 'undetermined' :
-          Alert.alert('undetermined');
+          Alert.alert('Per favore autorizza');
           break;
         default: 
           Alert.alert('default');
@@ -66,10 +69,10 @@ class EndOfConfig extends Component {
     })
     .catch(error => {
      // handle error
-     Alert.alert('error');
+     Alert.alert('Errore in authorize event store, riferiscilo al creatore dell\'app');
     });
-    */
   }
+  
   renderCards() {
     const m = this.naviProps.dataStruct;
     return m.map((item, i) => { 
