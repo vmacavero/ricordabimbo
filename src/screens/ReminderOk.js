@@ -69,39 +69,56 @@ class ReminderOk extends Component {
     });
   }
   dateTimeFormatter = (myDate, myTime) => {
-    //2016-08-19T19:26:00.000Z' UTC time format,
-    const dataString = myDate.substr(6, 4) + '-' + datamia.substr(3, 2) + 
-                '-' + datamia.substr(0, 2) + 'T' + myTime + ':00.000Z';
-    return dataString;
+    console.log('i am in dateformater');
+    //2016-08-19T19:26:00.000Z' ISO time format,
+
+  console.log('dati di mydate e mytime');
+  console.log(myDate);
+  console.log(myTime);
+    const noUTC = new Date(
+        myDate.substr(6, 4), 
+        myDate.substr(3, 2) - 1, 
+        myDate.substr(0, 2),
+        myTime.substr(0, 2),
+        myTime.substr(3, 2),
+    );
+
+    //console.log(now);
+    console.log('returno da dateformatter');            
+    return noUTC.toISOString();
   }
 
   insertEvent = (name, start, end) => {
+    console.log('inserisco evento con name start end');
+    console.log(name);
+    console.log(start);
+    console.log(end);
     RNCalendarEvents.saveEvent(
       'Hai lasciato '+ name +' a scuola ?',
        {
-      startDate: start,
-      //'2016-08-19T19:26:00.000Z',
-      endDate: end,
-      //'2017-08-29T19:26:00.000Z',
-      alarms: [{
-        date: -1 
-      }],
-      recurrenceRule: {
-        frequency: 'week',
-        interval: 1,
-        endDate: end
-        //'2017-08-29T19:26:00.000Z'
+        startDate: start,
+        //'2016-08-19T19:26:00.000Z',
+        endDate: start,
+        //'2017-08-29T19:26:00.000Z',
+        alarms: [{
+          date: -1 
+        }],
+        recurrenceRule:  {
+          frequency: 'weekly',
+          interval: 1,
+          endDate: end
+          //'2017-08-29T19:26:00.000Z'
       }
     })
     .then(id => {
       Alert.alert('ok !');
     })
     .catch(error => {
-      Alert.alert('errore gravissimo !');
+      Alert.alert('errore gravissimo inserendo l\'evento!');
       Alert.alert(error);
     });
   } 
-  }
+  
 
   prepareEvents = () => {
     const m = this.naviProps.dataStruct;
@@ -119,31 +136,13 @@ class ReminderOk extends Component {
         //WATCH OUT : 00:00 = 12:00 AM  ????
         // 12:00 = 12:00 PM  
         if (day.monday.active) {
-          insertEvent(
+          console.log('chiamo inserte vent');
+          this.insertEvent(
             item.name,
-            dateTimeFormatter(item.schoolDateStarts),
-            dateTimeFormatter(item.schoolDateEnd),
-          )
+            this.dateTimeFormatter(item.schoolDateStart, day.monday.start),
+            this.dateTimeFormatter(item.schoolDateEnd, day.monday.start),
+          );
         }
-        
-        console.log(
-          item.daysOfWeekSchoolStarts.tuesday.active ? 
-            item.daysOfWeekSchoolStarts.tuesday.start : 'noMar'); 
-        console.log(
-          item.daysOfWeekSchoolStarts.wednesday.active ? 
-            item.daysOfWeekSchoolStarts.wednesday.start : 'noMer');
-        console.log(
-          item.daysOfWeekSchoolStarts.thursday.active ? 
-            item.daysOfWeekSchoolStarts.thursday.start : 'noGio');
-        console.log(
-          item.daysOfWeekSchoolStarts.friday.active ? 
-            item.daysOfWeekSchoolStarts.friday.start : 'noVen');
-        console.log(
-          item.daysOfWeekSchoolStarts.saturday.active ? 
-            item.daysOfWeekSchoolStarts.saturday.start : 'noSab');
-        console.log(
-          item.daysOfWeekSchoolStarts.sunday.active ? 
-            item.daysOfWeekSchoolStarts.sunday.start : 'noDom');   
       }
     });
   }
@@ -164,7 +163,6 @@ class ReminderOk extends Component {
     ); 
   }
 }
-
 const styles = StyleSheet.create({
   linearGradient: {
     flex: 1,
