@@ -68,13 +68,7 @@ class ReminderOk extends Component {
      Alert.alert(error);
     });
   }
-  dateTimeFormatter = (myDate, myTime) => {
-    console.log('i am in dateformater');
-    //2016-08-19T19:26:00.000Z' ISO time format,
-
-  console.log('dati di mydate e mytime');
-  console.log(myDate);
-  console.log(myTime);
+  dateTimeFormatter = (myDate, myTime, iso) => {
     const noUTC = new Date(
         myDate.substr(6, 4), 
         myDate.substr(3, 2) - 1, 
@@ -82,19 +76,65 @@ class ReminderOk extends Component {
         myTime.substr(0, 2),
         myTime.substr(3, 2),
     );
+    if (iso === true) { 
+      return noUTC.toISOString();
+    } else {
+      return noUTC;
+    }
+  }
 
-    //console.log(now);
-    console.log('returno da dateformatter');            
-    return noUTC.toISOString();
+  nextDayOfWeek = (key, startDate) => {
+    console.log('i am in nextDayOfWeek');
+    console.log(key);
+    let dayOfWeek = 1;
+    console.log(startDate);
+    //console.log(startDate.toISOString());
+    switch (key) {
+      case 'monday':
+        dayOfWeek = 1;
+        break;
+      case 'tuesday':
+        dayOfWeek = 2;
+        break;
+      case 'wednesday':
+        dayOfWeek = 3;
+        break;
+      case 'thursday':
+        dayOfWeek = 4;
+        break;
+      case 'friday':
+        dayOfWeek = 5;
+        break;
+      case 'saturday':
+        dayOfWeek = 6;
+        break;
+      case 'sunday':
+        dayOfWeek = 0;
+        break;
+      default: break;
+    }
+    console.log('day of week = ');
+    console.log(dayOfWeek);
+    let dayNum = startDate.getDay();
+    console.log('day is number');
+    console.log(dayNum)
+    if (dayNum !== dayOfWeek) {
+        //calculating next occurrence of the day of the week
+        startDate.setDate(startDate.getDate() + (dayOfWeek - 1 - startDate.getDay() + 7) % 7 + 1);
+    }
+    console.log('dayis');
+    console.log(startDate);  
   }
 
   insertEvent = (name, start, end) => {
-    console.log('inserisco evento con name start end');
+    console.log('inserirei in teoria  evento con name start end');
     console.log(name);
     console.log(start);
     console.log(end);
-    RNCalendarEvents.saveEvent(
-      'Hai lasciato '+ name +' a scuola ?',
+    
+
+   /* RNCalendarEvents.saveEvent(
+      'Hai lasciato ' + name + ' a scuola ?',
        {
         startDate: start,
         //'2016-08-19T19:26:00.000Z',
@@ -103,7 +143,7 @@ class ReminderOk extends Component {
         alarms: [{
           date: -1 
         }],
-        recurrenceRule:  {
+        recurrenceRule: {
           frequency: 'weekly',
           interval: 1,
           endDate: end
@@ -116,33 +156,40 @@ class ReminderOk extends Component {
     .catch(error => {
       Alert.alert('errore gravissimo inserendo l\'evento!');
       Alert.alert(error);
-    });
+    });*/
   } 
   
-
   prepareEvents = () => {
     const m = this.naviProps.dataStruct;
     m.map((item, i) => { 
+      console.log('loop map ');
+     // console.log(item);
+     // console.log(i);
       if (item.name !== '') { 
-        console.log(i);
-        console.log(item.name);
-        console.log(item.id);
-        //console.log(item.schoolDateStart);
-        //console.log(item.schoolDateEnd);
-        const day = item.daysOfWeekSchoolStarts;
-
-        // so events in every week 
+        console.log('osno nel ciclo in cui item.name non vuoto');
         //starting in schooldatestart and ending in schooldateend
         //WATCH OUT : 00:00 = 12:00 AM  ????
-        // 12:00 = 12:00 PM  
-        if (day.monday.active) {
-          console.log('chiamo inserte vent');
-          this.insertEvent(
-            item.name,
-            this.dateTimeFormatter(item.schoolDateStart, day.monday.start),
-            this.dateTimeFormatter(item.schoolDateEnd, day.monday.start),
-          );
-        }
+        // 12:00 = 12:00 PM
+        Object.entries(item.daysOfWeekSchoolStarts).forEach(
+          ([key, value]) => {
+            //check if the day is effectively a scholastic one
+            console.log('sono nel ciclo dei giorni della settimana ecco key e value');
+            console.log(key);
+            console.log(value);
+            if (value.active === true) {
+              //this means i have to find the next corresponding day of week for start
+              const correspondingDayofWeek = this.nextDayOfWeek(key, this.dateTimeFormatter(item.schoolDateStart, value.start), false);
+
+              this.insertEvent(
+                item.name,
+                this.dateTimeFormatter(item.schoolDateStart, value.start, true),
+                this.dateTimeFormatter(item.schoolDateEnd, value.start, true),
+                key
+              );
+            }            
+           // console.log(key, value.start);
+          }
+       );
       }
     });
   }

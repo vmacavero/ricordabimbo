@@ -39,8 +39,7 @@ class EndOfConfig extends Component {
     this.index = this.props.navigation.state.params;
   }
 
-  insertEvents = () => {
-  
+  insertEvents = () => { 
     RNCalendarEvents.authorizeEventStore()
     .then(status => {
       switch (status) {
