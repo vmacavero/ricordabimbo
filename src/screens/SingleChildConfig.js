@@ -63,7 +63,7 @@ constructor(props) {
     };
 }
 
-componentWillMount() {
+componentDidMount() {
   //and let's check if we have an image
   if (this.naviProps.photoImage !== require('../../img/icon_empty_camera.png')) {
     this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
@@ -80,6 +80,8 @@ componentWillMount() {
       calendarIcon: 'calendar-check', 
       calendarColor: '#1fff6a' 
     });
+    //stop animation
+    this.refs.calendarButton.stopAnimation();
    } else {
     //we should leave it false ?
    }
@@ -345,7 +347,12 @@ switch (currentChild) {
       activeOpacity={0.7}
   />
   </View>
-  <Animatable.View animation="swing" iterationCount="infinite" duration={1500}>
+  <Animatable.View 
+    animation="swing" 
+    iterationCount="infinite" 
+    duration={1500} 
+    ref="calendarButton"
+  >
   <View style={styles.calendarButtonStyle}>
  
     <Icon

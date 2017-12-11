@@ -45,6 +45,26 @@ constructor(props, context) {
     //arrayOfChildren: this.props.navigation.state.params.arrayOfChildren
   };
 }
+getTodaysDate = () => {
+   //set today's date..
+   let today = new Date();
+   let dd = today.getDate();
+   let mm = today.getMonth()+1; //January is 0!
+   let yyyy = today.getFullYear();
+   if (dd < 10) {
+       dd = '0' + dd;
+   } 
+   if (mm < 10) {
+       mm = '0'+ mm
+   } 
+   today = dd + '/' + mm + '/' + yyyy;
+   return today;
+}
+
+componentWillMount() {
+  this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateStart 
+  = this.getTodaysDate();
+}
   changeCheckBox(num) {
     const index = this.naviProps.currentChild;
     const week = this.naviProps.dataStruct[index - 1].daysOfWeekSchoolStarts;
@@ -286,7 +306,8 @@ backBtn = () => {
         <Text style={styles.buttonText}>
           In basso scegli i giorni in
            cui {' '}{this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
-           {' '}va a scuola e l'orario in cui dovrebbe entrare
+           {' '}va a scuola e l'orario in cui dovrebbe entrare. Clicca sugli orologi per cambiare
+           gli orari.
         </Text>
       </View>
       <View style={styles.calendarIconsStyleCheckBox}>
@@ -309,13 +330,15 @@ backBtn = () => {
             style={styles.timeToSchoolTextStyle}
           >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.monday.start}</Text>
-          <Button
-            icon={{ name: 'alarm', size: 28 }}
-            onPress={this.showTimePicker.bind(this, 0)}
-            title={'(cambia)'}
-            buttonStyle={styles.nextButtonStyle}
-            backgroundColor='blue'
-          />
+          <Animatable.View animation="swing" iterationCount={15} delay={150}>
+        <Button
+          icon={{ name: 'alarm', size: 28 }}
+          onPress={this.showTimePicker.bind(this, 0)}
+          title={''}
+          buttonStyle={styles.nextButtonStyle}
+          backgroundColor='blue'
+        />
+        </Animatable.View>
         </View>
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
@@ -336,13 +359,15 @@ backBtn = () => {
           style={styles.timeToSchoolTextStyle}
         >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.tuesday.start}</Text>
+        <Animatable.View animation="swing" iterationCount={15} delay={300}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 1)}
-          title={'(cambia)'}
+          title={''}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
+        </Animatable.View>
       </View>
       <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
@@ -363,13 +388,15 @@ backBtn = () => {
           style={styles.timeToSchoolTextStyle}
         >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.wednesday.start}</Text>
+        <Animatable.View animation="swing" iterationCount={15} delay={450}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 2)}
-          title={'(cambia)'}
+          title={''}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
+        </Animatable.View>
       </View>
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
@@ -390,13 +417,15 @@ backBtn = () => {
           style={styles.timeToSchoolTextStyle}
         >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.thursday.start}</Text>
+         <Animatable.View animation="swing" iterationCount={15} delay={600}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 3)}
-          title={'(cambia)'}
+          title={''}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
+        </Animatable.View>
       </View>
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
@@ -417,13 +446,15 @@ backBtn = () => {
           style={styles.timeToSchoolTextStyle}
         >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.friday.start}</Text>
+        <Animatable.View animation="swing" iterationCount={15} delay={750}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 4)}
-          title={'(cambia)'}
+          title={''}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
+        </Animatable.View>
       </View>
         <View style={styles.daysOfWeekRowStyle}>
         <CheckBox
@@ -444,11 +475,11 @@ backBtn = () => {
           style={styles.timeToSchoolTextStyle}
         >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.saturday.start}</Text>
-        <Animatable.View animation="swing" iterationCount={15}>
+        <Animatable.View animation="swing" iterationCount={15} delay={900}>
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 5)}
-          title={'(cambia)'}
+          title={''}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
@@ -474,11 +505,11 @@ backBtn = () => {
         >{this.naviProps.dataStruct[this.naviProps.currentChild - 1]
                 .daysOfWeekSchoolStarts.sunday.start}</Text>
         
-        <Animatable.View animation="swing" iterationCount="infinite">
+        <Animatable.View animation="swing" iterationCount={15} delay={1050} >
         <Button
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 6)}
-          
+          title={''}
           buttonStyle={styles.nextButtonStyle}
           backgroundColor='blue'
         />
@@ -506,7 +537,7 @@ backBtn = () => {
    buttonStyle={styles.nextButtonStyle}
    backgroundColor='blue'
    textStyle={{ textAlign: 'center' }}
-   title={'Ritorna'}
+   title={'Salva'}
  />
 </LinearGradient>
 
@@ -543,6 +574,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(52, 52, 52, 0)',
     borderRadius: 10
 
+  },
+  clockIconStyle: {
+    backgroundColor: 'rgba(52, 52, 52, 0)',
   },
   calendarIconsStyle: {
     flex: 0,

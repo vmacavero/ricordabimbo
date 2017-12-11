@@ -137,7 +137,7 @@ class ReminderOk extends Component {
       }
     })
     .then(id => {
-      Alert.alert('ok !');
+      //Alert.alert('ok !');
     })
     .catch(error => {
       Alert.alert('errore gravissimo inserendo l\'evento!');
@@ -177,6 +177,8 @@ class ReminderOk extends Component {
   <View style={{ paddingTop: 40 }}>
     <Text>
       ok inseriti correttamente !
+      Puoi chiudere l'applicazione e rilassarti.
+      Pensemo a tutto noi !
     </Text>
   </View>
   

@@ -71,7 +71,15 @@ class EndOfConfig extends Component {
      Alert.alert('Errore in authorize event store, riferiscilo al creatore dell\'app');
     });
   }
-  
+  backToConfig = (param) => {
+    const { navigate } = this.props.navigation;
+    navigate(
+      'singlechildconfig',
+        { totalChild: 1,//or param ?
+          currentChild: param +1,
+          dataStruct: this.dataStruct
+        });
+  }
   renderCards() {
     const m = this.naviProps.dataStruct;
     return m.map((item, i) => { 
@@ -85,7 +93,7 @@ class EndOfConfig extends Component {
         image={item.photoImage}
         key={i}
       >
-      <Text style={{ color: 'white' }}>{'Va a scuola il : \n'}
+      <Text style={{ color: 'white' }}>{'Va a scuola/asilo/nido il : \n'}
       {(item.daysOfWeekSchoolStarts.monday.active === true) ? 
         `Lunedi' alle ${item.daysOfWeekSchoolStarts.monday.start} \n` : ''}
       {(item.daysOfWeekSchoolStarts.tuesday.active === true) ? 
@@ -106,6 +114,8 @@ class EndOfConfig extends Component {
         backgroundColor='#3b7077'
         buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
         title='Modifica' 
+        onPress={() =>  this.backToConfig(i)}
+          
       />
       </Card>
     );
