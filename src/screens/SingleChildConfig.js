@@ -247,7 +247,7 @@ switch (currentChild) {
             justifyContent: 'space-between',
           }}
         >
-          Nome
+          <Text>Nome</Text>
         </FormLabel>
         <FormInput
           onChangeText={(text) => this.validateName(text)}
@@ -289,7 +289,7 @@ switch (currentChild) {
             onPress={null}
             backgroundColor='transparent'
           />
-        campo richiesto
+        <Text>campo richiesto</Text>
         <Icon
           raised
           name='arrow-upward'
