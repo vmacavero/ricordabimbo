@@ -5,7 +5,8 @@ import {
   View,
   StyleSheet,
   PixelRatio,
-  Alert
+  Alert,
+  Keyboard
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -257,6 +258,8 @@ switch (currentChild) {
           width={100}
           inputStyle={styles.buttonText}
           value={this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
+          onSubmitEditing={() => { Keyboard.dismiss(); }}
+          onEndEditing={() => { Keyboard.dismiss(); }}
         />
       </View>
       { ((this.state.requiredField === true) || (this.state.requiredField === '')) &&

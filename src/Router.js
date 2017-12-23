@@ -6,10 +6,11 @@ import CalendarSelection from './screens/CalendarSelection';
 import TimeToSchoolSelection from './screens/TimeToSchoolSelection';
 import EndOfConfig from './screens/EndOfConfig';
 import ReminderOk from './screens/ReminderOk';
+import Reload from './screens/Reload';
 
 const Router = StackNavigator(
   {
-    home: { screen: ConfigAge }, /*HomeScreen*/
+    home: { screen: Reload }, /*HomeScreen, ConfigAge*/
     config: { screen: ConfigAge },
     singlechildconfig: { screen: SingleChildConfig },
     calendarselection: { screen: CalendarSelection },

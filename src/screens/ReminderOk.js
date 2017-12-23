@@ -3,7 +3,8 @@ import {
   View,
   Text,
   StyleSheet,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -36,6 +37,9 @@ class ReminderOk extends Component {
     this.naviProps = this.props.navigation.state.params;
     this.dataStruct = this.props.navigation.state.params.dataStruct;
     this.index = this.props.navigation.state.params;
+    this.state = {
+      arrayOfEventsId: []
+    };
   }
   componentWillMount = () => {
     RNCalendarEvents.authorizationStatus()
@@ -118,33 +122,31 @@ class ReminderOk extends Component {
     return startDate.toISOString();
   }
 
-  insertEvent = (name, start, end) => {
-    RNCalendarEvents.saveEvent(
-      `Hai lasciato ${name} a scuola ?`,
-       {
-        startDate: start,
-        //'2016-08-19T19:26:00.000Z',
-        endDate: start,
-        //'2017-08-29T19:26:00.000Z',
-        alarms: [{
-          date: -1 
-        }],
-        recurrenceRule: {
-          frequency: 'weekly',
-          interval: 1,
-          endDate: end
-          //'2017-08-29T19:26:00.000Z'
-      }
-    })
-    .then(id => {
-      //Alert.alert('ok !');
+   insertEvent(name, start, end, value) { 
+      RNCalendarEvents.saveEvent(
+        `Hai lasciato ${name} a scuola ?`,
+        {
+          startDate: start,
+          //'2016-08-19T19:26:00.000Z',
+          endDate: start,
+          alarms: [{
+            date: -1 
+          }],
+          recurrenceRule: {
+            frequency: 'weekly',
+            interval: 1,
+            endDate: end
+        }
+      })
+    .then(id => { 
+      value.eventId = id;
     })
     .catch(error => {
-      Alert.alert('errore gravissimo inserendo l\'evento!');
+      Alert.alert('error inserting event, please contact developer!');
       Alert.alert(error);
     });
-  } 
-  
+}
+
   prepareEvents = () => {
     const m = this.naviProps.dataStruct;
     m.map((item, i) => { 
@@ -155,18 +157,48 @@ class ReminderOk extends Component {
             if (value.active === true) {
               //this means i have to find the next corresponding day of week for start
               const correspondingDayofWeek = this.nextDayOfWeek(key, this.dateTimeFormatter(item.schoolDateStart, value.start), false);
-              this.insertEvent(
+             this.insertEvent(
                 item.name,
                // this.dateTimeFormatter(item.schoolDateStart, value.start, true),
                 correspondingDayofWeek,
-                this.dateTimeFormatter(item.schoolDateEnd, value.start, true)
+                this.dateTimeFormatter(item.schoolDateEnd, value.start, true),
+                value
               );
+            //we have just inserted the Event, and we have received an ID
             }            
           }
        );
       }
     });
+   this.saveAll();
   }
+
+   async saveAll() {
+     console.log('trying to save all');
+      try {
+        await AsyncStorage.setItem('allDataStruct', JSON.stringify(this.dataStruct));
+        console.log('async storage done');
+      } catch (error) {
+        console.log('errore inserting data in asyncstorage');
+        console.log(error);
+      }     
+    }
+
+    async reloadData() {
+         try {
+          let dataReloaded = await AsyncStorage.getItem('allDataStruct');
+          if (value !== null){
+            // We have data!!
+            console.log('dataReloaded');
+            console.log(dataReloaded);
+          }
+        } catch (error) {
+          // Error retrieving data
+          console.log('error retrieving dataStruct');
+        }
+
+    }
+
 
   render() {
     return (
@@ -180,6 +212,12 @@ class ReminderOk extends Component {
       Puoi chiudere l'applicazione e rilassarti.
       Pensemo a tutto noi !
     </Text>
+    <Button
+    onPress={this.reloadData}
+    title="Reload Data"
+    color="#841584"
+    />
+    
   </View>
   
   </LinearGradient>
