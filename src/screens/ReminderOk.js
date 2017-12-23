@@ -120,7 +120,7 @@ class ReminderOk extends Component {
 
   insertEvent = (name, start, end) => {
     RNCalendarEvents.saveEvent(
-      'Hai lasciato ' + name + ' a scuola ?',
+      `Hai lasciato ${name} a scuola ?`,
        {
         startDate: start,
         //'2016-08-19T19:26:00.000Z',

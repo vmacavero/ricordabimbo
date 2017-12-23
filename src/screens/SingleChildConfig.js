@@ -172,6 +172,9 @@ const ImagePicker = require('react-native-image-picker');
 const options = {
   title: 'Select Avatar',
   allowsEditing: 'true',
+  maxWidth: 800,
+  maxHeight: 800,
+  quality: 0,
   takePhotoButtonTitle: 'Usa la Fotocamera',
   chooseFromLibraryButtonTitle: 'Scegli dall\'album Foto',
   storageOptions: {
@@ -311,9 +314,7 @@ switch (currentChild) {
     >
       <Text
         style={styles.nameInputTextStyle}
-      >
-        Eta'
-      </Text>
+      >Eta'</Text>
       <Text
         style={styles.buttonText}
         width={100}
