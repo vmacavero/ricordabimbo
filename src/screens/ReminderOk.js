@@ -123,7 +123,7 @@ class ReminderOk extends Component {
   }
 
    insertEvent(name, start, end, value) { 
-      RNCalendarEvents.saveEvent(
+   return  RNCalendarEvents.saveEvent(
         `Hai lasciato ${name} a scuola ?`,
         {
           startDate: start,
@@ -137,14 +137,19 @@ class ReminderOk extends Component {
             interval: 1,
             endDate: end
         }
-      })
-    .then(id => { 
+      });
+
+
+    /*  
+    .then(id =>  { 
+      Alert.alert('id = '+id);
       value.eventId = id;
     })
     .catch(error => {
       Alert.alert('error inserting event, please contact developer!');
       Alert.alert(error);
     });
+    */
 }
 
   prepareEvents = () => {
@@ -163,18 +168,36 @@ class ReminderOk extends Component {
                 correspondingDayofWeek,
                 this.dateTimeFormatter(item.schoolDateEnd, value.start, true),
                 value
-              );
+              )
+              .then(id =>  { 
+                //FIX ME !
+                Alert.alert('id = '+id);
+                value.eventId = id;
+                this.saveAll();
+               
+              })
+              .catch(error => {
+                Alert.alert('error inserting event, please contact developer!');
+                Alert.alert(error);
+              });
+              
             //we have just inserted the Event, and we have received an ID
             }            
           }
        );
       }
     });
-   this.saveAll();
+  // this.saveAll();
   }
 
    async saveAll() {
-     console.log('trying to save all');
+     console.log('trying to save all the struct = ');
+     Alert.alert(this.dataStruct[0].daysOfWeekSchoolStarts.monday.eventId);
+     console.log(this.dataStruct[0].daysOfWeekSchoolStarts.monday.eventId);
+     console.log(this.dataStruct[0]);
+     //console.log('stringified');
+     console.log(JSON.stringify(this.dataStruct));
+
       try {
         await AsyncStorage.setItem('allDataStruct', JSON.stringify(this.dataStruct));
         console.log('async storage done');

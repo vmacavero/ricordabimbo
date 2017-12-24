@@ -4,7 +4,8 @@ import {
   ScrollView,
   Text,
   StyleSheet,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 
 import RNCalendarEvents from 'react-native-calendar-events';
@@ -37,7 +38,55 @@ class EndOfConfig extends Component {
     this.naviProps = this.props.navigation.state.params;
     this.dataStruct = this.props.navigation.state.params.dataStruct;
     this.index = this.props.navigation.state.params;
+    this.deleteEvents = this.deleteEvents.bind(this);
   }
+
+  async iterateAndDelete(day) {
+    console.log('i am in iterateAndDelete');
+    console.log(day);
+    Object.keys(day).forEach(function (key) {
+        if (day[key].eventId !== '0') {
+          //delete event;
+          console.log(eventId);
+        }
+    });
+    console.log('out from iterateAndDelete');
+  }
+
+  async deleteEvents() {
+
+    //DELETE ME 
+  /*
+    console.log('i am in deletevents');
+    try {
+      AsyncStorage.removeItem('allDataStruct');
+      console.log('removing all');
+    } catch (errore) {
+      console.log('error remov item');
+    }
+  */
+//DELETE ME
+
+
+    try {
+     const dataReloaded = await AsyncStorage.getItem('allDataStruct');
+     if (dataReloaded !== null) {
+        //we must iterate to find the id and delete all.
+        //this will be hard.
+        const m = this.naviProps.dataStruct;
+        return m.map((item, i) => { 
+          if (item.name!=='') {
+            this.iterateAndDelete(item.daysOfWeekSchoolStarts);
+          }
+        });
+     }
+   } catch (error) {
+     // Error retrieving data
+     console.log('error retrieving dataStruct for Events, in endofcofig');
+     console.log(error);
+     Alert.alert(error);
+   }
+}
 
   insertEvents = () => { 
     RNCalendarEvents.authorizeEventStore()
@@ -54,9 +103,14 @@ class EndOfConfig extends Component {
         );
           break;
         case 'authorized' :
-          this.props.navigation.navigate('reminderok', {
+        //in this place we check if we have already events in calendar (via AsyncStorage)
+        console.log('calling dlete events');
+       // this.deleteEvents();
+        //console.log('not going to reminderOf');
+         this.props.navigation.navigate('reminderok', {
             dataStruct: this.naviProps.dataStruct
           });
+      
           break;
         case 'undetermined' :
           Alert.alert('Per favore autorizza');
@@ -75,7 +129,7 @@ class EndOfConfig extends Component {
     const { navigate } = this.props.navigation;
     navigate(
       'singlechildconfig',
-        { totalChild: 1,//or param ?
+        { totalChild: 1, //or param ?
           currentChild: param +1,
           dataStruct: this.dataStruct
         });
@@ -110,11 +164,11 @@ class EndOfConfig extends Component {
          `Domenica alle ${item.daysOfWeekSchoolStarts.sunday.start} \n` : ''}
       </Text>
       <Button
-        icon={{ name: 'code' }}
+        icon={{ name: 'mode-edit' }}
         backgroundColor='#3b7077'
-        buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+        buttonStyle={styles.centeredButtonStyle}
         title='Modifica' 
-        onPress={() =>  this.backToConfig(i)}
+        onPress={() => this.backToConfig(i)}
           
       />
       </Card>
@@ -135,9 +189,9 @@ class EndOfConfig extends Component {
     <ScrollView>
       {this.renderCards()}
       <Button
-          icon={{ name: 'code' }}
-          backgroundColor='#86592d'
-          buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+          icon={{ name: 'event' }}
+          backgroundColor='#3b7077'
+          buttonStyle={styles.buttonStyle}
           title='Inserisci i Promemoria !'
           onPress={this.insertEvents}  
       />
@@ -155,7 +209,24 @@ const styles = StyleSheet.create({
     paddingLeft: 15,
     paddingRight: 15,
     borderRadius: 0
+  },
+  buttonStyle: {
+    borderRadius: 0, 
+    marginLeft: 0, 
+    marginRight: 0, 
+    marginBottom: 0,
+    marginTop: 40
+  },
+  centeredButtonStyle: {
+    borderRadius: 0, 
+    marginLeft: 0, 
+    marginRight: 0, 
+    marginBottom: 0, 
+    height: 20, 
+    width: 100,
+    alignSelf: 'center'
   }
+  
 });
 
 export default EndOfConfig;

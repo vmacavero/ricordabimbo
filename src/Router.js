@@ -10,7 +10,7 @@ import Reload from './screens/Reload';
 
 const Router = StackNavigator(
   {
-    home: { screen: Reload }, /*HomeScreen, ConfigAge*/
+    home: { screen: HomeScreen }, /*HomeScreen, ConfigAge*/
     config: { screen: ConfigAge },
     singlechildconfig: { screen: SingleChildConfig },
     calendarselection: { screen: CalendarSelection },

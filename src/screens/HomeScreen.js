@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import {
  PixelRatio,
- View
+ View,
+ Alert,
+ AsyncStorage
 } from 'react-native';
 import AppIntro from 'react-native-app-intro';
 
@@ -12,6 +14,12 @@ class HomeScreen extends Component {
       header: null
       // Note: By default the icon is only shown on iOS. Search the showIcon option below
     });
+
+    componentDidMount = () => {
+      //will check if we have already saved our data in AsyncStorage
+      this.reloadData();
+    }
+    
 
     onSkipBtnHandle = (index) => {
       console.log(index);
@@ -27,6 +35,39 @@ class HomeScreen extends Component {
     nextBtnHandle = (index) => {
       console.log(index);
     }
+    
+    async reloadData() {
+      const debug = true;
+         try {
+          const dataReloaded = await AsyncStorage.getItem('allDataStruct');
+          if (dataReloaded !== null) {
+            console.log('loaded:');
+            
+              const dataReloadedJson = JSON.parse(dataReloaded);
+              console.log(dataReloadedJson);
+              const { navigate } = this.props.navigation;  
+             if (debug) { 
+              try {
+                AsyncStorage.removeItem('allDataStruct');
+                 console.log('removing all');
+                 Alert.alert('Debug: Events deleted');
+              } catch (errore) {
+                console.log('error remov item');
+              }
+            }
+
+              navigate('endofconfig', {
+                dataStruct: dataReloadedJson,
+              });
+          }
+         } catch (error) {
+          // Error retrieving data
+          console.log('error retrieving dataStruct');
+          console.log(error);
+          Alert.alert('error in retrieving Data in Phone' + error);
+         }
+    }
+    
     render() {
       const pageArray = [{
         title: 'RicordaBimbo ',

@@ -38,7 +38,6 @@ class Reload extends Component {
   }
 
   async reloadData() {
-      console.log('i am in reloadData');
          try {
           let dataReloaded = await AsyncStorage.getItem('allDataStruct');
           if (dataReloaded !== null){
@@ -61,9 +60,7 @@ class Reload extends Component {
           console.log(error);
           Alert.alert(error);
         }
-
     }
-
 
   render() {
     return (
