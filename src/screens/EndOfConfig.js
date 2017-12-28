@@ -18,9 +18,9 @@ class EndOfConfig extends Component {
     headerStyle: {
            backgroundColor: '#3b7077'
          },
-    title: 'RicordaBimbo',
+    title: 'Riepilogo',
     headerRight: null,
-    header: null,
+    headerLeft: null,
     headerMode: 'none'
   /*  <Button
     icon={{ name: 'trending-flat', size: 12, flex: 1 }}
@@ -39,6 +39,7 @@ class EndOfConfig extends Component {
     this.dataStruct = this.props.navigation.state.params.dataStruct;
     this.index = this.props.navigation.state.params;
     this.deleteEvents = this.deleteEvents.bind(this);
+    this.buttonEditDisabled = this.props.navigation.state.params.buttonEditDisabled;
   }
 
   async iterateAndDelete(day) {
@@ -82,7 +83,7 @@ class EndOfConfig extends Component {
      }
    } catch (error) {
      // Error retrieving data
-     console.log('error retrieving dataStruct for Events, in endofcofig');
+     console.log('error retrieving dataStruct for Events, in EndOfConfig');
      console.log(error);
      Alert.alert(error);
    }
@@ -104,8 +105,14 @@ class EndOfConfig extends Component {
           break;
         case 'authorized' :
         //in this place we check if we have already events in calendar (via AsyncStorage)
+        //we call delete events, in wich we check if there's something saved
+        //and in that case, the app wipes everything and inserts all new events at once
+        //this it maybe the only convenient way to modify recurring events without
+        //presenting the user a LONG list of event for every child for every day of the
+        //week. 
+        //still don't know the behaviour in android, we'll see.
         console.log('calling dlete events');
-       // this.deleteEvents();
+        this.deleteEvents();
         //console.log('not going to reminderOf');
          this.props.navigation.navigate('reminderok', {
             dataStruct: this.naviProps.dataStruct
@@ -127,6 +134,7 @@ class EndOfConfig extends Component {
   }
   backToConfig = (param) => {
     const { navigate } = this.props.navigation;
+    this.buttonEditDisabled = false;
     navigate(
       'singlechildconfig',
         { totalChild: 1, //or param ?
@@ -147,7 +155,7 @@ class EndOfConfig extends Component {
         image={item.photoImage}
         key={i}
       >
-      <Text style={{ color: 'white' }}>{'Va a scuola/asilo/nido il : \n'}
+      <Text style={{ color: 'white' }}>{'Va a scuola/asilo/nido : \n'}
       {(item.daysOfWeekSchoolStarts.monday.active === true) ? 
         `Lunedi' alle ${item.daysOfWeekSchoolStarts.monday.start} \n` : ''}
       {(item.daysOfWeekSchoolStarts.tuesday.active === true) ? 
@@ -169,7 +177,7 @@ class EndOfConfig extends Component {
         buttonStyle={styles.centeredButtonStyle}
         title='Modifica' 
         onPress={() => this.backToConfig(i)}
-          
+         
       />
       </Card>
     );
@@ -193,7 +201,8 @@ class EndOfConfig extends Component {
           backgroundColor='#3b7077'
           buttonStyle={styles.buttonStyle}
           title='Inserisci i Promemoria !'
-          onPress={this.insertEvents}  
+          onPress={this.insertEvents} 
+          disabled={this.buttonEditDisabled}  
       />
     </ScrollView>
   </View>

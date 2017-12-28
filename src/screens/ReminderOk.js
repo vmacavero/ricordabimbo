@@ -171,7 +171,7 @@ class ReminderOk extends Component {
               )
               .then(id =>  { 
                 //FIX ME !
-                Alert.alert('id = '+id);
+               // Alert.alert('id = '+id);
                 value.eventId = id;
                 this.saveAll();
                
@@ -188,16 +188,19 @@ class ReminderOk extends Component {
       }
     });
   // this.saveAll();
+  //
+  Alert.alert('Eventi inseriti !');
+  this.props.navigation.navigate('home');
   }
 
    async saveAll() {
-     console.log('trying to save all the struct = ');
+     /*console.log('trying to save all the struct = ');
      Alert.alert(this.dataStruct[0].daysOfWeekSchoolStarts.monday.eventId);
      console.log(this.dataStruct[0].daysOfWeekSchoolStarts.monday.eventId);
      console.log(this.dataStruct[0]);
      //console.log('stringified');
      console.log(JSON.stringify(this.dataStruct));
-
+    */  
       try {
         await AsyncStorage.setItem('allDataStruct', JSON.stringify(this.dataStruct));
         console.log('async storage done');

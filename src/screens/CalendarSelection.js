@@ -49,13 +49,13 @@ getTodaysDate = () => {
    //set today's date..
    let today = new Date();
    let dd = today.getDate();
-   let mm = today.getMonth()+1; //January is 0!
+   let mm = today.getMonth() + 1; //January is 0!
    let yyyy = today.getFullYear();
    if (dd < 10) {
        dd = '0' + dd;
    } 
    if (mm < 10) {
-       mm = '0'+ mm
+       mm = '0'+ mm ;
    } 
    today = dd + '/' + mm + '/' + yyyy;
    return today;
@@ -170,33 +170,45 @@ componentWillMount() {
     this.props.navigation.setParams(); //FORCES - TRIGGERS RE-RENDER
   };
 backBtn = () => {
-    //let currentChildrenArray = currentProps.childrenArray;
-    // I'll check if the calendar is correct ! (date/times, etc) so
-    //we can pass to other child (or to final config);
     const index = this.naviProps.currentChild;
     const week = this.naviProps.dataStruct[index - 1].daysOfWeekSchoolStarts;
     let calendarOk = false;
     Object.keys(week).forEach((key) => {
-     //console.log('Key : ' + key + ', Value : ' + week[key].active);
+     //iterating to datastruct to find at least one day active
+     //so we can set calendarOk to true :)
      if (week[key].active) {
        calendarOk = true; 
      }
     });
+    const end = 
+      this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateEnd;
+      console.log('end = '+end);
+    //switching month and day
+    const endDate = new Date(end.substring(3, 5)+'/'+end.substring(0, 2)+'/'+end.substring(6, 10));
+    console.log(endDate);
+  
+    const start = 
+      this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateStart;
+
+const startDate = new Date(start.substring(3, 5)+'/'+start.substring(0, 2)+'/'+start.substring(6, 10));
+    if (endDate <= startDate) {
+      Alert.alert('per fare scegli delle date Corrette (fine superiore a inizio ?)');
+      return;
+    }
+
      if (calendarOk === false) {
        Alert.alert('Per favore segna con la spunta almeno un giorno della settimana');
        return;
      } else {
       this.naviProps.dataStruct[index - 1].calendarDone = true;
      }
-
-
      const { navigate } = this.props.navigation;
     navigate(
            'singlechildconfig',
-           {
-            totalChild: this.naviProps.totalChild,
-            currentChild: this.naviProps.currentChild,
-            dataStruct: this.naviProps.dataStruct
+            {
+              totalChild: this.naviProps.totalChild,
+              currentChild: this.naviProps.currentChild,
+              dataStruct: this.naviProps.dataStruct
            }
          );
 }

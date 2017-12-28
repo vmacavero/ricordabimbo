@@ -53,7 +53,7 @@ constructor(props) {
       nameTextField: '',
       childNameText: 'Benissimo, come si chiama il tuo ',
       childNameTextEnd: ' figlio? e quanti anni ha ?',
-      canInsertPhotoText: 'Puoi aggiungere una foto di tuo figlio o figlia, te lo consiglio !',
+      canInsertPhotoText: 'Aggiungi qui la foto di tuo figlio o figlia !',
       calendarTextPart1:
         'Adesso fai \'Tap\' sul calendario e scegliamo i giorni',
       calendarTextPart2:
@@ -65,8 +65,8 @@ constructor(props) {
 }
 
 componentDidMount() {
-  //and let's check if we have an image
-  if (this.naviProps.photoImage !== require('../../img/icon_empty_camera.png')) {
+  //and let's check if we have an image 
+  if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage !== require('../../img/icon_empty_camera.png')) {
     this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
   }
 //let's check if name isn't empty
@@ -149,9 +149,15 @@ nextBtn = () => {
     }
 
     if (this.naviProps.dataStruct[index - 1].calendarDone === false) {
-      Alert.alert('per favore fai tap sul calendario e configuralo!');
+      Alert.alert('per favore fai tap sul calendario e configuralo...');
       return;
     }
+
+    if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage === require('../../img/icon_empty_camera.png')) {
+      Alert.alert('per favore scegli una foto...');
+      return;
+    }
+
 
     if (index < this.naviProps.totalChild) {
         this.props.navigation.navigate('singlechildconfig', {

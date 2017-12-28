@@ -37,20 +37,23 @@ class HomeScreen extends Component {
     }
     
     async reloadData() {
-      const debug = true;
+      //with debug = true on restart the app deletes all the asyncstorage saved data
+      const debug = false;
+      
+      console.log('reloaddata');
          try {
           const dataReloaded = await AsyncStorage.getItem('allDataStruct');
           if (dataReloaded !== null) {
-            console.log('loaded:');
-            
+            console.log('loaded:');            
               const dataReloadedJson = JSON.parse(dataReloaded);
-              console.log(dataReloadedJson);
+              
               const { navigate } = this.props.navigation;  
              if (debug) { 
+               console.log('debug');
               try {
                 AsyncStorage.removeItem('allDataStruct');
                  console.log('removing all');
-                 Alert.alert('Debug: Events deleted');
+               //  Alert.alert('Debug: Events deleted');
               } catch (errore) {
                 console.log('error remov item');
               }
@@ -58,6 +61,7 @@ class HomeScreen extends Component {
 
               navigate('endofconfig', {
                 dataStruct: dataReloadedJson,
+                buttonEditDisabled: true,
               });
           }
          } catch (error) {
@@ -108,7 +112,8 @@ class HomeScreen extends Component {
           level: 10, },
           {
             title: 'Ok !',
-            description: 'Siamo Pronti ? Via!',
+            description: 'Siamo Pronti ? Via! \n\n(ricorda di autorizzare questa' +
+             ' App ad accedere al calendario ed alle foto)',
             img: require('../../img/child4.jpg'),
             imgStyle: {
               height: 93 * 3,
