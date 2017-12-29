@@ -39,6 +39,7 @@ class HomeScreen extends Component {
     async reloadData() {
       //with debug = true on restart the app deletes all the asyncstorage saved data
       const debug = false;
+      console.log('debug is:' + debug);
       
       console.log('reloaddata');
          try {

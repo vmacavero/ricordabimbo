@@ -192,7 +192,7 @@ backBtn = () => {
 
 const startDate = new Date(start.substring(3, 5)+'/'+start.substring(0, 2)+'/'+start.substring(6, 10));
     if (endDate <= startDate) {
-      Alert.alert('per fare scegli delle date Corrette (fine superiore a inizio ?)');
+      Alert.alert('Per favore controlla se le date di inizio e fine scuola sono corrette...');
       return;
     }
 

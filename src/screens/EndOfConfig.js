@@ -5,7 +5,8 @@ import {
   Text,
   StyleSheet,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  Platform
 } from 'react-native';
 
 import RNCalendarEvents from 'react-native-calendar-events';
@@ -42,33 +43,42 @@ class EndOfConfig extends Component {
     this.buttonEditDisabled = this.props.navigation.state.params.buttonEditDisabled;
   }
 
-  async iterateAndDelete(day) {
-    console.log('i am in iterateAndDelete');
-    console.log(day);
-    Object.keys(day).forEach(function (key) {
-        if (day[key].eventId !== '0') {
-          //delete event;
-          console.log(eventId);
+  async remove(id) {
+    if (Platform.os==='ios') {
+        console.log('removing on ios');
+        RNCalendarEvents.removeFutureEvents(id)
+        .then(success => {
+          console.log('removed event with id' +id);
+        })
+        .catch (error => {
+            console.log('error removing event: '+error)
+        });
+    } else {
+        RNCalendarEvents.removeEvents(id)
+        .then(success => {
+          console.log('removed event with id' +id);
+        })
+        .catch (error => {
+          console.log('error removing event: '+error)
+        });
+     }
+       
+}
+  async iterateAndDelete(day){
+      console.log('i am in iterteAndDelete'); 
+      console.log(day); 
+     Object.keys(day).forEach(function (key) {
+          if (day[key].eventId == '0') { 
+          console.log('ho trovato evento: ');
+          console.log(day[key].eventId);
+          //deleting events
+          this.remove(day[key].eventId);
         }
     });
     console.log('out from iterateAndDelete');
   }
 
   async deleteEvents() {
-
-    //DELETE ME 
-  /*
-    console.log('i am in deletevents');
-    try {
-      AsyncStorage.removeItem('allDataStruct');
-      console.log('removing all');
-    } catch (errore) {
-      console.log('error remov item');
-    }
-  */
-//DELETE ME
-
-
     try {
      const dataReloaded = await AsyncStorage.getItem('allDataStruct');
      if (dataReloaded !== null) {
