@@ -347,8 +347,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 0)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='transparent'
         />
         </Animatable.View>
         </View>
@@ -376,8 +376,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 1)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='blue'
         />
         </Animatable.View>
       </View>
@@ -405,8 +405,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 2)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='blue'
         />
         </Animatable.View>
       </View>
@@ -434,8 +434,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 3)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='blue'
         />
         </Animatable.View>
       </View>
@@ -463,8 +463,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 4)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='blue'
         />
         </Animatable.View>
       </View>
@@ -492,8 +492,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 5)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='blue'
         />
         </Animatable.View>
       </View>
@@ -522,8 +522,8 @@ backBtn = () => {
           icon={{ name: 'alarm', size: 28 }}
           onPress={this.showTimePicker.bind(this, 6)}
           title={''}
-          buttonStyle={styles.nextButtonStyle}
-          backgroundColor='blue'
+          buttonStyle={styles.clockIconStyle}
+          //backgroundColor='blue'
         />
         </Animatable.View>
 
@@ -543,12 +543,13 @@ backBtn = () => {
     </Text>
  </View>
  <Button
-   icon={{ name: 'trending-flat', size: 32 }}
-   iconLeft
+   icon={{ name: 'trending-flat', size: 32, color: '#00008B' }}
+   iconRight
    onPress={this.backBtn}
    buttonStyle={styles.nextButtonStyle}
-   backgroundColor='blue'
-   textStyle={{ textAlign: 'center' }}
+   backgroundColor='white'
+   textStyle={{ textAlign: 'center', color: '#00008B', fontSize: 18 }}
+   containerViewStyle={{ alignSelf:'flex-end', padding:10}}
    title={'Salva'}
  />
 </LinearGradient>
@@ -583,9 +584,8 @@ const styles = StyleSheet.create({
 
   },
   nextButtonStyle: {
-    backgroundColor: 'rgba(52, 52, 52, 0)',
+    //backgroundColor: 'rgba(52, 52, 52, 0)',
     borderRadius: 10
-
   },
   clockIconStyle: {
     backgroundColor: 'rgba(52, 52, 52, 0)',

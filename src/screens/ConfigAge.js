@@ -17,8 +17,8 @@ class ConfigAge extends Component {
     static navigationOptions = () => ({
     headerTintColor: 'white',
     headerStyle: {
-          backgroundColor: '#955104'
-          //80bfff
+          backgroundColor: '#fa931d'
+          //955104
         },
     title: 'RicordaBimbo',
     });
@@ -56,7 +56,7 @@ nextBtn = () => {
    return (
       <LinearGradient
           //colors={['#4c669f', '#3b5998', '#192f6a']}
-          colors={['#955104', '#fba037', '#955104']}
+          colors={['#fa931d', '#fa931d', '#fa931d']}
           
           style={styles.linearGradient}
       >
@@ -78,6 +78,8 @@ nextBtn = () => {
           maximumValue={5}
           step={1}
           thumbTintColor='white'
+          minimumTrackTintColor='gray'
+          maximumTrackTintColor='white'
           onValueChange={(numberOfChildren) => {
             this.setState({ numberOfChildren });
             }
@@ -94,12 +96,12 @@ nextBtn = () => {
       </Text>
   </View>
   <Button
-    icon={{ name: 'trending-flat', size: 32, color:'#00008B' }}
+    icon={{ name: 'trending-flat', size: 32, color: '#00008B' }}
     iconRight
     onPress={this.nextBtn}
     buttonStyle={styles.nextButtonStyle}
     backgroundColor='white'
-    textStyle={{ textAlign: 'center' , color: '#00008B', fontSize: 18}}
+    textStyle={{ textAlign: 'center', color: '#00008B', fontSize: 18 }}
     title={'Prossimo'}
     containerViewStyle={{ alignSelf:'flex-end', padding:10}}
   />

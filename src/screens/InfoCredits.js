@@ -6,7 +6,8 @@ import {
   StyleSheet,
   PixelRatio,
   AsyncStorage,
-  Alert
+  Alert,
+  Linking
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Icon } from 'react-native-elements';
@@ -80,6 +81,7 @@ deleteData() {
             <Text style={styles.buttonText}>
               2018 Victor Macavero
             </Text>
+            
           </View>
               <View>
             <Text style={styles.buttonText}>

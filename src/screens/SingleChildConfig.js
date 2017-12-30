@@ -30,7 +30,8 @@ class SingleChildConfig extends Component {
   static navigationOptions = ({ navigation }) => ({
   headerTintColor: 'white',
   headerStyle: {
-         backgroundColor: '#52b152'
+         backgroundColor: '#d9b709'
+         //52b152
        },
   title: 'RicordaBimbo',
   headerRight:
@@ -60,7 +61,7 @@ constructor(props) {
         ' e l\'ora in cui accompagni tuo figlio.',
       nextOrEndText: 'Prossimo',
       calendarIcon: 'calendar-question',
-      calendarColor: '#ff0000' //green is '#1fff6a'
+      calendarColor: '#b30000' //green is '#1fff6a'
     };
 }
 
@@ -221,7 +222,7 @@ switch (currentChild) {
 
    return (
     <LinearGradient
-        colors={['#52b152', '#399ff8', '#1abc6a']}
+        colors={['#d9b709', '#d9b709', '#d9b709']}
         style={styles.linearGradient}
     >
       <View style={{ paddingTop: 1 }}>
@@ -236,7 +237,7 @@ switch (currentChild) {
         paddingRight: 1,
         flex: 0,
         justifyContent: 'flex-start',
-        backgroundColor: 'rgba(52, 52, 52, 0)'
+       // backgroundColor: 'rgba(52, 52, 52, 0)'
       }}
     >
       <View
@@ -245,7 +246,7 @@ switch (currentChild) {
           flex: 0,
           flexDirection: 'row',
           justifyContent: 'space-around',
-          backgroundColor: 'rgba(52, 52, 52, 0)',
+         // backgroundColor: 'rgba(52, 52, 52, 0)',
           marginBottom: 15,
         }}
       >
@@ -264,56 +265,13 @@ switch (currentChild) {
           onChangeText={(text) => this.validateName(text)}
           width={100}
           inputStyle={styles.buttonText}
+          
           value={this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
           onSubmitEditing={() => { Keyboard.dismiss(); }}
           onEndEditing={() => { Keyboard.dismiss(); }}
         />
       </View>
-      { ((this.state.requiredField === true) || (this.state.requiredField === '')) &&
-
-    <View>
-        <FormValidationMessage
-          containerStyle={{
-            flex: 0,
-            paddingRight: 0,
-            marginLeft: 0,
-            marginRight: 0,
-            marginTop: 0,
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-          }}
-          labelStyle={{
-            flex: 0,
-            color: 'red',
-            marginLeft: 0,
-            marginRight: 0,
-            marginTop: 0,
-            padding: 0,
-            justifyContent: 'flex-end',
-            alignItems: 'flex-end',
-          }}
-
-        >
-          <Icon
-            raised
-            name='arrow-upward'
-            size={13}
-            color='red'
-            onPress={null}
-            backgroundColor='transparent'
-          />
-        <Text>Campo obbligatorio</Text>
-        <Icon
-          raised
-          name='arrow-upward'
-          size={13}
-          color='red'
-          onPress={null}
-          backgroundColor='transparent'
-        />
-      </FormValidationMessage>
-    </View>
-  }
+  
     <View
       style={{
         flex: 0,
@@ -335,6 +293,9 @@ switch (currentChild) {
         value={this.naviProps.dataStruct[this.naviProps.currentChild - 1].age}
         minimumValue={0.5}
         maximumValue={15}
+        thumbTintColor='white'
+        minimumTrackTintColor='gray'
+        maximumTrackTintColor='white'
         step={0.5}
         style={{ backgroundColor: 'rgba(52, 52, 52, 0)', width: 107, marginRight: 20 }}
         onValueChange={(value) => {
@@ -394,12 +355,13 @@ switch (currentChild) {
     alignItems: 'center', }}
 > 
     <Button
-      icon={{ name: 'trending-flat', size: 32, flex: 1 }}
+      icon={{ name: 'trending-flat', size: 32, flex: 1, color: '#00008B'}}
       iconRight
       onPress={this.nextBtn}
       buttonStyle={styles.nextButtonStyle}
-      backgroundColor='blue'
-      textStyle={{ textAlign: 'center' }}
+      backgroundColor='white'
+      textStyle={{ textAlign: 'center', color: '#00008B', fontSize: 18 }}
+      containerViewStyle={{ alignSelf: 'flex-end', padding: 10 }}
       title={this.state.nextOrEndText}
     />
 </View>
@@ -432,7 +394,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   },
   nextButtonStyle: {
-    backgroundColor: 'rgba(52, 52, 52, 0)',
+   // backgroundColor: 'rgba(52, 52, 52, 0)',
     borderRadius: 10
   },
   childStyle: {
