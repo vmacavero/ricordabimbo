@@ -49,6 +49,7 @@ class EndOfConfig extends Component {
     this.buttonEditDisabled = this.props.navigation.state.params.buttonEditDisabled;
     this.deleteEvents = this.deleteEvents.bind(this);
     this.removeWithId = this.removeWithId.bind(this);
+    this.goToInfo = this.goToInfo.bind(this);
     this.iterateAndDelete = this.iterateAndDelete.bind(this);
       //this.props.navigation.setParams();
   }
@@ -57,9 +58,10 @@ class EndOfConfig extends Component {
     this.props.navigation.setParams({ handleInfo: this.goToInfo });
   }
   
-  goToInfo = () => {
+  goToInfo() {
     this.props.navigation.navigate('infocredits');
   }
+
  removeWithId(id) {
     if (Platform.os==='ios') {
         console.log('removing on ios');

@@ -4,34 +4,84 @@ import {
   View,
   Text,
   StyleSheet,
-  PixelRatio
+  PixelRatio,
+  AsyncStorage,
+  Alert
 } from 'react-native';
-//import { connect } from 'react-redux';
-//import { setNumberOfChildren } from '../actions';
 import LinearGradient from 'react-native-linear-gradient';
-import { Slider, Button } from 'react-native-elements';
+import { Button, Icon } from 'react-native-elements';
 
 class InfoCredits extends Component {
-    static navigationOptions = () => ({
+    static navigationOptions = ({ navigation }) => ({
     headerTintColor: 'white',
     headerStyle: {
           backgroundColor: '#4c669f'
         },
-    title: 'RicordaBimbo - Credits',
+    title: 'RicordaBimbo - Credits'
     });
-    constructor(props) {
-      super(props); 
+
+    constructor(props) { 
+      super(props);     
+      this.state = {
+        visible: false
+      };
+      global.counter = 0; 
+      this.deleteData = this.deleteData.bind(this);
     }
+
+    
+deleteAll() {
+  console.log('i ami ndelete all');
+ global.counter++;
+  if (global.counter > 19) {
+    console.log('magg');
+    global.counter = 0;
+    this.setState({ visible: !this.state.visible });
+  }
+}
+   
+deleteData() {
+  try {
+    AsyncStorage.removeItem('allDataStruct');
+     console.log('removing all');
+   //  Alert.alert('Debug: Events deleted');
+   Alert('Ho rimosso tutti i dati salvati, chiudi l\'app e riaprila');
+  } catch (error) {
+    console.log('error remov item'+error);
+    Alert.alert('non sono riuscito a rimuovere i dati o non ve ne erano, chiudi l\'app e riaprila');
+  }
+}
   render() {
+    const buttonVisible = this.state.visible;
+        let button = null;
+        if (buttonVisible) {
+          button = <Button onPress={() => this.deleteData()} title='Delete All'/>;
+        } else {
+          button = null;
+        }
    return (
       <LinearGradient
           colors={['#4c669f', '#3b5998', '#192f6a']}
           style={styles.linearGradient}
       >
-          <View style={{ paddingTop: 20 }}>
+          <View style={{ 
+            flexDirection: 'row', 
+            paddingTop: 20, 
+            justifyContent: 'center', 
+            alignItems: 'stretch', 
+          }}>
+          <Icon
+               name='copyright'
+               size={18}
+               color='white'
+              onPress={this.deleteAll.bind(this)}
+            >
+            </Icon>
             <Text style={styles.buttonText}>
-              Copyright 2018 Victor Macavero
+              2018 Victor Macavero
             </Text>
+          </View>
+              <View>
             <Text style={styles.buttonText}>
               Images Copyright di Unsplash.com e dei rispettivi Autori
             </Text>
@@ -41,9 +91,7 @@ class InfoCredits extends Component {
             <Text style={styles.buttonText}>
               Testing di Francoise Lombardi
             </Text>
-
-
-            
+        {button} 
           </View>
       </LinearGradient>
 );

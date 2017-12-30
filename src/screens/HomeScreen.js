@@ -58,7 +58,6 @@ class HomeScreen extends Component {
                 console.log('error remov item');
               }
             }
-
               navigate('endofconfig', {
                 dataStruct: dataReloadedJson,
                 buttonEditDisabled: true,

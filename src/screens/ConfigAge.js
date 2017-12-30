@@ -17,7 +17,8 @@ class ConfigAge extends Component {
     static navigationOptions = () => ({
     headerTintColor: 'white',
     headerStyle: {
-          backgroundColor: '#4c669f'
+          backgroundColor: '#955104'
+          //80bfff
         },
     title: 'RicordaBimbo',
     });
@@ -54,7 +55,9 @@ nextBtn = () => {
   render() {
    return (
       <LinearGradient
-          colors={['#4c669f', '#3b5998', '#192f6a']}
+          //colors={['#4c669f', '#3b5998', '#192f6a']}
+          colors={['#955104', '#fba037', '#955104']}
+          
           style={styles.linearGradient}
       >
           <View style={{ paddingTop: 20 }}>
@@ -74,6 +77,7 @@ nextBtn = () => {
           minimumValue={1}
           maximumValue={5}
           step={1}
+          thumbTintColor='white'
           onValueChange={(numberOfChildren) => {
             this.setState({ numberOfChildren });
             }
