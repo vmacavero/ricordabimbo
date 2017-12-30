@@ -7,6 +7,7 @@ import TimeToSchoolSelection from './screens/TimeToSchoolSelection';
 import EndOfConfig from './screens/EndOfConfig';
 import ReminderOk from './screens/ReminderOk';
 import Reload from './screens/Reload';
+import InfoCredits from './screens/InfoCredits';
 
 const Router = StackNavigator(
   {
@@ -16,7 +17,8 @@ const Router = StackNavigator(
     calendarselection: { screen: CalendarSelection },
     timetoschoolselection: { screen: TimeToSchoolSelection },
     endofconfig: { screen: EndOfConfig },
-    reminderok: { screen: ReminderOk }
+    reminderok: { screen: ReminderOk },
+    infocredits: { screen: InfoCredits }
   });
 
   export default Router;

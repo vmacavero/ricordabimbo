@@ -11,7 +11,7 @@ import {
 
 import RNCalendarEvents from 'react-native-calendar-events';
 import LinearGradient from 'react-native-linear-gradient';
-import { Button, Card } from 'react-native-elements';
+import { Button, Card, Icon } from 'react-native-elements';
 
 class EndOfConfig extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -20,7 +20,14 @@ class EndOfConfig extends Component {
            backgroundColor: '#3b7077'
          },
     title: 'Riepilogo',
-    headerRight: null,
+    headerRight:
+    <Icon
+    name='info'
+    size={18}
+    color='white'
+    onPress={navigation.state.params.handleInfo}
+    backgroundColor='transparent'
+    />,
     headerLeft: null,
     headerMode: 'none'
   /*  <Button
@@ -39,40 +46,72 @@ class EndOfConfig extends Component {
     this.naviProps = this.props.navigation.state.params;
     this.dataStruct = this.props.navigation.state.params.dataStruct;
     this.index = this.props.navigation.state.params;
-    this.deleteEvents = this.deleteEvents.bind(this);
     this.buttonEditDisabled = this.props.navigation.state.params.buttonEditDisabled;
+    this.deleteEvents = this.deleteEvents.bind(this);
+    this.removeWithId = this.removeWithId.bind(this);
+    this.iterateAndDelete = this.iterateAndDelete.bind(this);
+      //this.props.navigation.setParams();
   }
 
-  async remove(id) {
+  componentDidMount = () => {
+    this.props.navigation.setParams({ handleInfo: this.goToInfo });
+  }
+  
+  goToInfo = () => {
+    this.props.navigation.navigate('infocredits');
+  }
+ removeWithId(id) {
     if (Platform.os==='ios') {
         console.log('removing on ios');
         RNCalendarEvents.removeFutureEvents(id)
         .then(success => {
-          console.log('removed event with id' +id);
+          console.log('removed event with id' + id + ':' + success);
         })
-        .catch (error => {
-            console.log('error removing event: '+error)
+        .catch(error => {
+            console.log('error removing event: ' + error);
         });
     } else {
-        RNCalendarEvents.removeEvents(id)
+      console.log('removing on Android');
+      RNCalendarEvents.removeEvent(id)
         .then(success => {
-          console.log('removed event with id' +id);
+          console.log('removed event with id' + id + ':' + success);
         })
-        .catch (error => {
-          console.log('error removing event: '+error)
+        .catch(error => {
+          console.log('error removing event: ' + error);
         });
-     }
-       
+     }      
 }
-  async iterateAndDelete(day){
+
+   iterateAndDelete= (day) => {
       console.log('i am in iterteAndDelete'); 
       console.log(day); 
      Object.keys(day).forEach(function (key) {
-          if (day[key].eventId == '0') { 
+          if (day[key].eventId !== '0') { 
           console.log('ho trovato evento: ');
           console.log(day[key].eventId);
           //deleting events
-          this.remove(day[key].eventId);
+          //this.removeWithId(day[key].eventId);
+          // BLOCK start
+          if (Platform.OS==='ios') {
+            console.log('removing on ios');
+            RNCalendarEvents.removeFutureEvents(day[key].eventId)
+            .then(success => {
+              console.log('removed event with id' +day[key].eventId + ':' + success);
+            })
+            .catch(error => {
+                console.log('error removing event: ' + error);
+            });
+        } else {
+          console.log('removing on Android');
+          RNCalendarEvents.removeEvent(day[key].eventId)
+            .then(success => {
+              console.log('removed event with id' + day[key].eventId + ':' + success);
+            })
+            .catch(error => {
+              console.log('error removing event: ' + error);
+            });
+         } 
+         //Block end
         }
     });
     console.log('out from iterateAndDelete');
@@ -105,12 +144,12 @@ class EndOfConfig extends Component {
       switch (status) {
         case 'denied' : 
           Alert.alert(
-            'Per favore vai nelle impostazioni e autorizza all\'uso del calendario'
+            'Devi autorizzare l\'APP all\'uso del calendario.'
           );
           break;
         case 'restricted' :
           Alert.alert(
-           'Per favore vai nelle impostazioni e autorizza all\'uso del calendario'
+           'Devi autorizzare l\'APP all\'uso del calendario.'
         );
           break;
         case 'authorized' :
@@ -120,17 +159,17 @@ class EndOfConfig extends Component {
         //this it maybe the only convenient way to modify recurring events without
         //presenting the user a LONG list of event for every child for every day of the
         //week. 
-        //still don't know the behaviour in android, we'll see.
+        //
         console.log('calling dlete events');
         this.deleteEvents();
         //console.log('not going to reminderOf');
+       // console.log('now we do not call navigate, so nothuing happens');
          this.props.navigation.navigate('reminderok', {
             dataStruct: this.naviProps.dataStruct
           });
-      
           break;
         case 'undetermined' :
-          Alert.alert('Per favore autorizza');
+          Alert.alert('Devi autorizzare l\'APP all\'uso del calendario.');
           break;
         default: 
           Alert.alert('default');
@@ -139,7 +178,7 @@ class EndOfConfig extends Component {
     })
     .catch(error => {
      // handle error
-     Alert.alert('Errore in authorize event store, riferiscilo al creatore dell\'app');
+     Alert.alert('Errore in authorize event store, riferiscilo al creatore dell\'App.');
     });
   }
   backToConfig = (param) => {
@@ -151,6 +190,34 @@ class EndOfConfig extends Component {
           currentChild: param +1,
           dataStruct: this.dataStruct
         });
+  }
+  renderConditionalButton() {
+    //FIXME !
+      if (this.buttonEditDisabled) {
+          return (<Button
+            icon={{ name: 'event', size: 32, color:'#cccccc' }}
+            iconRight
+            backgroundColor='white'
+            textStyle={{ textAlign: 'center' , color: '#cccccc', fontSize: 18}}
+            buttonStyle={styles.buttonStyle}
+            title='Inserisci i Promemoria'
+            onPress={this.insertEvents} 
+            disabled={true}  
+            containerViewStyle={{ alignSelf:'flex-end', padding:10}}
+            />);
+      } else {
+          return (<Button
+          icon={{ name: 'event', size: 32, color:'#00008B' }}
+          iconRight
+          backgroundColor='white'
+          textStyle={{ textAlign: 'center' , color: '#00008B', fontSize: 18}}
+          buttonStyle={styles.buttonStyle}
+          title='Inserisci i Promemoria'
+          onPress={this.insertEvents} 
+          disabled={this.buttonEditDisabled}  
+          containerViewStyle={{ alignSelf:'flex-end', padding:10}}
+          />);
+       }
   }
   renderCards() {
     const m = this.naviProps.dataStruct;
@@ -182,12 +249,14 @@ class EndOfConfig extends Component {
          `Domenica alle ${item.daysOfWeekSchoolStarts.sunday.start} \n` : ''}
       </Text>
       <Button
-        icon={{ name: 'mode-edit' }}
-        backgroundColor='#3b7077'
+        icon={{ name: 'mode-edit', size: 32, color:'#00008B' }}
+        iconRight
+        backgroundColor='white'
+        textStyle={{ textAlign: 'center' , color: '#00008B', fontSize: 18}}
         buttonStyle={styles.centeredButtonStyle}
         title='Modifica' 
         onPress={() => this.backToConfig(i)}
-         
+        containerViewStyle={{ alignSelf:'flex-end', padding:10}} 
       />
       </Card>
     );
@@ -206,14 +275,7 @@ class EndOfConfig extends Component {
   <View style={{ paddingTop: 40 }}>
     <ScrollView>
       {this.renderCards()}
-      <Button
-          icon={{ name: 'event' }}
-          backgroundColor='#3b7077'
-          buttonStyle={styles.buttonStyle}
-          title='Inserisci i Promemoria !'
-          onPress={this.insertEvents} 
-          disabled={this.buttonEditDisabled}  
-      />
+      {this.renderConditionalButton()}
     </ScrollView>
   </View>
   
@@ -230,20 +292,20 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonStyle: {
-    borderRadius: 0, 
+    borderRadius: 10/*, 
     marginLeft: 0, 
     marginRight: 0, 
     marginBottom: 0,
-    marginTop: 40
+    marginTop: 40*/
   },
   centeredButtonStyle: {
-    borderRadius: 0, 
+    borderRadius: 10/*, 
     marginLeft: 0, 
     marginRight: 0, 
     marginBottom: 0, 
     height: 20, 
     width: 100,
-    alignSelf: 'center'
+    alignSelf: 'center'*/
   }
   
 });

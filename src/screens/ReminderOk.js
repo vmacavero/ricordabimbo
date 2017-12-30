@@ -37,9 +37,6 @@ class ReminderOk extends Component {
     this.naviProps = this.props.navigation.state.params;
     this.dataStruct = this.props.navigation.state.params.dataStruct;
     this.index = this.props.navigation.state.params;
-    this.state = {
-      arrayOfEventsId: []
-    };
   }
   componentWillMount = () => {
     RNCalendarEvents.authorizationStatus()
@@ -47,19 +44,19 @@ class ReminderOk extends Component {
       switch (status) {
         case 'denied' : 
           Alert.alert(
-            'Per favore vai nelle impostazioni e autorizza all\'uso del calendario'
+            'Devi autorizzare l\'APP all\'uso del calendario.'
           );
           break;
         case 'restricted' :
           Alert.alert(
-           'Per favore vai nelle impostazioni e autorizza all\'uso del calendario'
+           'Devi autorizzare l\'APP all\'uso del calendario.'
         );
           break;
         case 'authorized' :
           this.prepareEvents();
           break;
         case 'undetermined' :
-          Alert.alert('Per favore autorizza');
+          Alert.alert('Devi autorizzare l\'APP all\'uso del calendario.');
           break;
         default: 
           Alert.alert('default');
@@ -68,7 +65,7 @@ class ReminderOk extends Component {
     })
     .catch(error => {
      // handle error
-     Alert.alert('Errore in authorize event store, riferiscilo al creatore dell\'app');
+     Alert.alert('Errore in authorize event store, riferiscilo al creatore dell\'app.');
      Alert.alert(error);
     });
   }
@@ -189,8 +186,11 @@ class ReminderOk extends Component {
     });
   // this.saveAll();
   //
-  Alert.alert('Eventi inseriti !');
-  this.props.navigation.navigate('home');
+  Alert.alert('Eventi inseriti correttamente.');
+  this.props.navigation.navigate('endofconfig', 
+    { dataStruct: this.dataStruct,
+      buttonEditDisabled: true 
+    });
   }
 
    async saveAll() {
@@ -227,14 +227,15 @@ class ReminderOk extends Component {
 
 
   render() {
-    return (
+    return null;
+     /*
       <LinearGradient
       colors={['#3b7077', '#499ff8', '#dabc6a']}
       style={styles.linearGradient}
       >
   <View style={{ paddingTop: 40 }}>
     <Text>
-      ok inseriti correttamente !
+      Avvisi inseriti correttamente !
       Puoi chiudere l'applicazione e rilassarti.
       Pensemo a tutto noi !
     </Text>
@@ -247,7 +248,8 @@ class ReminderOk extends Component {
   </View>
   
   </LinearGradient>
-    ); 
+  
+    );*/
   }
 }
 const styles = StyleSheet.create({

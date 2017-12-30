@@ -190,14 +190,14 @@ backBtn = () => {
     const start = 
       this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateStart;
 
-const startDate = new Date(start.substring(3, 5)+'/'+start.substring(0, 2)+'/'+start.substring(6, 10));
-    if (endDate <= startDate) {
-      Alert.alert('Per favore controlla se le date di inizio e fine scuola sono corrette...');
+    const startDate = new Date(start.substring(3, 5)+'/'+start.substring(0, 2)+'/'+start.substring(6, 10));
+    if (endDate < startDate) {
+      Alert.alert('La data di fine e\' antecedente alla data di inizio.');
       return;
     }
 
      if (calendarOk === false) {
-       Alert.alert('Per favore segna con la spunta almeno un giorno della settimana');
+       Alert.alert('Indica almeno un giorno della settimana in cui lasci tuo figlio.');
        return;
      } else {
       this.naviProps.dataStruct[index - 1].calendarDone = true;
@@ -243,9 +243,9 @@ const startDate = new Date(start.substring(3, 5)+'/'+start.substring(0, 2)+'/'+s
       </View>
         <View style={{ paddingTop: 20 }}>
           <Text style={styles.buttonText}>
-            Per favore scegli la data in cui inizia la scuola di{' '}
+            Scegli la data in cui inizia la scuola di{' '}
             {this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
-            {' '}e quando termina
+            {' '}e quando termina.
           </Text>
 
         </View>
@@ -318,7 +318,7 @@ const startDate = new Date(start.substring(3, 5)+'/'+start.substring(0, 2)+'/'+s
         <Text style={styles.buttonText}>
           In basso scegli i giorni in
            cui {' '}{this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
-           {' '}va a scuola e l'orario in cui dovrebbe entrare. Clicca sugli orologi per cambiare
+           {' '}va a scuola e l'orario in cui dovresti lasciarlo. Clicca sugli orologi per cambiare
            gli orari.
         </Text>
       </View>

@@ -51,14 +51,14 @@ constructor(props) {
       //sliderValue: 0.5,
       requiredField: true,
       nameTextField: '',
-      childNameText: 'Benissimo, come si chiama il tuo ',
-      childNameTextEnd: ' figlio? e quanti anni ha ?',
-      canInsertPhotoText: 'Aggiungi qui la foto di tuo figlio o figlia !',
+      childNameText: 'Come si chiama il tuo ',
+      childNameTextEnd: ' figlio? E quanti anni ha?',
+      canInsertPhotoText: 'Aggiungi la foto di tuo figlio.',
       calendarTextPart1:
-        'Adesso fai \'Tap\' sul calendario e scegliamo i giorni',
+        'Fai \'Tap\' sul calendario e scegli i giorni.',
       calendarTextPart2:
-        ' e l\'ora in cui accompagni tuo figlio va a scuola',
-      nextOrEndText: 'prossimo',
+        ' e l\'ora in cui accompagni tuo figlio.',
+      nextOrEndText: 'Prossimo',
       calendarIcon: 'calendar-question',
       calendarColor: '#ff0000' //green is '#1fff6a'
     };
@@ -67,7 +67,7 @@ constructor(props) {
 componentDidMount() {
   //and let's check if we have an image 
   if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage !== require('../../img/icon_empty_camera.png')) {
-    this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
+    this.setState({ canInsertPhotoText: 'Fai \'Tap\' sulla foto per sostituirla.' });
   }
 //let's check if name isn't empty
   if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].name !== '') {
@@ -120,7 +120,7 @@ goToCalendarConfig = () => {
 
       });
   } else {
-    Alert.alert('per favore inserisci un nome prima di configurare il calendario');
+    Alert.alert('E\' obbligatorio inserire il nome prima di configurare il calendario.');
   }
 }
 nextBtn = () => {  
@@ -144,17 +144,17 @@ nextBtn = () => {
     }*/
     const index = this.naviProps.currentChild;
     if (this.naviProps.dataStruct[index - 1].name === '') {
-      Alert.alert('per favore, inserisci il nome...');
+      Alert.alert('E\' obbligatorio inserire il nome.');
       return;
     }
 
     if (this.naviProps.dataStruct[index - 1].calendarDone === false) {
-      Alert.alert('per favore fai tap sul calendario e configuralo...');
+      Alert.alert('E\' obbligatorio configurare il calendario.');
       return;
     }
 
     if (this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage === require('../../img/icon_empty_camera.png')) {
-      Alert.alert('per favore scegli una foto...');
+      Alert.alert('E\' obbligatorio scegliere una foto.');
       return;
     }
 
@@ -169,6 +169,7 @@ nextBtn = () => {
     } else {
          this.props.navigation.navigate('endofconfig', {
            dataStruct: this.naviProps.dataStruct,
+           buttonEditDisabled: false
          });
       }
 }
@@ -177,7 +178,7 @@ accessCameraRoll = () => {
 const ImagePicker = require('react-native-image-picker');
 
 const options = {
-  title: 'Select Avatar',
+  title: 'Seleziona immagine',
   allowsEditing: 'true',
   maxWidth: 800,
   maxHeight: 800,
@@ -196,7 +197,7 @@ const options = {
        // const imageUriFromCamera = { uri: 'data:image/jpeg;base64,' + response.data };
         const imageUriFromCamera = { uri: `data:image/jpeg;base64,${response.data}` };
         this.setState({ currentImage: imageUriFromCamera });
-        this.setState({ canInsertPhotoText: 'Ottimo! Fai tap sulla foto per sostituirla' });
+        this.setState({ canInsertPhotoText: 'Fai \'Tap\' sulla foto per sostituirla.' });
         this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage = imageUriFromCamera;
         this.props.navigation.setParams();
     }
@@ -301,7 +302,7 @@ switch (currentChild) {
             onPress={null}
             backgroundColor='transparent'
           />
-        <Text>campo richiesto</Text>
+        <Text>Campo obbligatorio</Text>
         <Icon
           raised
           name='arrow-upward'

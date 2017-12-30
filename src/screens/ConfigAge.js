@@ -59,7 +59,11 @@ nextBtn = () => {
       >
           <View style={{ paddingTop: 20 }}>
             <Text style={styles.buttonText}>
-              Inserisci qui il numero dei tuoi Bimbi !
+              Quanti bambini hai?
+            </Text>
+            
+            <Text style={styles.buttonText}>
+              Muovi il pallino lungo la linea.
             </Text>
           </View>
        <View
@@ -86,13 +90,14 @@ nextBtn = () => {
       </Text>
   </View>
   <Button
-    icon={{ name: 'trending-flat', size: 32 }}
+    icon={{ name: 'trending-flat', size: 32, color:'#00008B' }}
     iconRight
     onPress={this.nextBtn}
     buttonStyle={styles.nextButtonStyle}
-    backgroundColor='blue'
-    textStyle={{ textAlign: 'center' }}
+    backgroundColor='white'
+    textStyle={{ textAlign: 'center' , color: '#00008B', fontSize: 18}}
     title={'Prossimo'}
+    containerViewStyle={{ alignSelf:'flex-end', padding:10}}
   />
 </LinearGradient>
 );
@@ -120,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   nextButtonStyle: {
-    backgroundColor: 'rgba(52, 52, 52, 0.01)',
+    //backgroundColor: 'rgba(52, 52, 52, 0.01)',
     borderRadius: 10
   },
   childStyle: {
