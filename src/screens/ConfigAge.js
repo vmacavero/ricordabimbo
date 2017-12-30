@@ -14,12 +14,22 @@ import ChildrenIcon from '../components/ChildrenIcon';
 import dataStructure from '../dataStructure.json';
 
 class ConfigAge extends Component {
-    static navigationOptions = () => ({
+    static navigationOptions = ({ navigation }) => ({
     headerTintColor: 'white',
     headerStyle: {
           backgroundColor: '#fa931d'
           //955104
         },
+        params: navigation.state.params,
+        headerLeft: <Button
+        
+        icon={{name: 'keyboard-arrow-left', size: 32}}
+        buttonStyle={{backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
+        containerViewStyle={{padding: 0, marginLeft: 0, marginRight: 0}}
+        textStyle={{textAlign: 'left'}}
+        onPress={() => navigation.goBack()}
+        title={``}
+      />,
     title: 'RicordaBimbo',
     });
     constructor(props) {
@@ -96,12 +106,12 @@ nextBtn = () => {
       </Text>
   </View>
   <Button
-    icon={{ name: 'trending-flat', size: 32, color: '#00008B' }}
+    icon={{ name: 'keyboard-arrow-right', size: 26, color: '#ffffff' }}
     iconRight
     onPress={this.nextBtn}
     buttonStyle={styles.nextButtonStyle}
-    backgroundColor='white'
-    textStyle={{ textAlign: 'center', color: '#00008B', fontSize: 18 }}
+    backgroundColor='#00134d'
+    textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18 }}
     title={'Prossimo'}
     containerViewStyle={{ alignSelf:'flex-end', padding:10}}
   />

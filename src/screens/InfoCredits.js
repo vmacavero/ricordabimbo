@@ -18,6 +18,16 @@ class InfoCredits extends Component {
     headerStyle: {
           backgroundColor: '#4c669f'
         },
+        params: navigation.state.params,
+        headerLeft: <Button
+        
+        icon={{name: 'keyboard-arrow-left', size: 32}}
+        buttonStyle={{backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
+        containerViewStyle={{padding: 0, marginLeft: 0, marginRight: 0}}
+        textStyle={{textAlign: 'left'}}
+        onPress={() => navigation.goBack()}
+        title={``}
+      />,
     title: 'RicordaBimbo - Credits'
     });
 
@@ -91,7 +101,7 @@ deleteData() {
               Contatti : victor@macavero.com
             </Text>
             <Text style={styles.buttonText}>
-              Testing di Francoise Lombardi
+              UX Testing di Francoise Lombardi
             </Text>
         {button} 
           </View>

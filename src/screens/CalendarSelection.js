@@ -215,7 +215,7 @@ backBtn = () => {
   render() {
    return (
       <LinearGradient
-        colors={['#1c669f', '#9a9e1d', '#9a9e1d']}
+        colors={['#a4b602', '#a4b602', '#a4b602']}
         style={styles.linearGradient}
       >
       <View
@@ -543,12 +543,12 @@ backBtn = () => {
     </Text>
  </View>
  <Button
-   icon={{ name: 'trending-flat', size: 32, color: '#00008B' }}
+   icon={{ name: 'keyboard-arrow-right', size: 26, color: '#ffffff' }}
    iconRight
    onPress={this.backBtn}
    buttonStyle={styles.nextButtonStyle}
-   backgroundColor='white'
-   textStyle={{ textAlign: 'center', color: '#00008B', fontSize: 18 }}
+   backgroundColor='#00134d'
+   textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18 }}
    containerViewStyle={{ alignSelf:'flex-end', padding:10}}
    title={'Salva'}
  />

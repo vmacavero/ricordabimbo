@@ -34,6 +34,15 @@ class SingleChildConfig extends Component {
          //52b152
        },
   title: 'RicordaBimbo',
+  params: navigation.state.params,
+  headerLeft: <Button
+  icon={{name: 'keyboard-arrow-left', size: 32 }}
+  buttonStyle={{ backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
+  containerViewStyle={{ padding: 0, marginLeft: 0, marginRight: 0 }}
+  textStyle={{ textAlign: 'left' }}
+  onPress={() => navigation.goBack()}
+  title={``}
+/>,
   headerRight:
     <Text
      style={styles.headerRightTextStyle}
@@ -80,7 +89,7 @@ componentDidMount() {
    if (this.naviProps.dataStruct[index - 1].calendarDone === true) {
     this.setState({ 
       calendarIcon: 'calendar-check', 
-      calendarColor: '#1fff6a' 
+      calendarColor: '#997300' 
     });
     //stop animation
     this.refs.calendarButton.stopAnimation();
@@ -355,12 +364,12 @@ switch (currentChild) {
     alignItems: 'center', }}
 > 
     <Button
-      icon={{ name: 'trending-flat', size: 32, flex: 1, color: '#00008B'}}
+      icon={{ name: 'keyboard-arrow-right', size: 26, flex: 1, color: '#ffffff'}}
       iconRight
       onPress={this.nextBtn}
       buttonStyle={styles.nextButtonStyle}
-      backgroundColor='white'
-      textStyle={{ textAlign: 'center', color: '#00008B', fontSize: 18 }}
+      backgroundColor='#00134d'
+      textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18 }}
       containerViewStyle={{ alignSelf: 'flex-end', padding: 10 }}
       title={this.state.nextOrEndText}
     />

@@ -17,7 +17,7 @@ class EndOfConfig extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTintColor: 'white',
     headerStyle: {
-           backgroundColor: '#3b7077'
+           backgroundColor: '#6699ff'
          },
     title: 'Riepilogo',
     headerRight:
@@ -26,6 +26,8 @@ class EndOfConfig extends Component {
     size={18}
     color='white'
     onPress={navigation.state.params.handleInfo}
+    buttonStyle={{ borderRadius: 40, padding: 20, marginRight: 20, marginLeft: 20 }}
+    containerViewStyle={{ padding: 20, marginRight: 20 }}
     backgroundColor='transparent'
     />,
     headerLeft: null,
@@ -209,10 +211,10 @@ class EndOfConfig extends Component {
             />);
       } else {
           return (<Button
-          icon={{ name: 'event', size: 32, color:'#00008B' }}
+          icon={{ name: 'event', size: 32, color:'#ffffff' }}
           iconRight
-          backgroundColor='white'
-          textStyle={{ textAlign: 'center' , color: '#00008B', fontSize: 18}}
+          backgroundColor='#00134d'
+          textStyle={{ textAlign: 'center' , color: '#ffffff', fontSize: 18}}
           buttonStyle={styles.buttonStyle}
           title='Inserisci i Promemoria'
           onPress={this.insertEvents} 
@@ -251,10 +253,10 @@ class EndOfConfig extends Component {
          `Domenica alle ${item.daysOfWeekSchoolStarts.sunday.start} \n` : ''}
       </Text>
       <Button
-        icon={{ name: 'mode-edit', size: 32, color:'#00008B' }}
+        icon={{ name: 'mode-edit', size: 32, color:'#ffffff' }}
         iconRight
-        backgroundColor='white'
-        textStyle={{ textAlign: 'center' , color: '#00008B', fontSize: 18}}
+        backgroundColor='#00134d'
+        textStyle={{ textAlign: 'center' , color: '#ffffff', fontSize: 18}}
         buttonStyle={styles.centeredButtonStyle}
         title='Modifica' 
         onPress={() => this.backToConfig(i)}
@@ -271,7 +273,7 @@ class EndOfConfig extends Component {
   render() {
     return (
       <LinearGradient
-      colors={['#3b7077', '#499ff8', '#dabc6a']}
+      colors={['#6699ff', '#6699ff', '#6699ff']}
       style={styles.linearGradient}
       >
   <View style={{ paddingTop: 40 }}>
