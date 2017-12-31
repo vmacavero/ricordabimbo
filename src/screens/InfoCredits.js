@@ -17,6 +17,7 @@ class InfoCredits extends Component {
     headerTintColor: 'white',
     headerStyle: {
           backgroundColor: '#4c669f'
+         
         },
         params: navigation.state.params,
         headerLeft: <Button

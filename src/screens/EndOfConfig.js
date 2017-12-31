@@ -17,7 +17,9 @@ class EndOfConfig extends Component {
   static navigationOptions = ({ navigation }) => ({
     headerTintColor: 'white',
     headerStyle: {
-           backgroundColor: '#6699ff'
+           backgroundColor: '#6699ff',
+           paddingRight: 10,
+          // marginRight: 20,
          },
     title: 'Riepilogo',
     headerRight:
@@ -26,8 +28,8 @@ class EndOfConfig extends Component {
     size={18}
     color='white'
     onPress={navigation.state.params.handleInfo}
-    buttonStyle={{ borderRadius: 40, padding: 20, marginRight: 20, marginLeft: 20 }}
-    containerViewStyle={{ padding: 20, marginRight: 20 }}
+    buttonStyle={{ borderRadius: 40, paddingRight: 10, marginRight: 10 }}
+    containerViewStyle={{ paddingRight: 10, marginRight: 10 }}
     backgroundColor='transparent'
     />,
     headerLeft: null,
