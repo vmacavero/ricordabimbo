@@ -96,7 +96,7 @@ deleteData() {
           </View>
               <View>
             <Text style={styles.buttonText}>
-              Images Copyright di Unsplash.com e dei rispettivi Autori
+              Immagini free di, rispettivamente, Jenna Norman, Janco Ferlic, Gabby Orcutt, Ben White
             </Text>
             <Text style={styles.buttonText}>
               Contatti : victor@macavero.com
