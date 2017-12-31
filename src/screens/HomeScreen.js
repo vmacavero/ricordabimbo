@@ -112,7 +112,11 @@ class HomeScreen extends Component {
           {
             title: 'Iniziamo',
             description: 'Ricorda di autorizzare questa ' +
-             'App ad accedere al calendario ed alle foto.',
+             'App ad accedere al calendario ed alle foto.' +
+             ' Ricorda anche che quest\'app e\' solo un aiuto, ' +
+              'facci affidamento, ma non dimenticare ' + 
+              'che sei unicamente tu' +
+              ' responsabile dei tuoi figli.',
             img: require('../../img/child4.jpg'),
             imgStyle: {
               height: 93 * 3,

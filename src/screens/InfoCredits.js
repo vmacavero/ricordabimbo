@@ -99,7 +99,13 @@ deleteData() {
               Immagini free di, rispettivamente, Jenna Norman, Janco Ferlic, Gabby Orcutt, Ben White
             </Text>
             <Text style={styles.buttonText}>
+              Icona/SplashScreen di PublicDomainPictures and Pixabay
+            </Text>
+            <Text style={styles.buttonText}>
               Contatti : victor@macavero.com
+            </Text>
+            <Text style={styles.buttonText}>
+              Personal Site : www.macavero.com
             </Text>
             <Text style={styles.buttonText}>
               UX Testing di Francoise Lombardi

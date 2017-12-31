@@ -115,22 +115,16 @@ validateName = (text) => {
   console.log(this.naviProps);
 }
 goToCalendarConfig = () => {
-   const { navigate } = this.props.navigation;
-   if ((this.state.nameTextField !== null) && (this.state.nameTextField !== '')) {
-    /* navigate('calendarselection',
-      { imgUri: this.state.currentImage,
-        childName: this.state.nameTextField,
-        currentChildNum: this.props.navigation.state.params.currentChild,
-        childAge: this.state.sliderValue
-      });*/
-
-    navigate('calendarselection',
-      { arrayOfChildren: this.state.arrayOfChildren,
-        currentChildNum: this.props.navigation.state.params.currentChild,
-
-      });
-  } else {
+  const index = this.naviProps.currentChild;
+   if ((this.naviProps.dataStruct[index - 1].name === null) || (this.naviProps.dataStruct[index - 1].name === '')) {
     Alert.alert('E\' obbligatorio inserire il nome prima di configurare il calendario.');
+  } else {
+    this.props.navigation.navigate('calendarselection', { 
+      dataStruct: this.naviProps.dataStruct,
+      currentChild: this.naviProps.currentChild,
+      totalChild: this.naviProps.totalChild,
+      calendarPage: true
+    });  
   }
 }
 nextBtn = () => {  
@@ -343,14 +337,7 @@ switch (currentChild) {
       type='material-community'
       color={this.state.calendarColor}
       //color='#192f6a'
-      onPress={() => {
-        this.props.navigation.navigate('calendarselection', { 
-          dataStruct: this.naviProps.dataStruct,
-          currentChild: this.naviProps.currentChild,
-          totalChild: this.naviProps.totalChild,
-          calendarPage: true
-        });
-      }}
+      onPress={() => this.goToCalendarConfig()}
     />
      </View>
   </Animatable.View>
