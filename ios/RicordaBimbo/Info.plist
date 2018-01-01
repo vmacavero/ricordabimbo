@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -38,19 +38,19 @@
 	<key>NSAppleMusicUsageDescription</key>
 	<string>Media</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string></string>
+	<string>Calendars</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Camera</string>
 	<key>NSContactsUsageDescription</key>
-	<string></string>
+	<string>Contacts</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Location</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Mic</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo</string>
 	<key>NSRemindersUsageDescription</key>
-	<string></string>
+	<string>Reminders</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
