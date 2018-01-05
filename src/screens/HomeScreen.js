@@ -4,7 +4,9 @@ import {
  PixelRatio,
  View,
  Alert,
- AsyncStorage
+ AsyncStorage,
+ StyleSheet,
+ Text
 } from 'react-native';
 import AppIntro from 'react-native-app-intro';
 
@@ -73,7 +75,9 @@ class HomeScreen extends Component {
     
     render() {
       const pageArray = [{
-        title: 'RicordaBimbo ',
+        title: <Text 
+          style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(22)}}
+               >RicordaBimbo</Text>,
         description: 'L\'App piu\' utile che ci sia!',
         img: require('../../img/child1.jpg'),
         imgStyle: {
@@ -83,7 +87,7 @@ class HomeScreen extends Component {
         backgroundColor: '#fa931d',
         fontColor: '#fff',
         level: 10,
-        fontSize: PixelRatio.getPixelSizeForLayoutSize(6)
+        //
       }, {
         title: 'La configurazione',
         description: 'Ti chiedero\' quanti bimbi hai, ' +
@@ -96,8 +100,8 @@ class HomeScreen extends Component {
         },
         backgroundColor: '#d9b709',
         fontColor: '#fff',
-        level: 10, },
-        {
+        level: 10, 
+      }, {
           title: 'Altre informazioni',
           description: 'Ripeteremo il tutto per ognuno dei tuoi figli. ' +
           'Dovrai aggiungere anche le loro foto.',
@@ -111,12 +115,14 @@ class HomeScreen extends Component {
           level: 10, },
           {
             title: 'Iniziamo',
-            description: 'Ricorda di autorizzare questa ' +
-             'App ad accedere al calendario ed alle foto.' +
-             ' Ricorda anche che quest\'app e\' solo un aiuto, ' +
-              'facci affidamento, ma non dimenticare ' + 
-              'che sei unicamente tu' +
-              ' responsabile dei tuoi figli.',
+            description: <Text 
+            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(9)}}
+                 >Ricorda di autorizzare questa
+             App ad accedere al calendario ed alle foto
+             Ricorda anche che quest'app e' solo un aiuto,
+              facci affidamento, ma non dimenticare 
+              che sei unicamente tu
+              responsabile dei tuoi figli.</Text>,
             img: require('../../img/child4.jpg'),
             imgStyle: {
               height: 93 * 3,
@@ -140,5 +146,21 @@ class HomeScreen extends Component {
       );
     }
 }
+
+const styles = StyleSheet.create({
+  slide: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DD6EB',
+    padding: 15,
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+});
+
 
 export default HomeScreen;

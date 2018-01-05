@@ -6,7 +6,8 @@ import {
   StyleSheet,
   Alert,
   AsyncStorage,
-  Platform
+  Platform,
+  Image
 } from 'react-native';
 
 import RNCalendarEvents from 'react-native-calendar-events';
@@ -231,13 +232,18 @@ class EndOfConfig extends Component {
       if (item.name !== '') {
       return (
       <Card 
+
         containerStyle={{ backgroundColor: 'transparent' }}
         titleStyle={{ color: 'white' }}
         title={item.name}
-        imageProps={{ resizeMode: 'center' }}
-        image={item.photoImage}
+      //  imageProps={{ resizeMode: 'contain' }}
+       // image={item.photoImage}
         key={i}
       >
+      <Image
+          style={{width: 50, height: 50}}
+          source={item.photoImage}
+        />
       <Text style={{ color: 'white' }}>{'Va a scuola/asilo/nido : \n'}
       {(item.daysOfWeekSchoolStarts.monday.active === true) ? 
         `Lunedi' alle ${item.daysOfWeekSchoolStarts.monday.start} \n` : ''}

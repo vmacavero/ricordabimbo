@@ -6,7 +6,9 @@ import {
   StyleSheet,
   PixelRatio,
   Alert,
-  Keyboard
+  Keyboard,
+  Platform,
+  Dimensions
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {
@@ -178,12 +180,33 @@ nextBtn = () => {
       }
 }
 
+isIpad = () => { 
+  console.log('isIpad');
+  if (Platform.OS === 'ios') {
+    //this is a check for iPad to avoid bug in image picker !
+    var {height, width} = Dimensions.get('window');
+    switch (height) {
+      case 1024 :
+        return false;
+        break;
+      case 1112 :
+        return false;
+        break;
+      case 1366 :
+        return false;
+        break;
+      default: return true;
+    }
+  }
+  return true; //on Android
+}
+
 accessCameraRoll = () => {
 const ImagePicker = require('react-native-image-picker');
 
 const options = {
   title: 'Seleziona immagine',
-  allowsEditing: 'true',
+  allowsEditing: this.isIpad(),
   maxWidth: 800,
   maxHeight: 800,
   quality: 0,
@@ -280,7 +303,7 @@ switch (currentChild) {
         flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 30,
+        marginBottom: 15,
         }}
     >
       <Text
@@ -308,7 +331,7 @@ switch (currentChild) {
       />
   </View>
 </View>
-<View style={{ padding: 5 }} >
+<View style={{ padding: 0 }} >
   <Text style={styles.buttonText}>
     {this.state.canInsertPhotoText}
   </Text>
@@ -374,7 +397,7 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonText: {
-    fontSize: 22,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 2,
@@ -382,7 +405,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   nameInputTextStyle: {
-    fontSize: 18,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
     fontFamily: 'Gill Sans',
     color: '#fffdfd',
     fontWeight: 'bold',
@@ -401,7 +424,7 @@ const styles = StyleSheet.create({
   },
   calendarButtonStyle: {
     flex: 0,
-    paddingTop: 30,
+    paddingTop: 20,
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',

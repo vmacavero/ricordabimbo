@@ -1,4 +1,5 @@
 {
   "name": "RicordaBimbo",
-  "displayName": "RicordaBimbo"
+  "displayName": "RicordaBimbo",
+  "supportsTablet": true
 }

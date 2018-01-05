@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>2</string>
+	<string>4</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -36,21 +36,21 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Media</string>
+	<string>Vorrei per favore accedere ai Media per quest'app</string>
 	<key>NSCalendarsUsageDescription</key>
-	<string>Calendars</string>
+	<string>Vorrei per favore accedere al calendario per inserire i promemoria</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera</string>
+	<string>Vorrei per favore usare la fotocamera per delle foto.</string>
 	<key>NSContactsUsageDescription</key>
-	<string>Contacts</string>
+	<string>Vorrei per favore usare i tuoi contatti</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Location</string>
+	<string>Vorrei per favore usare la tua localizzazione</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Mic</string>
+	<string>Vorrei per favore usare il microfono per delle note audio</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Photo</string>
+	<string>Vorrei per favore accedere alla libreria delle tue foto</string>
 	<key>NSRemindersUsageDescription</key>
-	<string>Reminders</string>
+	<string>Vorrei per favore accedere al calendari per inserire i reminder</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Entypo.ttf</string>
