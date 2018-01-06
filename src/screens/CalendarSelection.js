@@ -5,6 +5,7 @@ import {
   Text,
   StyleSheet,
   Alert,
+  PixelRatio
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Avatar, Icon, CheckBox } from 'react-native-elements';
@@ -566,7 +567,7 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 5,
@@ -632,7 +633,7 @@ const styles = StyleSheet.create({
     width: '20%',
   },
   daysOfWeekTextStyle: {
-    fontSize: 18,
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 5,

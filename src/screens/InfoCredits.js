@@ -78,7 +78,7 @@ deleteData() {
       >
           <View style={{ 
             flexDirection: 'row', 
-            paddingTop: 20, 
+            paddingTop: 10, 
             justifyContent: 'center', 
             alignItems: 'stretch', 
           }}>
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(10),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 10,

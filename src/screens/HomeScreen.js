@@ -76,7 +76,7 @@ class HomeScreen extends Component {
     render() {
       const pageArray = [{
         title: <Text 
-          style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(22)}}
+          style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(18)}}
                >RicordaBimbo</Text>,
         description: 'L\'App piu\' utile che ci sia!',
         img: require('../../img/child1.jpg'),
@@ -116,7 +116,7 @@ class HomeScreen extends Component {
           {
             title: 'Iniziamo',
             description: <Text 
-            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(9)}}
+            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(8)}}
                  >Ricorda di autorizzare questa
              App ad accedere al calendario ed alle foto
              Ricorda anche che quest'app e' solo un aiuto,

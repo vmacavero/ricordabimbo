@@ -236,14 +236,10 @@ class EndOfConfig extends Component {
         containerStyle={{ backgroundColor: 'transparent' }}
         titleStyle={{ color: 'white' }}
         title={item.name}
-      //  imageProps={{ resizeMode: 'contain' }}
-       // image={item.photoImage}
+        imageProps={{ resizeMode: 'contain' }}
+        image={item.photoImage}
         key={i}
       >
-      <Image
-          style={{width: 50, height: 50}}
-          source={item.photoImage}
-        />
       <Text style={{ color: 'white' }}>{'Va a scuola/asilo/nido : \n'}
       {(item.daysOfWeekSchoolStarts.monday.active === true) ? 
         `Lunedi' alle ${item.daysOfWeekSchoolStarts.monday.start} \n` : ''}
