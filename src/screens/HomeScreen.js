@@ -22,6 +22,8 @@ class HomeScreen extends Component {
       this.reloadData();
       console.log('home : ');
       console.log(PixelRatio.getPixelSizeForLayoutSize(16));
+      console.log(PixelRatio.get());
+      //console.log(PixelRatio.getFontScale());
     }
     
     onSkipBtnHandle = (index) => {
@@ -118,7 +120,7 @@ class HomeScreen extends Component {
           {
             title: 'Iniziamo',
             description: <Text 
-            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(7)}}
+            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(8)}}
                  >Ricorda di autorizzare questa
              App ad accedere al calendario ed alle foto
              Ricorda anche che quest'app e' solo un aiuto,
