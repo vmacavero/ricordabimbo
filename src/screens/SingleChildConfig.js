@@ -56,7 +56,7 @@ class SingleChildConfig extends Component {
 constructor(props) {
   super(props);
   this.naviProps = this.props.navigation.state.params;
-  Text.defaultProps.allowFontScaling = false;
+  //Text.defaultProps.allowFontScaling = false;
     this.state = {
       //currentImage: require('../../img/icon_empty_camera.png'),
       //currentChild: this.props.navigation.state.params.currentChild,

@@ -20,6 +20,8 @@ class HomeScreen extends Component {
     componentWillMount = () => {
       //will check if we have already saved our data in AsyncStorage
       this.reloadData();
+      console.log('home : ');
+      console.log(PixelRatio.getPixelSizeForLayoutSize(16));
     }
     
     onSkipBtnHandle = (index) => {
@@ -76,7 +78,7 @@ class HomeScreen extends Component {
     render() {
       const pageArray = [{
         title: <Text 
-          style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(18)}}
+          style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(14)}}
                >RicordaBimbo</Text>,
         description: 'L\'App piu\' utile che ci sia!',
         img: require('../../img/child1.jpg'),
@@ -116,7 +118,7 @@ class HomeScreen extends Component {
           {
             title: 'Iniziamo',
             description: <Text 
-            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(8)}}
+            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(7)}}
                  >Ricorda di autorizzare questa
              App ad accedere al calendario ed alle foto
              Ricorda anche che quest'app e' solo un aiuto,
@@ -134,7 +136,7 @@ class HomeScreen extends Component {
         }];
 
       return (
-        <View allowFontScaling={false}>
+        <View>
           <AppIntro
             onDoneBtnClick={this.doneBtnHandle}
             onSlideChange={this.onSlideChangeHandle}
