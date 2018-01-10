@@ -225,7 +225,7 @@ backBtn = () => {
           flex: 0,
           alignItems: 'center',
           justifyContent: 'space-between',
-          paddingTop: 40
+          paddingTop: 40/PixelRatio.getFontScale()
         }}
       >
         <Avatar
@@ -242,7 +242,7 @@ backBtn = () => {
           {this.naviProps.dataStruct[this.naviProps.currentChild - 1].age} { ' anni '}
         </Text>
       </View>
-        <View style={{ paddingTop: 20 }}>
+        <View style={{ paddingTop: 20/PixelRatio.getFontScale() }}>
           <Text style={styles.buttonText}>
             Scegli la data in cui inizia la scuola di{' '}
             {this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
@@ -259,7 +259,7 @@ backBtn = () => {
         <Icon
           raised
           name='date-range'
-          size={22}
+          size={22/PixelRatio.getFontScale()}
           //type='font-awesome'
           color='#192f6a'
           onPress={this.showDatePicker.bind(this, 'start')}
@@ -267,7 +267,7 @@ backBtn = () => {
       <Text
         style={{
           color: 'white',
-          fontSize: 12,
+          fontSize: 12/PixelRatio.getFontScale(),
           fontWeight: 'bold',
           backgroundColor: 'rgba(52, 52, 52, 0)',
           alignSelf: 'center',
@@ -278,14 +278,14 @@ backBtn = () => {
         <Icon
           raised
           name='trending-flat'
-          size={22}
+          size={22/PixelRatio.getFontScale()}
           color='#192f6a'
           onPress={() => console.log('arrowicon')}
         />
         <Text
           style={{
             color: 'white',
-            fontSize: 12,
+            fontSize: 12/PixelRatio.getFontScale(),
             fontWeight: 'bold',
             backgroundColor: 'rgba(52, 52, 52, 0)',
             alignSelf: 'center',
@@ -296,7 +296,7 @@ backBtn = () => {
         <Icon
           raised
           name='date-range'
-          size={22}
+          size={22/PixelRatio.getFontScale()}
           //type='font-awesome'
           color='#192f6a'
           onPress={this.showDatePicker.bind(this, 'end')}
@@ -315,7 +315,7 @@ backBtn = () => {
           mode='time'
         />
       </View>
-      <View style={{ paddingTop: 20 }}>
+      <View style={{ paddingTop: 20/PixelRatio.getFontScale() }}>
         <Text style={styles.buttonText}>
           In basso scegli i giorni in
            cui {' '}{this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
@@ -345,7 +345,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.monday.start}</Text>
           <Animatable.View animation="swing" iterationCount={15} delay={150}>
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 0)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -374,7 +374,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.tuesday.start}</Text>
         <Animatable.View animation="swing" iterationCount={15} delay={300}>
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 1)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -403,7 +403,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.wednesday.start}</Text>
         <Animatable.View animation="swing" iterationCount={15} delay={450}>
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 2)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -432,7 +432,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.thursday.start}</Text>
          <Animatable.View animation="swing" iterationCount={15} delay={600}>
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 3)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -461,7 +461,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.friday.start}</Text>
         <Animatable.View animation="swing" iterationCount={15} delay={750}>
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 4)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -490,7 +490,7 @@ backBtn = () => {
                 .daysOfWeekSchoolStarts.saturday.start}</Text>
         <Animatable.View animation="swing" iterationCount={15} delay={900}>
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 5)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -520,7 +520,7 @@ backBtn = () => {
         
         <Animatable.View animation="swing" iterationCount={15} delay={1050} >
         <Button
-          icon={{ name: 'alarm', size: 28 }}
+          icon={{ name: 'alarm', size: 28/PixelRatio.getFontScale() }}
           onPress={this.showTimePicker.bind(this, 6)}
           title={''}
           buttonStyle={styles.clockIconStyle}
@@ -544,13 +544,13 @@ backBtn = () => {
     </Text>
  </View>
  <Button
-   icon={{ name: 'keyboard-arrow-right', size: 26, color: '#ffffff' }}
+   icon={{ name: 'keyboard-arrow-right', size: 26/PixelRatio.getFontScale(), color: '#ffffff' }}
    iconRight
    onPress={this.backBtn}
    buttonStyle={styles.nextButtonStyle}
    backgroundColor='#00134d'
    textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18 }}
-   containerViewStyle={{ alignSelf:'flex-end', padding:10}}
+   containerViewStyle={{ alignSelf:'flex-end', padding:10/PixelRatio.getFontScale()}}
    title={'Salva'}
  />
 </LinearGradient>
@@ -567,18 +567,18 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7)/PixelRatio.getFontScale(),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
-    margin: 5,
+    margin: 5/PixelRatio.getFontScale(),
     color: '#fffdfd',
     backgroundColor: 'transparent',
   },
   childInfoStyle: {
-    fontSize: 18,
+    fontSize: 18/PixelRatio.getFontScale(),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
-    margin: 5,
+    margin: 5/PixelRatio.getFontScale(),
     color: '#fffdfd',
     backgroundColor: 'transparent',
     alignItems: 'center',
@@ -610,8 +610,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
     backgroundColor: 'rgba(52, 52, 52, 0)',
-    paddingLeft: 18,
-    paddingRight: 22,
+    paddingLeft: 18/PixelRatio.getFontScale(),
+    paddingRight: 22/PixelRatio.getFontScale(),
   },
   calendarIconsStyleCheckBox: {
     flex: -1,
@@ -649,7 +649,7 @@ daysOfWeekRowStyle: {
   heading: {
     color: 'white',
     marginTop: 10,
-    fontSize: 22,
+    fontSize: 22/PixelRatio.getFontScale(),
   },
   headerRightStyle:
   {
@@ -660,7 +660,7 @@ daysOfWeekRowStyle: {
   },
   timeToSchoolTextStyle: {
     color: 'white',
-    fontSize: 18,
+    fontSize: 18/PixelRatio.getFontScale(),
     fontWeight: 'bold'
   }
 });

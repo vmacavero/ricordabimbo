@@ -9,6 +9,7 @@ import {
  Text
 } from 'react-native';
 import AppIntro from 'react-native-app-intro';
+import { size } from '../ScreenSizeHelper';
 
 class HomeScreen extends Component {
 
@@ -17,13 +18,21 @@ class HomeScreen extends Component {
       // Note: By default the icon is only shown on iOS. Search the showIcon option below
     });
 
+    constructor() {
+      super();
+      Text.defaultProps.allowFontScaling = false;
+    }
+
     componentWillMount = () => {
       //will check if we have already saved our data in AsyncStorage
       this.reloadData();
       console.log('home : ');
-      console.log(PixelRatio.getPixelSizeForLayoutSize(16));
+      console.log(PixelRatio.getPixelSizeForLayoutSize(10));
       console.log(PixelRatio.get());
-      //console.log(PixelRatio.getFontScale());
+      console.log(PixelRatio.getFontScale());
+     // console.log(PixelRatio.getPixelSizeForLayoutSize(6));
+      console.log(PixelRatio.getPixelSizeForLayoutSize(10)/PixelRatio.getFontScale());
+      console.log(size(2));
     }
     
     onSkipBtnHandle = (index) => {
@@ -80,7 +89,7 @@ class HomeScreen extends Component {
     render() {
       const pageArray = [{
         title: <Text 
-          style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(14)}}
+          style={{fontSize: (PixelRatio.getPixelSizeForLayoutSize(14)/PixelRatio.getFontScale())}}
                >RicordaBimbo</Text>,
         description: 'L\'App piu\' utile che ci sia!',
         img: require('../../img/child1.jpg'),
@@ -93,7 +102,8 @@ class HomeScreen extends Component {
         level: 10,
         //
       }, {
-        title: 'La configurazione',
+        title: <Text 
+        style={{fontSize: 22/PixelRatio.get() }}> 'La configurazione'</Text>,
         description: 'Ti chiedero\' quanti bimbi hai, ' +
                       'a che ora li accompagni, in quali giorni ' +
                       'della settimana e in quale periodo (inizio e fine).',
@@ -106,7 +116,8 @@ class HomeScreen extends Component {
         fontColor: '#fff',
         level: 10, 
       }, {
-          title: 'Altre informazioni',
+        title: <Text 
+        style={{fontSize: 22/PixelRatio.get() }}> 'Altre informazioni'</Text>,
           description: 'Ripeteremo il tutto per ognuno dei tuoi figli. ' +
           'Dovrai aggiungere anche le loro foto.',
           img: require('../../img/child3.jpg'),
@@ -120,7 +131,7 @@ class HomeScreen extends Component {
           {
             title: 'Iniziamo',
             description: <Text 
-            style={{fontSize: PixelRatio.getPixelSizeForLayoutSize(8)}}
+            style={{fontSize: 22/PixelRatio.get() }}
                  >Ricorda di autorizzare questa
              App ad accedere al calendario ed alle foto
              Ricorda anche che quest'app e' solo un aiuto,

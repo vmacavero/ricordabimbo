@@ -20,6 +20,7 @@ import {
   Avatar,
   Slider
 } from 'react-native-elements';
+import { size } from '../ScreenSizeHelper';
 import * as Animatable from 'react-native-animatable';
 
 /* Receives folllowing props from navigator:
@@ -38,7 +39,7 @@ class SingleChildConfig extends Component {
   title: 'RicordaBimbo',
   params: navigation.state.params,
   headerLeft: <Button
-  icon={{name: 'keyboard-arrow-left', size: 32 }}
+  icon={{name: 'keyboard-arrow-left', size: 32/PixelRatio.getFontScale() }}
   buttonStyle={{ backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
   containerViewStyle={{ padding: 0, marginLeft: 0, marginRight: 0 }}
   textStyle={{ textAlign: 'left' }}
@@ -230,7 +231,45 @@ const options = {
     }
   });
 }
-
+returnAvatarbySize = () => {
+ //returns little or big avatar depending upon size of screen
+ if (Platform.OS === 'ios') {
+   return (<Avatar
+    large
+    rounded
+    source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
+    onPress={this.accessCameraRoll}
+    activeOpacity={0.7}
+   />);
+ }
+ 
+ const {width, height} = Dimensions.get('window');
+  if (height < 532) {
+    return (<Avatar
+      small
+      rounded
+      source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
+      onPress={this.accessCameraRoll}
+      activeOpacity={0.7}
+    />);
+  }
+  if (height < 592) {
+    return (<Avatar
+      medium
+      rounded
+      source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
+      onPress={this.accessCameraRoll}
+      activeOpacity={0.7}
+    />);
+  }
+  return (<Avatar
+    large
+    rounded
+    source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
+    onPress={this.accessCameraRoll}
+    activeOpacity={0.7}
+  />);
+}
   render() {
       const { currentChild } = this.props.navigation.state.params;
 let ordinal = '';
@@ -273,7 +312,7 @@ switch (currentChild) {
           flexDirection: 'row',
           justifyContent: 'space-around',
          // backgroundColor: 'rgba(52, 52, 52, 0)',
-          marginBottom: 15,
+          marginBottom: 15/PixelRatio.getFontScale(),
         }}
       >
         <FormLabel
@@ -303,7 +342,7 @@ switch (currentChild) {
         flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 15,
+        marginBottom: 15/PixelRatio.getFontScale(),
         }}
     >
       <Text
@@ -337,13 +376,7 @@ switch (currentChild) {
   </Text>
 </View>
   <View style={styles.childStyle}>
-  <Avatar
-      xlarge
-      rounded
-      source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
-      onPress={this.accessCameraRoll}
-      activeOpacity={0.7}
-  />
+  {this.returnAvatarbySize()}
   </View>
   <Animatable.View 
     animation="swing" 
@@ -356,7 +389,7 @@ switch (currentChild) {
     <Icon
       raised
       name={this.state.calendarIcon}
-      size={36}
+      size={32}
       type='material-community'
       color={this.state.calendarColor}
       //color='#192f6a'
@@ -374,13 +407,13 @@ switch (currentChild) {
     alignItems: 'center', }}
 > 
     <Button
-      icon={{ name: 'keyboard-arrow-right', size: 26, flex: 1, color: '#ffffff'}}
+      icon={{ name: 'keyboard-arrow-right', size: 26/PixelRatio.getFontScale(), flex: 1, color: '#ffffff'}}
       iconRight
       onPress={this.nextBtn}
       buttonStyle={styles.nextButtonStyle}
       backgroundColor='#00134d'
-      textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18 }}
-      containerViewStyle={{ alignSelf: 'flex-end', padding: 10 }}
+      textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18/PixelRatio.getFontScale() }}
+      containerViewStyle={{ alignSelf: 'flex-end', padding: 10/PixelRatio.getFontScale() }}
       title={this.state.nextOrEndText}
     />
 </View>
@@ -397,7 +430,7 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(8)/PixelRatio.getFontScale(),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 2,
@@ -405,7 +438,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   nameInputTextStyle: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7)/PixelRatio.getFontScale(),
     fontFamily: 'Gill Sans',
     color: '#fffdfd',
     fontWeight: 'bold',
@@ -424,7 +457,7 @@ const styles = StyleSheet.create({
   },
   calendarButtonStyle: {
     flex: 0,
-    paddingTop: 20,
+    paddingTop: 20/PixelRatio.getFontScale(),
     justifyContent: 'space-around',
     flexDirection: 'row',
     alignItems: 'center',
@@ -435,8 +468,8 @@ const styles = StyleSheet.create({
   headerRightTextStyle: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(7),
-    paddingRight: 15
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(7)/PixelRatio.getFontScale(),
+    paddingRight: 15/PixelRatio.getFontScale()
   }
 });
 

@@ -68,7 +68,7 @@ class EndOfConfig extends Component {
   }
 
  removeWithId(id) {
-    if (Platform.os==='ios') {
+    if (Platform.OS==='ios') {
         console.log('removing on ios');
         RNCalendarEvents.removeFutureEvents(id)
         .then(success => {

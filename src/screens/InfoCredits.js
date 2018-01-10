@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(8)/PixelRatio.getFontScale(),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 10,

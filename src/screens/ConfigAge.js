@@ -23,7 +23,7 @@ class ConfigAge extends Component {
         params: navigation.state.params,
         headerLeft: <Button
         
-        icon={{name: 'keyboard-arrow-left', size: 32}}
+        icon={{name: 'keyboard-arrow-left', size: 32/PixelRatio.getFontScale()}}
         buttonStyle={{backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
         containerViewStyle={{padding: 0, marginLeft: 0, marginRight: 0}}
         textStyle={{textAlign: 'left'}}
@@ -34,6 +34,7 @@ class ConfigAge extends Component {
     });
     constructor(props) {
       super(props);
+      Text.defaultProps.allowFontScaling = false;
       for (const d of dataStructure) {
         //setting all images to the empty image
         d.photoImage = require('../../img/icon_empty_camera.png');
@@ -70,8 +71,8 @@ nextBtn = () => {
           
           style={styles.linearGradient}
       >
-          <View style={{ paddingTop: 20 }}>
-            <Text style={styles.buttonText}>
+          <View style={{ paddingTop: 20/PixelRatio.getFontScale() }}>
+            <Text allowFontScaling={false} style={styles.buttonText}>
               Quanti bambini hai?
             </Text>
             
@@ -106,12 +107,12 @@ nextBtn = () => {
       </Text>
   </View>
   <Button
-    icon={{ name: 'keyboard-arrow-right', size: 26, color: '#ffffff' }}
+    icon={{ name: 'keyboard-arrow-right', size: 26/PixelRatio.getFontScale(), color: '#ffffff' }}
     iconRight
     onPress={this.nextBtn}
     buttonStyle={styles.nextButtonStyle}
     backgroundColor='#00134d'
-    textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18 }}
+    textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18/PixelRatio.getFontScale() }}
     title={'Prossimo'}
     containerViewStyle={{ alignSelf:'flex-end', padding:10}}
   />
@@ -133,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(12),
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(12)/PixelRatio.getFontScale(),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 10,
@@ -153,7 +154,7 @@ const styles = StyleSheet.create({
   heading: {
     color: 'white',
     marginTop: 10,
-    fontSize: 22,
+    fontSize: 22/PixelRatio.getFontScale(),
   },
 });
 
