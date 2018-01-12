@@ -15,20 +15,32 @@ import {
 const guidelineBaseWidth = 350;
 const guidelineBaseHeight = 680;
 
-function size(num, type) {
+function sizeNorm(num, type) {
+  //this function will be fixed for iPAD, sometime !
+
+  //type === 1 for Fonts
+  //type === 2 for Padding (different behaviour)
+  //type === 3 for Icons
+
+
    //=> width / guidelineBaseWidth * num;
    //console.log(Dimensions.get('screen'));
-   if (Platform.OS==='ios') {
-    return num;
-    //NOOP FOR iOS (for now everything seems ok on iOS)
+   if ((Platform.OS === 'ios') && (type === 1)) {
+    return PixelRatio.getPixelSizeForLayoutSize(num);
+   }
+   if ((Platform.OS === 'ios') && (type === 2)) {
+    return PixelRatio.getPixelSizeForLayoutSize(num);
+   }
+   if ((Platform.OS === 'ios') && (type === 3)) {
+    return PixelRatio.getPixelSizeForLayoutSize(num);
    }
 
 
-   console.log(Dimensions.get('window'));
+  // console.log(Dimensions.get('window'));
    return(2399);
 }
 
 //const verticalScale = size => height / guidelineBaseHeight * size;
 //const moderateScale = (size, factor = 0.5) => size + ( scale(size) - size ) * factor;
 
-export { size };
+export { sizeNorm };

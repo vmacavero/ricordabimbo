@@ -9,7 +9,7 @@ import {
  Text
 } from 'react-native';
 import AppIntro from 'react-native-app-intro';
-import { size } from '../ScreenSizeHelper';
+import { sizeNorm } from '../ScreenSizeHelper';
 
 class HomeScreen extends Component {
 
@@ -32,7 +32,7 @@ class HomeScreen extends Component {
       console.log(PixelRatio.getFontScale());
      // console.log(PixelRatio.getPixelSizeForLayoutSize(6));
       console.log(PixelRatio.getPixelSizeForLayoutSize(10)/PixelRatio.getFontScale());
-      console.log(size(2));
+      console.log(sizeNorm(2, 1));
     }
     
     onSkipBtnHandle = (index) => {
@@ -88,10 +88,14 @@ class HomeScreen extends Component {
     
     render() {
       const pageArray = [{
-        title: <Text 
-          style={{fontSize: (PixelRatio.getPixelSizeForLayoutSize(14)/PixelRatio.getFontScale())}}
-               >RicordaBimbo</Text>,
-        description: 'L\'App piu\' utile che ci sia!',
+        title: 
+          <Text style={{ fontSize: sizeNorm(8, 1) }}>
+            RicordaBimbo
+          </Text>,
+        description: 
+          <Text style={{ fontSize: sizeNorm(9, 1) }} >
+            L'App piu' utile che ci sia!
+          </Text>,
         img: require('../../img/child1.jpg'),
         imgStyle: {
           height: 80 * 3,
@@ -102,11 +106,15 @@ class HomeScreen extends Component {
         level: 10,
         //
       }, {
-        title: <Text 
-        style={{fontSize: 22/PixelRatio.get() }}> 'La configurazione'</Text>,
-        description: 'Ti chiedero\' quanti bimbi hai, ' +
-                      'a che ora li accompagni, in quali giorni ' +
-                      'della settimana e in quale periodo (inizio e fine).',
+        title: 
+        <Text style={{ fontSize: sizeNorm(9, 1) }}> 
+           La configurazione
+        </Text>,
+        description: 
+        <Text style={{ fontSize: sizeNorm(10, 1) }}>
+          Ti chiedero quanti bimbi hai, a che ora li accompagni, 
+          in quali giorni della settimana e in quale periodo (inizio e fine)
+        </Text>,
         img: require('../../img/child2.jpg'),
         imgStyle: {
           height: 93 * 3,
@@ -116,10 +124,14 @@ class HomeScreen extends Component {
         fontColor: '#fff',
         level: 10, 
       }, {
-        title: <Text 
-        style={{fontSize: 22/PixelRatio.get() }}> 'Altre informazioni'</Text>,
-          description: 'Ripeteremo il tutto per ognuno dei tuoi figli. ' +
-          'Dovrai aggiungere anche le loro foto.',
+        title: 
+        <Text style={{ fontSize: sizeNorm(9, 1) }}> 
+          Altre informazioni
+        </Text>,
+          description: 
+          <Text style={{ fontSize: sizeNorm(12, 1) }}>
+          Ripeteremo il tutto per ognuno dei tuoi figli. Sara' bello aggiungere
+           anche le loro foto.</Text>,
           img: require('../../img/child3.jpg'),
           imgStyle: {
             height: 93 * 3,
@@ -129,15 +141,19 @@ class HomeScreen extends Component {
           fontColor: '#fff',
           level: 10, },
           {
-            title: 'Iniziamo',
-            description: <Text 
-            style={{fontSize: 22/PixelRatio.get() }}
-                 >Ricorda di autorizzare questa
-             App ad accedere al calendario ed alle foto
-             Ricorda anche che quest'app e' solo un aiuto,
-              facci affidamento, ma non dimenticare 
-              che sei unicamente tu
-              responsabile dei tuoi figli.</Text>,
+            title: 
+            <Text style={{ fontSize: sizeNorm(9, 1) }}> 
+              Iniziamo
+            </Text>,
+            description: 
+            <Text style={{ fontSize: sizeNorm(8, 1) }}>
+                Ricorda di autorizzare questa
+              App ad accedere al calendario ed alle foto
+              Ricorda anche che quest'app e' solo un aiuto,
+                facci affidamento, ma non dimenticare 
+                che sei unicamente tu
+                responsabile dei tuoi figli.
+            </Text>,
             img: require('../../img/child4.jpg'),
             imgStyle: {
               height: 93 * 3,

@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import { Button, Icon } from 'react-native-elements';
+import { sizeNorm } from '../ScreenSizeHelper';
 
 class InfoCredits extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -29,7 +30,10 @@ class InfoCredits extends Component {
         onPress={() => navigation.goBack()}
         title={``}
       />,
-    title: 'RicordaBimbo - Credits'
+    title: 
+      <Text style={{ fontSize: sizeNorm(6, 1) }}> 
+        RicordaBimbo - Credits
+      </Text>
     });
 
     constructor(props) { 
@@ -130,7 +134,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(8)/PixelRatio.getFontScale(),
+    fontSize: sizeNorm(10,2),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 10,

@@ -20,7 +20,7 @@ import {
   Avatar,
   Slider
 } from 'react-native-elements';
-import { size } from '../ScreenSizeHelper';
+import { size, sizeNorm } from '../ScreenSizeHelper';
 import * as Animatable from 'react-native-animatable';
 
 /* Receives folllowing props from navigator:
@@ -39,7 +39,7 @@ class SingleChildConfig extends Component {
   title: 'RicordaBimbo',
   params: navigation.state.params,
   headerLeft: <Button
-  icon={{name: 'keyboard-arrow-left', size: 32/PixelRatio.getFontScale() }}
+  icon={{name: 'keyboard-arrow-left', size: sizeNorm(10,1) }}
   buttonStyle={{ backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
   containerViewStyle={{ padding: 0, marginLeft: 0, marginRight: 0 }}
   textStyle={{ textAlign: 'left' }}
@@ -208,9 +208,9 @@ const ImagePicker = require('react-native-image-picker');
 const options = {
   title: 'Seleziona immagine',
   allowsEditing: this.isIpad(),
-  maxWidth: 800,
-  maxHeight: 800,
-  quality: 0,
+  maxWidth: 1280,
+  maxHeight: 1280,
+  quality: 1,
   takePhotoButtonTitle: 'Usa la Fotocamera',
   chooseFromLibraryButtonTitle: 'Scegli dall\'album Foto',
   storageOptions: {
@@ -231,20 +231,20 @@ const options = {
     }
   });
 }
-returnAvatarbySize = () => {
+returnAvatarbySize() {
  //returns little or big avatar depending upon size of screen
- if (Platform.OS === 'ios') {
-   return (<Avatar
+ 
+ const { height } = Dimensions.get('window');
+ if (height < 592) { //this is sufficient for iPhoneSE
+  return (<Avatar
     large
     rounded
     source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
     onPress={this.accessCameraRoll}
     activeOpacity={0.7}
-   />);
- }
- 
- const {width, height} = Dimensions.get('window');
-  if (height < 532) {
+  />);
+} 
+ if (height < 532) {
     return (<Avatar
       small
       rounded
@@ -253,17 +253,8 @@ returnAvatarbySize = () => {
       activeOpacity={0.7}
     />);
   }
-  if (height < 592) {
-    return (<Avatar
-      medium
-      rounded
-      source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
-      onPress={this.accessCameraRoll}
-      activeOpacity={0.7}
-    />);
-  }
   return (<Avatar
-    large
+    xlarge
     rounded
     source={this.naviProps.dataStruct[this.naviProps.currentChild - 1].photoImage}
     onPress={this.accessCameraRoll}
@@ -312,7 +303,7 @@ switch (currentChild) {
           flexDirection: 'row',
           justifyContent: 'space-around',
          // backgroundColor: 'rgba(52, 52, 52, 0)',
-          marginBottom: 15/PixelRatio.getFontScale(),
+          marginBottom: sizeNorm(2,2),
         }}
       >
         <FormLabel
@@ -342,7 +333,7 @@ switch (currentChild) {
         flex: 0,
         flexDirection: 'row',
         justifyContent: 'space-between',
-        marginBottom: 15/PixelRatio.getFontScale(),
+        marginBottom: sizeNorm(6,2),
         }}
     >
       <Text
@@ -377,7 +368,7 @@ switch (currentChild) {
 </View>
   <View style={styles.childStyle}>
   {this.returnAvatarbySize()}
-  </View>
+</View>
   <Animatable.View 
     animation="swing" 
     iterationCount="infinite" 
@@ -389,7 +380,7 @@ switch (currentChild) {
     <Icon
       raised
       name={this.state.calendarIcon}
-      size={32}
+      size={ sizeNorm(20, 3) }
       type='material-community'
       color={this.state.calendarColor}
       //color='#192f6a'
@@ -407,7 +398,7 @@ switch (currentChild) {
     alignItems: 'center', }}
 > 
     <Button
-      icon={{ name: 'keyboard-arrow-right', size: 26/PixelRatio.getFontScale(), flex: 1, color: '#ffffff'}}
+      icon={{ name: 'keyboard-arrow-right', size: sizeNorm(10, 1), flex: 1, color: '#ffffff'}}
       iconRight
       onPress={this.nextBtn}
       buttonStyle={styles.nextButtonStyle}
@@ -430,7 +421,7 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(8)/PixelRatio.getFontScale(),
+    fontSize: sizeNorm(8, 1),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 2,
@@ -438,7 +429,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   nameInputTextStyle: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(7)/PixelRatio.getFontScale(),
+    fontSize: sizeNorm(8, 1),
     fontFamily: 'Gill Sans',
     color: '#fffdfd',
     fontWeight: 'bold',
@@ -468,8 +459,8 @@ const styles = StyleSheet.create({
   headerRightTextStyle: {
     color: 'white',
     fontWeight: 'bold',
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(7)/PixelRatio.getFontScale(),
-    paddingRight: 15/PixelRatio.getFontScale()
+    fontSize: sizeNorm(8,1),
+    paddingRight: sizeNorm(4,2)
   }
 });
 

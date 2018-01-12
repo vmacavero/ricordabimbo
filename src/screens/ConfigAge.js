@@ -12,6 +12,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import { Slider, Button } from 'react-native-elements';
 import ChildrenIcon from '../components/ChildrenIcon';
 import dataStructure from '../dataStructure.json';
+import { sizeNorm } from '../ScreenSizeHelper';
 
 class ConfigAge extends Component {
     static navigationOptions = ({ navigation }) => ({
@@ -23,7 +24,7 @@ class ConfigAge extends Component {
         params: navigation.state.params,
         headerLeft: <Button
         
-        icon={{name: 'keyboard-arrow-left', size: 32/PixelRatio.getFontScale()}}
+        icon={{name: 'keyboard-arrow-left', size: sizeNorm(10,1)}}
         buttonStyle={{backgroundColor: 'transparent', borderRadius: 40, padding: 0, marginLeft: 0, marginRight: 0}}
         containerViewStyle={{padding: 0, marginLeft: 0, marginRight: 0}}
         textStyle={{textAlign: 'left'}}
@@ -71,7 +72,7 @@ nextBtn = () => {
           
           style={styles.linearGradient}
       >
-          <View style={{ paddingTop: 20/PixelRatio.getFontScale() }}>
+          <View style={{ paddingTop: sizeNorm(1,2) }}>
             <Text allowFontScaling={false} style={styles.buttonText}>
               Quanti bambini hai?
             </Text>
@@ -107,14 +108,14 @@ nextBtn = () => {
       </Text>
   </View>
   <Button
-    icon={{ name: 'keyboard-arrow-right', size: 26/PixelRatio.getFontScale(), color: '#ffffff' }}
+    icon={{ name: 'keyboard-arrow-right', size: sizeNorm(10, 1), color: '#ffffff' }}
     iconRight
     onPress={this.nextBtn}
     buttonStyle={styles.nextButtonStyle}
     backgroundColor='#00134d'
-    textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: 18/PixelRatio.getFontScale() }}
+    textStyle={{ textAlign: 'center', color: '#ffffff', fontSize: sizeNorm(10, 1) }}
     title={'Prossimo'}
-    containerViewStyle={{ alignSelf:'flex-end', padding:10}}
+    containerViewStyle={{ alignSelf: 'flex-end', padding: 10 }}
   />
 </LinearGradient>
 );
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start'
   },
   buttonText: {
-    fontSize: PixelRatio.getPixelSizeForLayoutSize(12)/PixelRatio.getFontScale(),
+    fontSize: sizeNorm(10, 1),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 10,
@@ -143,7 +144,8 @@ const styles = StyleSheet.create({
   },
   nextButtonStyle: {
     //backgroundColor: 'rgba(52, 52, 52, 0.01)',
-    borderRadius: 10
+    borderRadius: 10,
+    
   },
   childStyle: {
     flex: 0,
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
   heading: {
     color: 'white',
     marginTop: 10,
-    fontSize: 22/PixelRatio.getFontScale(),
+    fontSize: sizeNorm(7,1),
   },
 });
 
