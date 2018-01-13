@@ -47,26 +47,28 @@ constructor(props, context) {
     //arrayOfChildren: this.props.navigation.state.params.arrayOfChildren
   };
 }
-getTodaysDate = () => {
-   //set today's date..
-   let today = new Date();
-   let dd = today.getDate();
-   let mm = today.getMonth() + 1; //January is 0!
-   let yyyy = today.getFullYear();
-   if (dd < 10) {
-       dd = '0' + dd;
-   } 
-   if (mm < 10) {
-       mm = '0'+ mm ;
-   } 
-   today = dd + '/' + mm + '/' + yyyy;
-   return today;
-}
 
 componentWillMount() {
   this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateStart 
   = this.getTodaysDate();
 }
+getTodaysDate = () => {
+   //set today's date..
+   let today = new Date();
+   let dd = today.getDate();
+   let mm = today.getMonth() + 1; //January is 0!
+   const yyyy = today.getFullYear();
+   if (dd < 10) {
+       dd = '0' + dd;
+   } 
+   if (mm < 10) {
+       mm = '0' + mm;
+   } 
+   today = dd + '/' + mm + '/' + yyyy;
+   return today;
+}
+
+
   changeCheckBox(num) {
     const index = this.naviProps.currentChild;
     const week = this.naviProps.dataStruct[index - 1].daysOfWeekSchoolStarts;
@@ -183,9 +185,9 @@ backBtn = () => {
     });
     const end = 
       this.naviProps.dataStruct[this.naviProps.currentChild - 1].schoolDateEnd;
-      console.log('end = '+end);
+      console.log('end = '+ end);
     //switching month and day
-    const endDate = new Date(end.substring(3, 5)+'/'+end.substring(0, 2)+'/'+end.substring(6, 10));
+    const endDate = new Date(end.substring(3, 5)+ '/'+ end.substring(0, 2)+'/'+end.substring(6, 10));
     console.log(endDate);
   
     const start = 

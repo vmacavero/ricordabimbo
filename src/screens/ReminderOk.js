@@ -120,9 +120,9 @@ class ReminderOk extends Component {
   }
 
    insertEvent(name, start, end, value) { 
- //FIXME ! better calculation of end date //adding 10 minutes
+ //FIXME ! better calculation of end date //adding 20 minutes
  const noUTC = new Date(start);
- const endD = new Date(noUTC.getTime() + 600000);
+ const endD = new Date(noUTC.getTime() + 1200000);
 
    return  RNCalendarEvents.saveEvent(
         `Hai lasciato ${name} a scuola ?`,
@@ -131,7 +131,7 @@ class ReminderOk extends Component {
           //'2016-08-19T19:26:00.000Z',
           endDate: endD.toISOString(),
           alarms: [{
-            date: -1 
+            date: 0 
           }],
           recurrenceRule: {
             frequency: 'weekly',
