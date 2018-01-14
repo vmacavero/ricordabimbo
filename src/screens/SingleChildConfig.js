@@ -185,6 +185,8 @@ isIpad = () => {
   console.log('isIpad');
   if (Platform.OS === 'ios') {
     //this is a check for iPad to avoid bug in image picker !
+    //if we have an iPad we set the workaround
+    //we set allowsEditing to False so the plugin works..
     var {height, width} = Dimensions.get('window');
     switch (height) {
       case 1024 :
