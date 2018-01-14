@@ -173,7 +173,7 @@ class ReminderOk extends Component {
               .then(id =>  { 
                 //FIX ME !
                // Alert.alert('id = '+id);
-                value.eventId = id;
+                value.eventId = id.toString();
                 this.saveAll();
                
               })

@@ -115,7 +115,7 @@ validateName = (text) => {
   this.setState({ nameTextField: text });
  //
   this.naviProps.dataStruct[this.naviProps.currentChild - 1].name = text;
-  console.log(this.naviProps);
+ // console.log(this.naviProps);
 }
 goToCalendarConfig = () => {
   const index = this.naviProps.currentChild;
@@ -182,7 +182,7 @@ nextBtn = () => {
 }
 
 isIpad = () => { 
-  console.log('isIpad');
+  console.log('CHECK IF isIpad');
   if (Platform.OS === 'ios') {
     //this is a check for iPad to avoid bug in image picker !
     //if we have an iPad we set the workaround
@@ -210,9 +210,9 @@ const ImagePicker = require('react-native-image-picker');
 const options = {
   title: 'Seleziona immagine',
   allowsEditing: this.isIpad(),
-  maxWidth: 1280,
-  maxHeight: 1280,
-  quality: 1,
+  maxWidth: 800,
+  maxHeight: 800,
+  quality: 0.6,
   takePhotoButtonTitle: 'Usa la Fotocamera',
   chooseFromLibraryButtonTitle: 'Scegli dall\'album Foto',
   storageOptions: {
@@ -322,7 +322,7 @@ switch (currentChild) {
         <FormInput
           onChangeText={(text) => this.validateName(text)}
           width={100}
-          inputStyle={styles.buttonText}
+          inputStyle={styles.buttonTextInput}
           
           value={this.naviProps.dataStruct[this.naviProps.currentChild - 1].name}
           onSubmitEditing={() => { Keyboard.dismiss(); }}
@@ -424,6 +424,14 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: sizeNorm(8, 1),
+    fontFamily: 'Gill Sans',
+    textAlign: 'center',
+    margin: 2,
+    color: '#fffdfd',
+    backgroundColor: 'transparent'
+  },
+  buttonTextInput: {
+    fontSize: sizeNorm(5, 1),
     fontFamily: 'Gill Sans',
     textAlign: 'center',
     margin: 2,

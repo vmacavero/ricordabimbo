@@ -16,7 +16,7 @@ const guidelineBaseWidth = 350;
 const guidelineBaseHeight = 680;
 
 function sizeNorm(num, type) {
-  console.log('sizeNormn');
+  //console.log('sizeNormn');
   //this function will be fixed for iPAD, sometime !
 
   //type === 1 for Fonts

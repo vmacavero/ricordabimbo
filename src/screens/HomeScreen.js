@@ -107,11 +107,11 @@ class HomeScreen extends Component {
         //
       }, {
         title: 
-        <Text style={{ fontSize: sizeNorm(9, 1) }}> 
+        <Text style={{ fontSize: sizeNorm(8, 1) }}> 
            La configurazione
         </Text>,
         description: 
-        <Text style={{ fontSize: sizeNorm(10, 1) }}>
+        <Text style={{ fontSize: sizeNorm(9, 1) }}>
           Ti chiedero quanti bimbi hai, a che ora li accompagni, 
           in quali giorni della settimana e in quale periodo (inizio e fine)
         </Text>,
@@ -125,11 +125,11 @@ class HomeScreen extends Component {
         level: 10, 
       }, {
         title: 
-        <Text style={{ fontSize: sizeNorm(9, 1) }}> 
+        <Text style={{ fontSize: sizeNorm(8, 1) }}> 
           Altre informazioni
         </Text>,
           description: 
-          <Text style={{ fontSize: sizeNorm(12, 1) }}>
+          <Text style={{ fontSize: sizeNorm(10, 1) }}>
           Ripeteremo il tutto per ognuno dei tuoi figli. Sara' bello aggiungere
            anche le loro foto.</Text>,
           img: require('../../img/child3.jpg'),

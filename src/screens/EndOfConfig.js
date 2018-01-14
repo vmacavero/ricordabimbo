@@ -48,6 +48,7 @@ class EndOfConfig extends Component {
 
   constructor(props) {
     super(props);
+    console.log('endofconfig');
     this.naviProps = this.props.navigation.state.params;
     this.dataStruct = this.props.navigation.state.params.dataStruct;
     this.index = this.props.navigation.state.params;
@@ -90,7 +91,7 @@ class EndOfConfig extends Component {
 }
 
    iterateAndDelete= (day) => {
-      console.log('i am in iterteAndDelete'); 
+      console.log('i am in iterateAndDelete'); 
       console.log(day); 
      Object.keys(day).forEach(function (key) {
           if (day[key].eventId !== '0') { 
@@ -146,6 +147,7 @@ class EndOfConfig extends Component {
 }
 
   insertEvents = () => { 
+    console.log('this.insertevents()');
     RNCalendarEvents.authorizeEventStore()
     .then(status => {
       switch (status) {
@@ -199,7 +201,7 @@ class EndOfConfig extends Component {
         });
   }
   renderConditionalButton() {
-    //FIXME !
+    //FIXME !  //it's almost the same component repeated two times ! bad !
       if (this.buttonEditDisabled) {
           return (<Button
             icon={{ name: 'event', size: 32, color:'#cccccc' }}
